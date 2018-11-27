@@ -30,11 +30,13 @@ import { Vue2GoogleMap } from 'vue2-google-maps'
     data() {
          return {
              position: {lat:10,lng:100},
-             cheers: [
-                {position: {lat:32.0714143,lng:34.78723}}
-             ]
          }
      },
+    computed: {
+         cheers() {
+             return this.$store.getters.getCheers;
+         }
+    },
     methods: {
 
         getCurrLocation() {
@@ -52,19 +54,22 @@ import { Vue2GoogleMap } from 'vue2-google-maps'
             this.position.lng = +latlng.lng;
         },
         openPreview(cheer) {
-        this.$alert('This is a message', 'Title', {
-          confirmButtonText: 'OK',
-          callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
+            this.$alert(cheer.desc, cheer.locationName, {
+            confirmButtonText: 'OK',
+                callback: action => {
+                    this.$message({
+                    type: 'info',
+                    message: `action: ${ action }`
+                    });
+                }
             });
-          }
-        });
-      }
+        },
+        loadCheers() {
+            this.$store.dispatch({type:'loadCheers'})
+        }
     },
     mounted() {
-
+        this.loadCheers();
          this.$refs.gmapRef.$mapPromise
             .then(() => {
                 this.getCurrLocation();
