@@ -26,9 +26,14 @@ export default new Router({
       component: () => import('./views/map.vue')
     },
     {
-      path: '/cheer',
+      path: '/cheer/:cheerId',
       name: 'cheer',
       component: () => import('./views/cheers/cheer-details.vue')
-    }
+    },
+    {
+      path: '/cheer',
+      name: 'cheer-list',
+      component: () => import('./views/cheers/cheer-list.vue')
+    },
   ]
 })
