@@ -15,7 +15,7 @@ export default {
             /* {
                 _id: utilService.makeId(),
                 date,
-                location,
+                position,
                 locationName: _getLocationName(location),
                 attendance,
                 desc,
