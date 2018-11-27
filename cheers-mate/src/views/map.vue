@@ -13,7 +13,7 @@
         :position="cheer.position"
         :icon="{ url : require('../assets/imgs/cheer-marker.png')}"
         :clickable="true"
-        @click="moveTo(cheer.position)"
+        @click="openPreview(cheer)"
       />
     </GmapMap>
     <input type="text" v-model.number="position.lat">
@@ -36,9 +36,8 @@ import { Vue2GoogleMap } from 'vue2-google-maps'
          }
      },
     methods: {
-        getCurrLocation() {
-        console.log('finding current location...');
 
+        getCurrLocation() {
         if(navigator.geolocation) {
             let latlng = {};
             navigator.geolocation.getCurrentPosition(({coords})=>{
@@ -51,7 +50,18 @@ import { Vue2GoogleMap } from 'vue2-google-maps'
             console.log('moving to:', latlng);
             this.position.lat = +latlng.lat;
             this.position.lng = +latlng.lng;
-        }
+        },
+        openPreview(cheer) {
+        this.$alert('This is a message', 'Title', {
+          confirmButtonText: 'OK',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
+      }
     },
     mounted() {
 

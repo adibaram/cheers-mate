@@ -1,10 +1,5 @@
 import utilService from './util-service.js';
 
-export default {
-    query,
-    getById,
-}
-
 var cheers = _createCheers();
 
 async function query(filter={}) {
@@ -18,6 +13,10 @@ async function getById(id) {
     return cheers.find(cheer => cheer._id === id);
 }
 
+export default {
+    query,
+    getById,
+}
 
 function _createCheers() {
     return [_createCheer(Date.now(), {lat: 30, lng: -30}, [{user:'A'}, {user:'B'}],'lorem',4,(Math.random() > 0.5)? 'en' : 'he'),
