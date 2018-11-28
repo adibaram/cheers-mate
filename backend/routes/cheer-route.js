@@ -8,12 +8,36 @@ function addCheerRoutes(app) {
     app.get('/cheer', (req, res) => {
         var filter = req.query;
         console.log('filter', filter);
-        
+
         cheerService.query(filter)
             .then(cheers => {
                 res.json(cheers)
             })
     })
+    // TODO
+    // GET FROM RADIUS
+    app.get('/cheer/radius', (req, res) => {
+        var params = req.query;
+        if (params.lat && params.lng && params.radius) {
+            const locationFilter = {
+                location: {
+                    $near: {
+                        $geometry: {
+                            type: "point",
+                            coordinates: [+params.lat, +params.lng]
+                        },
+                        $minDistance: 0,
+                        $maxDistance: +params.radius
+                    }
+                }
+            }
+            cheerService.queryRadius(locationFilter)
+                .then(cheers => {
+                    res.json(cheers);
+                })
+        } else throw new Error('params are not defined');
+    })
+
 
     // SINGLE - GET Full details
     app.get('/cheer/:cheerId', (req, res) => {
@@ -22,11 +46,9 @@ function addCheerRoutes(app) {
             cheerService.getById(cheerId),
             // reviewService.query({cheerId})
         ])
-        .then(([cheer]) => {
-            res.json( {
-                cheer
+            .then(([cheer]) => {
+                res.json({ cheer })
             })
-        })
     })
 
     // DELETE
