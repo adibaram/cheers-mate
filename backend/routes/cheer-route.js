@@ -7,8 +7,10 @@ function addCheerRoutes(app) {
     // LIST
     app.get('/cheer', (req, res) => {
         cheerService.query()
-            .then(cheers => res.json(cheers))
-            
+            .then(cheers => {
+                console.log('DEBUG::route : add : cheers', cheers);
+                res.json(cheers)
+            })
     })
 
     // SINGLE - GET Full details
