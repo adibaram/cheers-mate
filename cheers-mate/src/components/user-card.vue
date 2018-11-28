@@ -1,8 +1,52 @@
 <template>
-    <section>
+<section class="user-card-container">
+    <el-row>
+            <el-card :body-style="{ padding: '0px' }">
+            <img src="https://via.placeholder.com/100x100" class="image">
+            <div style="padding: 14px;">
+                <span>{{user.name}}</span>
+                <div class="bottom clearfix">
+                <time class="time">{{ currentDate }}</time>
+                <!-- <el-button type="text" class="button">Operating button</el-button> -->
+                </div>
+            </div>
+            </el-card>
+    </el-row>
+</section>
         
-    </section>
 </template>
+
+<style scoped>
+  .time {
+    font-size: 13px;
+    color: #999;
+  }
+  
+  .bottom {
+    margin-top: 13px;
+    line-height: 12px;
+  }
+
+  .button {
+    padding: 0;
+    float: right;
+  }
+
+  .image {
+    width: 100%;
+    display: block;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+      display: table;
+      content: "";
+  }
+  
+  .clearfix:after {
+      clear: both
+  }
+</style>
 
 <script>
 export default {
@@ -14,12 +58,8 @@ export default {
     },
     data() {
         return {
-
-        }
+            currentDate: new Date()
+        };
     }
 }
 </script>
-
-<style>
-
-</style>
