@@ -1,5 +1,6 @@
 <template>
     <section>
+      <cheer-filter></cheer-filter>
         <!-- <el-autocomplete
             v-model="state4"
             :fetch-suggestions="querySearchAsync"
@@ -7,7 +8,6 @@
             @select="handleSelect"
         ></el-autocomplete> -->
 
-        <input placeholder="Look for a Cheer">
         
         <!-- <div class="cheer-list-container">
         <cheer-preview class="card" v-for="cheer in cheers" 
@@ -18,7 +18,7 @@
 
     
         <el-row>
-            <el-col :span="8" v-for="cheer in cheers" :key="1" >
+            <el-col :span="8" v-for="cheer in cheers" :key="cheer._id" >
                 <el-card class="card" :body-style="{ padding: '10px' }" @click.native="$router.push(`/cheer/${cheer._id}`)">
                 <img src="@/assets/img/bgs/mates.jpeg" class="image">
                 <div style="padding: 14px;">
@@ -39,28 +39,25 @@
 <script>
 import cheerPreview from "../../components/cheer-preview.vue";
 import cheerService from "../../services/cheer-service.js";
+import cheerFilter from '../../components/cheer-filter.vue';
 const moment = require('moment');
 
 export default {
   data() {
     return {
-      cheers: [],
       currentDate: new Date()
     };
   },
   created() {
     this.loadCheers();
   },
+  computed:{
+    cheers() {
+      return this.$store.getters.getCheers;
+    }
+  },
   methods: {
-    loadCheers() {
-      return cheerService.query().then(cheers => {
-        this.cheers = cheers;
-        console.log(cheers);
-      });
-    },
-
     date({date}) {
-        
       return moment(date).format("dddd, LL");
     },
     relativeDate() {
@@ -73,9 +70,13 @@ export default {
       return moment(this.cheer.date).format("hh:mm A");
     }
   },
-
+  created() {
+    let filter = {};
+    this.$store.dispatch({type:'loadFilter', filter  })
+  },
   components: {
-    cheerPreview
+    cheerPreview,
+    cheerFilter
   }
 };
 </script>
