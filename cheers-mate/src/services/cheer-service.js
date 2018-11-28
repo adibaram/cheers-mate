@@ -4,7 +4,11 @@ const BASE_URL = 'http://localhost:3003/cheer';
 
 
 function query(filter={}) {
-    return axios.get(BASE_URL)
+    var queryParams = new URLSearchParams();
+    for (let key in filter) {
+        queryParams.set(`${key}`, filter[key]);
+    }
+    return axios.get(`${BASE_URL}?${queryParams}`)
         .then(res => res.data);
 }
 function getById(id) {
