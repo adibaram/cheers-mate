@@ -6,7 +6,10 @@ function addCheerRoutes(app) {
 
     // LIST
     app.get('/cheer', (req, res) => {
-        cheerService.query()
+        var filter = req.query;
+        console.log('filter', filter);
+        
+        cheerService.query(filter)
             .then(cheers => {
                 res.json(cheers)
             })
