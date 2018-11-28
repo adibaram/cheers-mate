@@ -5,16 +5,16 @@
       :center="position"
       :zoom="15"
       map-type-id="terrain"
-      style="width: 500px; height: 300px"
+      style="width: 100%; height: 600px"
     >
-      <!-- <GmapMarker
+      <GmapMarker
         :key="index"
-        v-for="(m, index) in markers"
-        :position="m.position"
+        v-for="(cheer, index) in cheers"
+        :position="cheer.position"
+        :icon="{ url : require('../assets/imgs/cheer-marker.png')}"
         :clickable="true"
-        :draggable="true"
-        @click="center=m.position"
-      />-->
+        @click="openPreview(cheer)"
+      />
     </GmapMap>
     <input type="text" v-model.number="position.lat">
     <input type="text" v-model.number="position.lng">
@@ -29,37 +29,50 @@ import { Vue2GoogleMap } from 'vue2-google-maps'
  export default {
     data() {
          return {
-             position: {lat:10,lng:100}
+             position: {lat:10,lng:100},
          }
      },
+    computed: {
+         cheers() {
+             return this.$store.getters.getCheers;
+         }
+    },
     methods: {
-        getCurrLocation() {
-        console.log('finding current location...');
-        var geocoder = new google.maps.Geocoder();
 
+        getCurrLocation() {
         if(navigator.geolocation) {
-            let loc = {};
-            navigator.geolocation.getCurrentPosition(position=>{
-                this.position.lat = +position.coords.latitude;
-                this.position.lng = +position.coords.longitude;
+            let latlng = {};
+            navigator.geolocation.getCurrentPosition(({coords})=>{
+                this.moveTo({lat:coords.latitude,lng:coords.longitude})
+
             })
-            // var latlng = new google.maps.LatLng(loc.lat, loc.lng);
-            // geocoder.geocode({'latLng': latlng}, function(results, status) {
-            //     console.log('DEBUG::status', status);
-            //     if(status == google.maps.GeocoderStatus.OK) {
-            //         console.log(results[0]['formatted_address']);
-            //     };
-            // })
             }
+        },
+        moveTo(latlng) {
+            console.log('moving to:', latlng);
+            this.position.lat = +latlng.lat;
+            this.position.lng = +latlng.lng;
+        },
+        openPreview(cheer) {
+            this.$alert(cheer.desc, cheer.locationName, {
+            confirmButtonText: 'OK',
+                callback: action => {
+                    this.$message({
+                    type: 'info',
+                    message: `action: ${ action }`
+                    });
+                }
+            });
+        },
+        loadCheers() {
+            this.$store.dispatch({type:'loadCheers'})
         }
     },
     mounted() {
-
+        this.loadCheers();
          this.$refs.gmapRef.$mapPromise
-            .then((map) => {
+            .then(() => {
                 this.getCurrLocation();
-        //         // console.log('DEBUG::this.position', this.position);
-        //         // map.panTo(loc);
                 })
     },
     components: {
@@ -69,8 +82,4 @@ import { Vue2GoogleMap } from 'vue2-google-maps'
 </script>
 
 <style>
-    #gmap {
-        height: 400px;
-        width: 100%;
-    }
 </style>
