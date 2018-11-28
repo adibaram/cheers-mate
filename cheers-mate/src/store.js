@@ -8,6 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     cheers: [],
+    filter: {},
     position: {
       lat:32,
       lng:34
@@ -32,15 +33,13 @@ export default new Vuex.Store({
   },
   actions: {
     loadCheers(context) {
-      return cheersService.query()
+      return cheersService.query(context.state.filter)
         .then(cheers=>{
-          console.log('DEBUG::cheers', cheers);
           context.commit({type:'setCheers', cheers});
         })
     },
     findCurrPosition(context) {
       if(navigator.geolocation) {
-        let latlng = {};
         navigator.geolocation.getCurrentPosition(({coords})=>{
           context.commit({type:'setPosition', coords})
         })
