@@ -4,6 +4,9 @@ const ObjectId = require('mongodb').ObjectId;
 
 
 function query(filter) {
+    for (key in filter) {
+        filter[key] = {$regex:  new RegExp(filter[key].toLowerCase(), "i")}
+    }
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('cheer');
