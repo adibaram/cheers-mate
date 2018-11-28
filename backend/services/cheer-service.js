@@ -2,7 +2,7 @@ const mongoService = require('./mongo-service')
 
 const ObjectId = require('mongodb').ObjectId;
 
-
+// GET ALL
 function query() {
     return mongoService.connect()
         .then(db => {
@@ -10,7 +10,16 @@ function query() {
             return collection.find({}).toArray()
         })
 }
-
+// GET SPECIFIC CHEER
+function getById(cheerId) {
+    cheerId = new ObjectId(cheerId)
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection('cheer');
+            return collection.findOne({ _id: cheerId }).cheer
+        })
+}
+// REMOVE CHEER
 function remove(cheerId) {
     cheerId = new ObjectId(cheerId)
     return mongoService.connect()
@@ -19,15 +28,7 @@ function remove(cheerId) {
             return collection.remove({ _id: cheerId })
         })
 }
-function getById(cheerId) {
-    cheerId = new ObjectId(cheerId)
-    return mongoService.connect()
-        .then(db => {
-            const collection = db.collection('cheer');
-            return collection.findOne({ _id: cheerId })
-        })
-}
-
+// ADD CHEER
 function add(cheer) {
     return mongoService.connect()
         .then(db => {
@@ -39,7 +40,7 @@ function add(cheer) {
                 })
         })
 }
-
+// UPDATE CHEER
 function update(cheer) {
     cheer._id = new ObjectId(cheer._id)
     return mongoService.connect()
