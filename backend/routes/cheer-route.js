@@ -8,7 +8,6 @@ function addCheerRoutes(app) {
     app.get('/cheer', (req, res) => {
         cheerService.query()
             .then(cheers => {
-                console.log('DEBUG::route : add : cheers', cheers);
                 res.json(cheers)
             })
     })

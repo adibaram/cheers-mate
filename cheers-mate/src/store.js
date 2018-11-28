@@ -7,17 +7,28 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    cheers: []
+    cheers: [],
+    position: {
+      lat:32,
+      lng:34
+    }
   },
   getters: {
     getCheers(state) {
       return state.cheers;
+    },
+    getCurrPosition(state) {
+      return state.position;
     }
   },
   mutations: {
     setCheers(state, {cheers}) {
       state.cheers = cheers;
-    }    
+    },
+    setPosition(state, {coords}) {
+      state.position.lat = coords.latitude;
+      state.position.lng = coords.longitude;
+    }
   },
   actions: {
     loadCheers(context) {
@@ -26,6 +37,14 @@ export default new Vuex.Store({
           console.log('DEBUG::cheers', cheers);
           context.commit({type:'setCheers', cheers});
         })
+    },
+    findCurrPosition(context) {
+      if(navigator.geolocation) {
+        let latlng = {};
+        navigator.geolocation.getCurrentPosition(({coords})=>{
+          context.commit({type:'setPosition', coords})
+        })
+        } else console.log('cant find location');
     }
   }
 })

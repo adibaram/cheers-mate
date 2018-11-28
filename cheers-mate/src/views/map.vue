@@ -1,8 +1,14 @@
 <template>
   <section>
+    <!-- <label>
+        <gmap-autocomplete
+          @place_changed="setPlace">
+        </gmap-autocomplete>
+        <button @click="addMarker">Add</button>
+    </label> -->
     <GmapMap
       ref="gmapRef"
-      :center="position"
+      :center="currPosition"
       :zoom="15"
       map-type-id="terrain"
       style="width: 100%; height: 600px"
@@ -16,69 +22,63 @@
         @click="openPreview(cheer)"
       />
     </GmapMap>
-    <input type="text" v-model.number="position.lat">
-    <input type="text" v-model.number="position.lng">
   </section>
 </template>
 
 
 
 <script>
-import { Vue2GoogleMap } from 'vue2-google-maps'
+import { Vue2GoogleMap } from "vue2-google-maps";
 
- export default {
-    data() {
-         return {
-             position: {lat:10,lng:100},
-         }
-     },
-    computed: {
-         cheers() {
-             return this.$store.getters.getCheers;
-         }
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    cheers() {
+      return this.$store.getters.getCheers;
     },
-    methods: {
-
-        getCurrLocation() {
-        if(navigator.geolocation) {
-            let latlng = {};
-            navigator.geolocation.getCurrentPosition(({coords})=>{
-                this.moveTo({lat:coords.latitude,lng:coords.longitude})
-
-            })
-            }
-        },
-        moveTo(latlng) {
-            console.log('moving to:', latlng);
-            this.position.lat = +latlng.lat;
-            this.position.lng = +latlng.lng;
-        },
-        openPreview(cheer) {
-            this.$alert(cheer.desc, cheer.locationName, {
-            confirmButtonText: 'OK',
-                callback: action => {
-                    this.$message({
-                    type: 'info',
-                    message: `action: ${ action }`
-                    });
-                }
-            });
-        },
-        loadCheers() {
-            this.$store.dispatch({type:'loadCheers'})
-        }
-    },
-    mounted() {
-        this.loadCheers();
-         this.$refs.gmapRef.$mapPromise
-            .then(() => {
-                this.getCurrLocation();
-                })
-    },
-    components: {
-        Vue2GoogleMap
+    currPosition() {
+      return this.$store.getters.getCurrPosition;
     }
-    };
+  },
+  methods: {
+    // getCurrLocation() {
+    //     this.moveTo(currPosition);
+    // },
+    // moveTo(latlng) {
+    //     console.log('moving to:', latlng);
+    //     this.position.lat = +latlng.lat;
+    //     this.position.lng = +latlng.lng;
+    // },
+    openPreview(cheer) {
+      this.$alert(cheer.desc, cheer.locationName, {
+        confirmButtonText: "OK",
+        callback: action => {
+          this.$message({
+            type: "info",
+            message: `action: ${action}`
+          });
+        }
+      });
+    },
+    loadCheers() {
+      this.$store.dispatch({ type: "loadCheers" });
+    },
+    findCurrLocation() {
+      this.$store.dispatch({ type: "findCurrPosition" });
+    }
+  },
+  mounted() {
+    this.$refs.gmapRef.$mapPromise.then(() => {
+      this.loadCheers();
+      this.findCurrLocation();
+    });
+  },
+  components: {
+    Vue2GoogleMap
+  }
+};
 </script>
 
 <style>
