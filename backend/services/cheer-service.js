@@ -2,13 +2,21 @@ const mongoService = require('./mongo-service')
 
 const ObjectId = require('mongodb').ObjectId;
 
-
+// GET ALL
 function query(filter) {
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('cheer');
             return collection.find(filter).toArray()
         })
+}
+// GET FROM RADIUS
+function queryRadius(params) {
+    return mongoService.connect()
+    .then(db => {
+        const collection = db.collection('cheer');
+        return collection.find(params).toArray();
+    })
 }
 // GET SPECIFIC CHEER
 function getById(cheerId) {
@@ -55,6 +63,7 @@ function update(cheer) {
 
 module.exports = {
     query,
+    queryRadius,
     remove,
     getById,
     add,
