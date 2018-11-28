@@ -3,13 +3,20 @@
         <section class="title-attendance-container">
             <div class="name-date">
                 <div class="date">
-                    <span>{{relativeDate}} //// {{date}}</span>
+                    <span>{{date}}</span>
                 </div>
                 <span>{{cheer.locationName}}</span>
             </div>
             
-            <div class="spot-attendance">
-                <div class="spots-left" v-if="cheer.attendees">Spots left: {{spotsLeft}}</div>
+            <div class="attending-share">
+                <div class="spot-attendance">
+                    <div class="is-going">
+                        <h4>Are You Going?</h4>
+                        <el-button type="primary" icon="el-icon-check"></el-button>
+                        <el-button type="primary" icon="el-icon-close" plain></el-button>
+                    </div>
+                    <div class="spots-left" v-if="cheer.attendees">Spots left: {{spotsLeft}}</div>
+                </div>
             </div>
         </section>
         
@@ -22,20 +29,14 @@
                     <h3>Details:</h3>
                     {{cheer.desc}}
                 </div>
-                <section class="cheer-attendances">
+                <section class="cheer-attendees">
                     <h3>Attendance:</h3>
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="user in cheer.attendees" :key="">
-                                <td v-for="prop in user" :key="">{{prop}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="attendees">
+                        <div v-for="user in cheer.attendees" :key="">
+                            <user-card :user="user"></user-card>
+                            <!-- <td v-for="prop in user" :key="">{{prop}}</td> -->
+                        </div>
+                    </div>
                 </section>
             </div>
 
@@ -72,6 +73,7 @@
 <script>
 // IMPORTS
 import cheerService from '../../services/cheer-service.js';
+import userCard from '../../components/user-card.vue';
 const moment = require('moment');
 
 export default {
@@ -115,6 +117,10 @@ export default {
         time() {
             return moment(this.cheer.date).format('hh:mm A');
         }
+    },
+
+    components: {
+        userCard,
     }
 };
 </script>

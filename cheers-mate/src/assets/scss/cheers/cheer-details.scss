@@ -17,6 +17,10 @@
     .spot-attendance {
         flex-grow: 1;
         
+        .is-going {
+            margin-bottom: 10px;
+            padding: 10px;
+        }
     }
 }
 
@@ -37,9 +41,21 @@
         .cover-image > * {
             width: 100%;
         }
+
+        .cheer-attendees {
+            .attendees {
+                display: flex;
+
+                & > * {
+                    width: 150px;
+                    margin: 5px;
+                }
+            }
+        }
     }
 
     .date-time-map {
+        
         padding: 10px;
         .icon {
             padding: 0 10px;
