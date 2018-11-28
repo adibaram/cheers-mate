@@ -14,26 +14,51 @@
         </section>
         
         <section class="main-info-container">
-            <div class="cheer-description">
-                Cheer Subject:
-                {{cheer.desc}}
+            <div class="description-attendees">
+                <div class="cover-image">
+                    <img src="https://via.placeholder.com/250x100" alt="">
+                </div>
+                <div class="cheer-description">
+                    Details:
+                    {{cheer.desc}}
+                </div>
+                <section class="cheer-attendances">
+                    <h3>Attendance:</h3>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="user in cheer.attendance" :key="">
+                                <td v-for="prop in user" :key="">{{prop}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+
+            <div class="date-time-map">
+                <div class="date-time">
+                    <div class="icon"><i class="far fa-clock"></i></div>
+                    <div class="info">
+                        <div class="date">{{date}}</div>
+                        <div>{{time}}</div>
+                    </div>
+                </div>
+                <div class="address">
+                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="info">
+                        <div class="street">{{cheer.position}}</div>
+                        <div class="city">{{cheer.position}}</div>
+                    </div>
+                </div>
+                <div class="map">
+                    <img src="https://via.placeholder.com/250x150" alt="map">
+                </div>
             </div>
             
-            <section class="cheer-attendances">
-                <h3>Attendance:</h3>
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="user in cheer.attendance" :key="">
-                            <td v-for="prop in user" :key="">{{prop}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
         </section>
 
         <br>
@@ -79,13 +104,16 @@ export default {
     },
     computed: {
         date() {
-            return moment(this.cheer.date).format('MMMM Do YYYY');
+            return moment(this.cheer.date).format('dddd, LL');
         },
         relativeDate() {
             return moment(this.cheer.date).fromNow();
         },
         spotsLeft() {
-            return this.cheer.spots - this.cheer.attendance.length
+            return this.cheer.spots - this.cheer.attendees.length
+        },
+        time() {
+            return moment(this.cheer.date).format('hh:mm A');
         }
     }
 };
