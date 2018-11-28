@@ -99,7 +99,7 @@ export default {
         loadCheer() {
             var cheerId = this.$route.params.cheerId;
             cheerService.getById(cheerId)
-                .then(cheer => this.cheer = cheer.cheer);
+                .then(res => this.cheer = res.cheer);
         },
     },
     computed: {
