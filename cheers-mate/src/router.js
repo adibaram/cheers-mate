@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from './views/home.vue'
+import Home from './views/Home.vue'
 
 
 
@@ -19,7 +19,7 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
-      component: () => import('./views/about.vue')
+      component: () => import('./views/About.vue')
     },
     {
       path: '/map',

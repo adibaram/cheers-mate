@@ -20,8 +20,8 @@ async function getById(id) {
 
 
 function _createCheers() {
-    return [_createCheer(Date.now(), {lat: 30, lng: -30}, [{user:'A'}, {user:'B'}],'lorem',4,(Math.random() > 0.5)? 'en' : 'he'),
-           _createCheer(Date.now(), {lat: 30, lng: -40}, [{user:'A'}, {user:'B'}],'lorem',4, (Math.random() > 0.5)? 'en' : 'he'),];
+    return [_createCheer(1545908790000, {lat: 30, lng: -30}, [{user:'A'}, {user:'B'}],'lorem',4,(Math.random() > 0.5)? 'en' : 'he'),
+           _createCheer(1543921590000, {lat: 30, lng: -40}, [{user:'A'}, {user:'B'}],'lorem',4, (Math.random() > 0.5)? 'en' : 'he'),];
 }
 
 function _createCheer(date,location,attendance,desc,spots,language) {
