@@ -6,10 +6,11 @@ function connectToMongo() {
     if (dbConn) return Promise.resolve(dbConn);
     const MongoClient = require('mongodb').MongoClient;
     
-    const url = (!process.env.PORT)? 
-                    'mongodb://localhost:27017/cheer_db' : 'mongodb://cheers:Cheers123@ds119024.mlab.com:19024/cheer_db'
+    // const url = (!process.env.PORT)? 
+    //                 'mongodb://localhost:27017/cheer_db' : 'mongodb://cheers:Cheers123@ds119024.mlab.com:19024/cheer_db'
     
-    return MongoClient.connect(url)
+    
+    return MongoClient.connect(url, { useNewUrlParser: true })
         .then(client => {
             console.log('Connected to MongoDB');
             
