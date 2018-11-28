@@ -5,11 +5,11 @@
                 <div class="date">
                     <span>{{relativeDate}} //// {{date}}</span>
                 </div>
-                <span>Location Name {{cheer.locationName}}</span>
+                <span>{{cheer.locationName}}</span>
             </div>
             
             <div class="spot-attendance">
-                <div class="spots-left" v-if="cheer.attendance">Spots left: {{spotsLeft}}</div>
+                <div class="spots-left" v-if="cheer.attendees">Spots left: {{spotsLeft}}</div>
             </div>
         </section>
         
@@ -31,7 +31,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="user in cheer.attendance" :key="">
+                            <tr v-for="user in cheer.attendees" :key="">
                                 <td v-for="prop in user" :key="">{{prop}}</td>
                             </tr>
                         </tbody>
@@ -99,7 +99,7 @@ export default {
         loadCheer() {
             var cheerId = this.$route.params.cheerId;
             cheerService.getById(cheerId)
-                .then(cheer => this.cheer = cheer);
+                .then(cheer => this.cheer = cheer.cheer);
         },
     },
     computed: {
