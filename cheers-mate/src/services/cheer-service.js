@@ -1,38 +1,30 @@
-import utilService from './util-service.js';
+import axios from 'axios';
 
-var cheers = _createCheers();
+const BASE_URL = 'http://localhost:3003/cheer';
 
-async function query(filter={}) {
-    var cheersForDisplay = cheers;
-    return cheersForDisplay
+
+function query(filter={}) {
+    return axios.get(BASE_URL)
+        .then(res => res.data);
+}
+function getById(id) {
+    return axios.get(`${BASE_URL}/${id}`)
+        .then(res => res.data);
+}
+function add(cheer) {
+    return axios.post(BASE_URL,cheer)
 }
 
-async function getById(id) {
-    var cheers = await query();
-    return cheers.find(cheer => cheer._id === id);
+function remove(id) {
+    return axios.delete(`${BASE_URL}/${id}`)
+        .then(res => res.data);
 }
 
 export default {
     query,
     getById,
-}
-
-function _createCheers() {
-    return [_createCheer(Date.now(), {lat: 32.0714143, lng: 34.78723}, [{user:'A'}, {user:'B'}],'lorem',4,(Math.random() > 0.5)? 'en' : 'he'),
-           _createCheer(Date.now(), {lat: 30, lng: -40}, [{user:'A'}, {user:'B'}],'lorem',4, (Math.random() > 0.5)? 'en' : 'he'),];
-}
-
-function _createCheer(date,position,attendance,desc,spots,language) {
-    return {
-        _id: utilService.makeId(),
-        date,
-        position,
-        locationName: _getLocationName(position),
-        attendance,
-        desc,
-        spots,
-        language,
-    }
+    add,
+    remove
 }
 
 function _getLocationName({lat,lng}) {
