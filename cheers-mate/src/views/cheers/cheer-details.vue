@@ -19,7 +19,7 @@
                     <img src="https://via.placeholder.com/250x100" alt="">
                 </div>
                 <div class="cheer-description">
-                    Details:
+                    <h3>Details:</h3>
                     {{cheer.desc}}
                 </div>
                 <section class="cheer-attendances">
