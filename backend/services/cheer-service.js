@@ -3,11 +3,11 @@ const mongoService = require('./mongo-service')
 const ObjectId = require('mongodb').ObjectId;
 
 
-function query() {
+function query(filter) {
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('cheer');
-            return collection.find({}).toArray()
+            return collection.find(filter).toArray()
         })
 }
 
