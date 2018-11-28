@@ -16,7 +16,7 @@ function getById(cheerId) {
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('cheer');
-            return collection.findOne({ _id: cheerId }).cheer
+            return collection.findOne({ _id: cheerId })
         })
 }
 // REMOVE CHEER
