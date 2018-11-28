@@ -1,16 +1,10 @@
-.cheer-attendances > * {
-    margin: 0 auto;
-}
-
-.cheer-description {
-
-}
 
 .title-attendance-container {
     display: flex;
     border: 1px solid black;
     padding: 10px;
-
+    margin: 10px;
+    
     .name-date {
         .date {
             opacity: 0.8;
@@ -19,14 +13,58 @@
         width: 60%;
         margin: 0 10px;
     }
-
+    
     .spot-attendance {
         flex-grow: 1;
-
+        
     }
 }
 
 .main-info-container {
     display: flex;
     border: 1px solid red;
+    margin: 10px;
+    justify-content: space-between;
+
+    .description-attendees {
+        width: 70%;
+        padding: 10px;
+
+        & > * {
+            padding: 0 0 10px;
+        }
+
+        .cover-image > * {
+            width: 100%;
+        }
+    }
+
+    .date-time-map {
+        padding: 10px;
+        .icon {
+            padding: 0 10px;
+        }
+        .info {
+            padding: 0 10px;
+            text-align: left;
+        }
+
+        .date-time {
+            padding: 0 0 10px;
+            display: flex;
+        }
+        
+        .address {
+            display: flex;
+            padding: 0 0 10px;   
+            .city {
+                opacity: 0.8;
+                font-size: 0.8rem;
+            }
+        }
+
+        .map > * {
+            width: 100%;
+        }
+    }
 }
