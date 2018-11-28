@@ -10,15 +10,7 @@ function query(filter) {
             return collection.find(filter).toArray()
         })
 }
-
-function remove(cheerId) {
-    cheerId = new ObjectId(cheerId)
-    return mongoService.connect()
-        .then(db => {
-            const collection = db.collection('cheer');
-            return collection.remove({ _id: cheerId })
-        })
-}
+// GET SPECIFIC CHEER
 function getById(cheerId) {
     cheerId = new ObjectId(cheerId)
     return mongoService.connect()
@@ -27,7 +19,16 @@ function getById(cheerId) {
             return collection.findOne({ _id: cheerId })
         })
 }
-
+// REMOVE CHEER
+function remove(cheerId) {
+    cheerId = new ObjectId(cheerId)
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection('cheer');
+            return collection.remove({ _id: cheerId })
+        })
+}
+// ADD CHEER
 function add(cheer) {
     return mongoService.connect()
         .then(db => {
@@ -39,7 +40,7 @@ function add(cheer) {
                 })
         })
 }
-
+// UPDATE CHEER
 function update(cheer) {
     cheer._id = new ObjectId(cheer._id)
     return mongoService.connect()
