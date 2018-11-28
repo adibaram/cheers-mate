@@ -5,17 +5,25 @@
                 <div class="date">
                     <span>{{date}}</span>
                 </div>
-                <span>{{cheer.locationName}}</span>
+                <span class="location-name">{{cheer.locationName}}</span>
             </div>
             
             <div class="attending-share">
                 <div class="spot-attendance">
                     <div class="is-going">
-                        <h4>Are You Going?</h4>
-                        <el-button type="primary" icon="el-icon-check"></el-button>
-                        <el-button type="primary" icon="el-icon-close" plain></el-button>
+                        <h4 class="txt">
+                            Are You Going?
+                            <span class="spots-left" v-if="cheer.attendees">Spots left: {{spotsLeft}}</span>
+                        </h4>
+                        <el-button class="btn" size="small" type="primary" icon="el-icon-check"></el-button>
+                        <el-button class="btn" size="small" type="primary" icon="el-icon-close" plain></el-button>
                     </div>
-                    <div class="spots-left" v-if="cheer.attendees">Spots left: {{spotsLeft}}</div>
+                    <div class="share">
+                        <span>Share: </span>
+                        <i class="fab fa-facebook-square"></i>
+                        <i class="fab fa-twitter-square"></i>
+                        <i class="fab fa-linkedin"></i>
+                    </div>
                 </div>
             </div>
         </section>

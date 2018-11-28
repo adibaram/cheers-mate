@@ -1,8 +1,10 @@
 #nav {
     max-height: 70px;
     padding: 30px;
+    font-family: Lobster;
     a {
       font-weight: bold;
+      font-family: Nunito;
       color: #2c3e50;
       &.router-link-exact-active {
         color: #42b983;
