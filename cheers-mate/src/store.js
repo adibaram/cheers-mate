@@ -29,13 +29,19 @@ export default new Vuex.Store({
     setPosition(state, {coords}) {
       state.position.lat = coords.latitude;
       state.position.lng = coords.longitude;
+    },
+    setFilter(state, {filter}) {
+      state.filter = filter;
     }
   },
   actions: {
     loadCheers(context) {
+
       return cheersService.query(context.state.filter)
         .then(cheers=>{
           context.commit({type:'setCheers', cheers});
+          console.log('cheers loaded:', cheers);
+          
         })
     },
     findCurrPosition(context) {
@@ -44,6 +50,10 @@ export default new Vuex.Store({
           context.commit({type:'setPosition', coords})
         })
         } else console.log('cant find location');
+    },
+    loadFilter(context, {filter}) {
+      context.commit({type:'setFilter', filter});
+      context.dispatch({type:'loadCheers'});      
     }
   }
 })
