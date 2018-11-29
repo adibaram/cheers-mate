@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       filter: {
-          date: Date.now()
+          // date: Date.now()
       }
     };
   },

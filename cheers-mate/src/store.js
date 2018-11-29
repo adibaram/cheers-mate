@@ -40,6 +40,7 @@ export default new Vuex.Store({
       return cheersService.query(context.state.filter)
         .then(cheers=>{
           context.commit({type:'setCheers', cheers});
+          console.log('filter', context.state.filter);
           console.log('cheers loaded:', cheers);
           
         })
