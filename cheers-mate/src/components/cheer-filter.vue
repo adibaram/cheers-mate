@@ -3,14 +3,34 @@
     <label>
         <input placeholder="Look for a Cheer" v-model="locationName" @input="updateFilter">
     </label>
-    <label>
+    <!-- <label>
         <input type="date" v-model="date" @change="updateFilter">
-    </label>
+    </label> -->
+    <div class="datepicker-trigger">
+      <input
+        type="text"
+        id="datepicker-trigger"
+        placeholder="Select dates"
+        :value="formatDates(dateOne, dateTwo)"
+        @change="updateFilter"
+      >
+
+      <AirbnbStyleDatepicker
+        :trigger-element-id="'datepicker-trigger'"
+        :mode="'range'"
+        :fullscreen-mobile="true"
+        :date-one="dateOne"
+        :date-two="dateTwo"
+        @date-one-selected="val => { dateOne = val }"
+        @date-two-selected="val => { dateTwo = val }"
+      />
+    </div>
 </section>
 </template>
 
 <script>
 const moment = require('moment');
+import format from 'date-fns/format';
 
 export default {
   data() {
@@ -21,6 +41,9 @@ export default {
       // },
       locationName: '',
       date: '',
+      dateFormat: 'D MMM',
+      dateOne: '',
+      dateTwo: '',
       
     };
   },
@@ -30,13 +53,24 @@ export default {
       filter.locationName = this.locationName;
       this.$store.dispatch({ type: "loadFilter", filter });
     },
+
+    formatDates(dateOne, dateTwo) {
+      let formattedDates = '';
+      if (dateOne) {
+        formattedDates = format(dateOne, this.dateFormat);
+      }
+      if (dateTwo) {
+        formattedDates += ' - ' + format(dateTwo, this.dateFormat);
+      }
+      return formattedDates;
+    }
   },
 
   computed: {
     filter() {
       return {
-        fromDate: moment(this.date).format('X'),
-        toDate: moment(this.date).add(24,'hours').format('X'),
+        fromDate: moment(this.dateOne).format('X'),
+        toDate: moment(this.dateTwo).format('X'),
       }
     },
     fromDate() {
