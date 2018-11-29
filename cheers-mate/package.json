@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "date-fns": "^1.29.0",
     "element-ui": "^2.4.11",
     "google-maps": "^3.3.0",
     "moment": "^2.22.2",
