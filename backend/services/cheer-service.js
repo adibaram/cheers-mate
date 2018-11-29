@@ -15,10 +15,24 @@ function query(filter) {
 }
 // GET FROM RADIUS
 function queryRadius(params) {
+    console.log('DEBUG::params', params);
+    const locationFilter = {
+        position: {
+            $near: {
+                $geometry: {
+                    type: "Point",
+                    coordinates: [+params.lat, +params.lng]
+                },
+                $maxDistance: +params.radius
+            }
+        }
+    }
+    console.log('DEBUG::locationFilter', locationFilter);
     return mongoService.connect()
     .then(db => {
         const collection = db.collection('cheer');
-        return collection.find(params).toArray();
+        collection.createIndex({ 'position': "2dsphere" });
+        return collection.find(locationFilter).toArray();
     })
 }
 // GET SPECIFIC CHEER
