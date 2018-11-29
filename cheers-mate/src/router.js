@@ -27,14 +27,14 @@ export default new Router({
       component: () => import('./views/map.vue')
     },
     {
+      path: '/cheer/create',
+      name: 'create-cheer',
+      component: () => import('./views/cheers/create-cheer.vue')
+    },
+    {
       path: '/cheer/:cheerId',
       name: 'cheer',
       component: () => import('./views/cheers/cheer-details.vue')
-    },
-    {
-      path: '/cheer/create',
-      name: 'create-cheer',
-      component: () => import('./views/create-cheer.vue')
     },
     {
       path: '/cheer',
