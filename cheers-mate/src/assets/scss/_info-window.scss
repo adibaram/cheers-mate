@@ -1,0 +1,15 @@
+.info-window {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    & .info-header {
+        background-color: aqua;
+        padding: 5px;
+    }
+    & .info-content {
+        flex-grow: 1;
+    }
+
+}

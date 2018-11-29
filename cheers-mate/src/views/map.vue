@@ -13,19 +13,21 @@
       map-type-id="terrain"
       style="width: 100%; height: 600px">
 
-      <gmap-info-window 
+      <gmap-info-window
+      v-if="infoOpened"
       :options="infoOptions" 
-      :position="currCheer.position"
+      :position="currCheer.position.coordinates"
       :opened="infoOpened" 
-      @closeclick="infoOpened=false; infoCurrentKey=null">
-    {{currCheer.locationName}}
+      @closeclick="infoOpened=false; infoCurrentKey=null"
+      >
+      <div v-html="infoContent"></div>
     </gmap-info-window>
  
 
       <GmapMarker
         :key="index"
         v-for="(cheer, index) in cheers"
-        :position="cheer.position"
+        :position="cheer.position.coordinates"
         :icon="{ url : require('../assets/imgs/cheer-marker.png')}"
         :clickable="true"
         @click="toggleInfo(cheer)"
@@ -45,12 +47,13 @@ export default {
       currCheer: {},
       infoOpened: false,
       infoCurrentKey: null,
+      infoContent: '',
       infoOptions: {
         pixelOffset: {
           width: 0,
-          height: -35
+          height: -30
         }
-      }
+      },
     };
   },
   computed: {
@@ -59,32 +62,29 @@ export default {
     },
     currPosition() {
       return this.$store.getters.getCurrPosition;
-    }
+    },
   },
   methods: {
     toggleInfo: function(cheer) {
       console.log('toggleInfo');
-      
       if (this.infoCurrentKey == cheer._id) {
         this.infoOpened = !this.infoOpened
         this.currCheer = {};
       } else {
-        this.infoOpened = true
-        this.infoCurrentKey = cheer._id
         this.currCheer = cheer;
+        this.infoContent = this.getInfoWindowContent(cheer);
+        this.infoCurrentKey = cheer._id
+        this.infoOpened = true
       }
     },
- 
-    openPreview(cheer) {
-      // this.$alert(cheer.desc, cheer.locationName, {
-      //   confirmButtonText: "OK",
-      //   callback: action => {
-      //     this.$message({
-      //       type: "info",
-      //       message: `action: ${action}`
-      //     });
-      //   }
-      // });
+    getInfoWindowContent(cheer) {
+          return (`<section class="info-window">
+                      <div class="info-header">${cheer.locationName}</div>
+                      <div class="info-content">
+                          <p>${cheer.date}</p>
+                          <p>${cheer.attendees.length} are coming!</p>  
+                      </div>
+                   </section>`);
     },
     loadCheers() {
       this.$store.dispatch({ type: "loadCheers" });
@@ -100,7 +100,7 @@ export default {
     });
   },
   components: {
-    Vue2GoogleMap
+    Vue2GoogleMap,
   }
 };
 </script>
