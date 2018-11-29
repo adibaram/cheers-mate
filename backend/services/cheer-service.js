@@ -40,11 +40,32 @@ function query(filter) {
 }
 // GET FROM RADIUS
 function queryRadius(params) {
+    console.log('DEBUG::params', params);
+    const locationFilter = {
+        position: {
+            $near: {
+                $geometry: {
+                    type: "Point",
+                    coordinates: [+params.lat, +params.lng]
+                },
+                $maxDistance: +params.radius
+            }
+        }
+    }
+    console.log('DEBUG::locationFilter', locationFilter);
     return mongoService.connect()
+<<<<<<< HEAD
         .then(db => {
             const collection = db.collection(COLLECTION_NAME);
             return collection.find(params).toArray();
         })
+=======
+    .then(db => {
+        const collection = db.collection('cheer');
+        collection.createIndex({ 'position': "2dsphere" });
+        return collection.find(locationFilter).toArray();
+    })
+>>>>>>> create
 }
 // GET SPECIFIC CHEER
 function getById(cheerId) {

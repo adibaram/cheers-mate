@@ -7,8 +7,7 @@ function addCheerRoutes(app) {
     // LIST
     app.get('/cheer', (req, res) => {
         var filter = req.query;
-        console.log('filter', filter);
-
+        console.log('DEBUG::filter', filter);
         cheerService.query(filter)
             .then(cheers => {
                 res.json(cheers)
@@ -18,24 +17,13 @@ function addCheerRoutes(app) {
     // GET FROM RADIUS
     app.get('/cheer/radius', (req, res) => {
         var params = req.query;
-        if (params.lat && params.lng && params.radius) {
-            const locationFilter = {
-                location: {
-                    $near: {
-                        $geometry: {
-                            type: "point",
-                            coordinates: [+params.lat, +params.lng]
-                        },
-                        $minDistance: 0,
-                        $maxDistance: +params.radius
-                    }
-                }
-            }
-            cheerService.queryRadius(locationFilter)
+        console.log('DEBUG::params', params);
+        // if (params.lat && params.lng && params.radius) {
+            cheerService.queryRadius(params)
                 .then(cheers => {
                     res.json(cheers);
                 })
-        } else throw new Error('params are not defined');
+        // } else throw new Error('params are not defined');
     })
 
 

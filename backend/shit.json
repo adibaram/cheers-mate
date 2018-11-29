@@ -1,0 +1,112 @@
+[
+    {
+        "_id": "5bfe52f984acc159d53423af",
+        "date": 1543777200000,
+        "position": {
+            "type": "Point",
+            "coordinates": {"lat" : 32.079, "lng" : 34.779194}
+        },
+        "locationName": "Shem Tov",
+        "attendees": [
+            {
+                "name": "Neta"
+            }
+        ],
+        "desc": "Preparations for the Eurovision",
+        "category": "Music",
+        "spots": 2
+    },
+    {
+        "_id": "5bfe560584acc159d53423b0",
+        "date": 1546300800000,
+        "position": {
+            "type": "Point",
+            "coordinates": {"lat" : 32.080224,"lng" : 34.7818127}
+        },
+        "locationName": "Mishbetzet",
+        "attendees": [
+            {
+                "name": "Good"
+            },
+            {
+                "name": "Vibes"
+            }
+        ],
+        "desc": "New year celebration",
+        "category": "Party",
+        "spots": 20
+    },
+    {
+        "_id": "5bfe6c3a84acc159d53423b2",
+        "date": 1546300800000,
+        "position": {
+            "type": "Point",
+            "coordinates":{"lat" : 32.080224,"lng" : 34.7818129}
+        },
+        "locationName": "Mishbetzet",
+        "attendees": [
+            "Good",
+            "Vibes"
+        ],
+        "desc": "New year celebration",
+        "category": "Party",
+        "spots": 20
+    },
+    {
+        "_id": "5bfe560584acc159d53423b1",
+        "date": 1543352400000,
+        "position": {
+            "type": "Point",
+            "coordinates":{"lat" : 32.078202,"lng" : 34.774559}
+        },
+        "locationName": "Beer Garden",
+        "attendees": [
+            {
+                "name": "Gal Gadot"
+            },
+            {
+                "name": "Bar Refaeli"
+            }
+        ],
+        "desc": "Drink alot",
+        "category": "Happy Hour",
+        "spots": 5
+    },
+    {
+        "_id": "5bfe6c3a84acc159d53423b3",
+        "date": 1543352400000,
+        "position": {
+            "type": "Point",
+            "coordinates":{"lat" : 32.078202,"lng" : 34.774559}
+        },
+        "locationName": "Beer Garden",
+        "attendees": [
+            {
+                "name": "Gal Gadot"
+            },
+            {
+                "name": "Bar Refaeli"
+            }
+        ],
+        "desc": "Drink alot",
+        "category": "Happy Hour",
+        "spots": 5
+    },
+    {
+        "_id": "5bfe63f84045d90058102f84",
+        "date": 1547336000000,
+        "position": {
+            "type": "Point",
+            "coordinates":{"lat" : 32.087422,"lng" : 34.803218}
+        },
+        "locationName": "Drinks President",
+        "attendees": [
+            {
+                "name": "Adi"
+            }
+        ],
+        "desc": "Resting from coding",
+        "category": "Happy Hour",
+        "spots": 2
+    }
+]
