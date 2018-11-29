@@ -2,12 +2,19 @@
     max-height: 70px;
     padding: 30px;
     font-family: Lobster;
+    height: 100px;
+    // position: fixed;
+    width: 100vw;
     a {
       font-weight: bold;
       font-family: Nunito;
-      color: #2c3e50;
+      color: black;
+      // color: #2c3e50;
       &.router-link-exact-active {
         color: #42b983;
       }
+    }
+    h1 {
+      font-size: 50px;
     }
   }

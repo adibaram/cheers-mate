@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav" class="flex space-between">
-       <h1>Cheer App</h1>
+       <h1>Cheers</h1> 
        <div class="links">
         <router-link to="/">Home</router-link> |
         <router-link to="/cheer">Cheers</router-link> |
