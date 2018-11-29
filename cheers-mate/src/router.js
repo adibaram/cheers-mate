@@ -32,6 +32,11 @@ export default new Router({
       component: () => import('./views/cheers/cheer-details.vue')
     },
     {
+      path: '/cheer/create',
+      name: 'create-cheer',
+      component: () => import('./views/create-cheer.vue')
+    },
+    {
       path: '/cheer',
       name: 'cheer-list',
       component: () => import('./views/cheers/cheer-list.vue')
