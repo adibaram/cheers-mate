@@ -13,7 +13,6 @@
         id="datepicker-trigger"
         placeholder="Select dates"
         :value="formatDates(dateOne, dateTwo)"
-        @change="updateFilter"
       >
 
       <AirbnbStyleDatepicker
@@ -63,6 +62,7 @@ export default {
       if (dateTwo) {
         formattedDates += ' - ' + format(dateTwo, this.dateFormat);
       }
+      // this.updateFilter();
       return formattedDates;
     }
   },

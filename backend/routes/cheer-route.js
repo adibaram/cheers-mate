@@ -32,9 +32,9 @@ function addCheerRoutes(app) {
         const cheerId = req.params.cheerId;
         Promise.all([
             cheerService.getById(cheerId),
-            // reviewService.query({cheerId})
         ])
             .then(([cheer]) => {
+                console.log('DEBUG::cheer', cheer);
                 res.json({ cheer })
             })
     })
