@@ -1,13 +1,14 @@
 <template>
-<section>
+<section class="filter-container">
     <label>
-        <input placeholder="Look for a Cheer" v-model="locationName" @input="updateFilter">
+        <input class="filter-input" placeholder="Look by location" v-model="locationName" @input="updateFilter">
     </label>
     <!-- <label>
         <input type="date" v-model="date" @change="updateFilter">
     </label> -->
     <div class="datepicker-trigger">
       <input
+        class="filter-input" 
         type="text"
         id="datepicker-trigger"
         placeholder="Select dates"
@@ -89,5 +90,19 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+
+.filter-container {
+  width: fit-content;
+  padding: 20px;
+  /* margin: 0 auto; */
+
+  .filter-input {
+    padding: 10px;
+    background-color: rgba(228, 224, 224, 0.411);
+    font-size: 15px;
+    margin: 10px;
+  }
+}
+
 </style>

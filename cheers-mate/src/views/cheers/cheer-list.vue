@@ -1,6 +1,7 @@
 <template>
     <section>
-      <cheer-filter></cheer-filter>
+      <!-- <cheer-filter></cheer-filter> -->
+        
         <!-- <el-autocomplete
             v-model="state4"
             :fetch-suggestions="querySearchAsync"
