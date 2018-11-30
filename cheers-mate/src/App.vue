@@ -1,20 +1,22 @@
 <template>
-  <div id="app">
-    <div id="nav" class="flex space-between">
-       <h1>Cheers</h1> 
-       <div class="links">
-        <router-link to="/">Home</router-link> |
-        <!-- <router-link to="/cheer">Cheers</router-link> | -->
-        <router-link to="/about">About</router-link> |
+<section>
+  <header>
+    <div class="container">
+      <h1>Cheers</h1>
+      <div class="links">
+        <router-link to="/">Home</router-link>
+        <!-- <router-link to="/cheer">Cheers</router-link> -->
+        <router-link to="/about">About</router-link>
         <router-link to="/map">Map</router-link>
       </div>
-      <div>
-        <router-link to="/signup">Sign up</router-link> |
+      <div class="links">
+        <router-link to="/signup">Sign up</router-link>
         <router-link to="/login">Log in</router-link>
       </div>
     </div>
-    <router-view/>
-  </div>
+  </header>
+  <router-view/>
+  </section>
 </template>
 
 <style lang="scss">
