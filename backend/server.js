@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const addCheerRoutes = require('./routes/cheer-route');
-
+const addUserRoutes = require('./routes/user-route');
 
 
 const app = express()  
@@ -30,7 +30,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-addCheerRoutes(app)
+addCheerRoutes(app);
+addUserRoutes(app);
 
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
