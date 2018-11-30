@@ -35,6 +35,7 @@ function addCheerRoutes(app) {
             // reviewService.query({cheerId})
         ])
             .then(([cheer]) => {
+                console.log('DEBUG::cheer', cheer);
                 res.json({ cheer })
             })
     })
