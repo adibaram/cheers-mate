@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="map">
-                    <img src="https://via.placeholder.com/250x150" alt="map">
+                    <img :src="mapPic" alt="map"/>
                 </div>
             </div>
             
@@ -124,6 +124,9 @@ export default {
         },
         time() {
             return moment(this.cheer.date).format('hh:mm A');
+        },
+        mapPic() {
+            return `https://maps.googleapis.com/maps/api/staticmap?center=${this.cheer.position.coordinates.lat},${this.cheer.position.coordinates.lng}&markers=color:red%7Clabel:C%7C${this.cheer.position.coordinates.lat},${this.cheer.position.coordinates.lng}&zoom=16&size=600x400&key=AIzaSyDSpb5jrUSIDb124D7Qpjd4XJQ6d8oVPW0`
         }
     },
 
