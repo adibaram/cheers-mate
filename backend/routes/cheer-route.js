@@ -55,8 +55,9 @@ function addCheerRoutes(app) {
 
     // UPDATE
     app.put('/cheer/:cheerId', (req, res) => {
-        const cheer = req.body;
-        cheerService.update(cheer)
+        const id = req.params.cheerId;
+        const newParams = req.body;
+            cheerService.update(id,newParams)
             .then(cheer => res.json(cheer))
     })
 
