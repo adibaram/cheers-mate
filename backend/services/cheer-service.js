@@ -91,14 +91,15 @@ function add(cheer) {
         })
 }
 // UPDATE CHEER
-function update(cheer) {
-    cheer._id = new ObjectId(cheer._id)
+function update(id,cheer) {
+    _id = new ObjectId(id)
+    console.log('DEBUG::_id', _id);
     return mongoService.connect()
         .then(db => {
             const collection = db.collection(COLLECTION_NAME);
-            return collection.updateOne({ _id: cheer._id }, { $set: cheer })
-                .then(result => {
-                    return cheer;
+            return collection.updateOne({ _id : id }, { $set: cheer })
+                .then(res => {
+                    return res.modifiedCount;
                 })
         })
 }
