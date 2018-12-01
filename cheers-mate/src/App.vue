@@ -2,7 +2,7 @@
 <section>
   <header>
     <div class="container">
-      <h1>Cheers</h1>
+      <h1>Cheers 🍻</h1>
       <div class="links">
         <router-link to="/">Home</router-link>
         <!-- <router-link to="/cheer">Cheers</router-link> -->
