@@ -33,6 +33,9 @@ app.get('/', (req, res) => {
 addCheerRoutes(app);
 addUserRoutes(app);
 
+
+
+
 const PORT = process.env.PORT || 3003;
 app.listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
 
