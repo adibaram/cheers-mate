@@ -38,7 +38,7 @@
                     {{cheer.desc}}
                 </div>
                 <section class="cheer-attendees">
-                    <h3>Attendance:</h3>
+                    <h3>Attendees:</h3>
                     <div class="attendees">
                         <div v-for="user in cheer.attendees" :key="">
                             <user-card :user="user"></user-card>
