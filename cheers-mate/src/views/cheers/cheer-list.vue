@@ -23,7 +23,7 @@
                 <el-card class="card" :body-style="{ padding: '10px' }" @click.native="$router.push(`/cheer/${cheer._id}`)">
                 <img src="@/assets/img/bgs/mates.jpeg" class="image">
                 <div style="padding: 14px;">
-                    <span>Location: {{cheer.locationName}}</span><br>
+                    <span class="location"><i class="fas fa-map-marker-alt"></i> {{cheer.locationName}}</span><br>
                     <span v-if="cheer.attendees">Spots: {{cheer.attendees.length}} of {{cheer.spots}}</span>
                     <div class="bottom clearfix">
                     <time class="time">{{ date(cheer) }}</time>
@@ -121,5 +121,9 @@ input {
     height: 30px;
     width: 300px;
     border-radius: 5px;
+}
+
+span .location {
+  
 }
 </style>
