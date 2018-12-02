@@ -29,14 +29,23 @@ export default {
 
     methods: {
         checkUser() {
-            authService.checkUser(this.user)
-                .then(user => {
-                    console.log('logged in')
-                    this.$router.push('/');
-                })
-                .catch( err => {
+            let user = this.user;
+            this.$store.dispatch({type: 'login', user})
+                .then(()=> this.$router.push('/'))
+                .catch(err => {
                     console.log('err', err);
                 })
+
+
+            // authService.checkUser(this.user)
+            //     .then(user => {
+            //         console.log('logged in')
+            //         this.$store.dispatch({type: 'login', user})
+            //         this.$router.push('/');
+            //     })
+            //     .catch( err => {
+            //         console.log('err', err);
+            //     })
         }
     }
 }

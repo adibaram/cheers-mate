@@ -27,19 +27,12 @@ function login(user, rememberPref = false) {
     }
 }
 
-function logout() {
-    // remove user from session storage to log user out
-    if (sessionStorage.getItem('user')) sessionStorage.removeItem('user');
-    if (localStorage.getItem('user')) localStorage.removeItem('user');
-
-}
 
 export default {
     getById,
     remove,
     getAll,
     login,
-    logout
 }
 
 
