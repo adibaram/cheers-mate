@@ -6,7 +6,7 @@
     <!-- <label>
         <input type="date" v-model="date" @change="updateFilter">
     </label> -->
-    <div class="datepicker-trigger">
+    <!-- <div class="datepicker-trigger">
       <input
         class="filter-input" 
         type="text"
@@ -24,13 +24,16 @@
         @date-one-selected="val => { dateOne = val }"
         @date-two-selected="val => { dateTwo = val }"
       />
-    </div>
+    </div> -->
+
+    <input type="text" id="datepicker">
+
+
 </section>
 </template>
 
 <script>
 const moment = require('moment');
-import format from 'date-fns/format';
 
 export default {
   data() {
@@ -47,6 +50,12 @@ export default {
       
     };
   },
+
+  mounted() {
+    var picker = new Pikaday({ field: document.getElementById('datepicker') });
+    console.log(picker);
+  },
+
   methods: {
     updateFilter() {
       let filter = this.filter;

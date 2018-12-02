@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3003/cheer';
+const BASE_URL = (process.env.NODE_ENV !== 'development')? 
+                '/cheer' : 'http://localhost:3003/cheer';
 
 
 function query(filter={}) {

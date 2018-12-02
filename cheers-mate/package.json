@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build --dest ../backend/public"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -20,10 +20,12 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@chenfengyuan/datepicker": "^1.0.1",
     "@vue/cli-plugin-babel": "^3.1.1",
     "@vue/cli-plugin-pwa": "^3.1.2",
     "@vue/cli-service": "^3.1.4",
     "node-sass": "^4.9.0",
+    "pikaday": "^1.8.0",
     "sass-loader": "^7.0.1",
     "vue-template-compiler": "^2.5.17"
   }
