@@ -1,5 +1,7 @@
 <template>
 <section class="filter-container">
+  <h2>look for new people to drink with</h2>
+
     <label>
         <input class="filter-input" placeholder="Look by location" v-model="locationName" @input="updateFilter">
     </label>
@@ -26,9 +28,14 @@
       />
     </div> -->
 
-    <input type="text" id="datepicker">
 
+    <div class="filter-buttons">
+      <el-button type="warning">Search</el-button>
 
+      <router-link to="/map">
+      <el-button type="warning">Look Around</el-button>
+      </router-link>
+    </div>
 </section>
 </template>
 
@@ -101,17 +108,5 @@ export default {
 
 <style lang="scss">
 
-.filter-container {
-  width: fit-content;
-  padding: 20px;
-  /* margin: 0 auto; */
-
-  .filter-input {
-    padding: 10px;
-    background-color: rgba(228, 224, 224, 0.411);
-    font-size: 15px;
-    margin: 10px;
-  }
-}
 
 </style>
