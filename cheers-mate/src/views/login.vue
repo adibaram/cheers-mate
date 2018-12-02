@@ -32,7 +32,7 @@ export default {
             authService.checkUser(this.user)
                 .then(user => {
                     console.log('logged in')
-                    this.$route.push('/');
+                    this.$router.push('/');
                 })
                 .catch( err => {
                     console.log('err', err);
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style>
-    .login, button {
+    .login button {
         width: 100px;
     }
 </style>

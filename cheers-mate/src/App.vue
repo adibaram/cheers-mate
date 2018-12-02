@@ -6,9 +6,8 @@
         <h1 class="main-logo">Cheers🍻</h1>
       </router-link>
       <div class="links">
-        <router-link to="/">Home</router-link>
         <!-- <router-link to="/cheer">Cheers</router-link> -->
-        <router-link to="/about">About</router-link>
+        <!-- <router-link to="/about">About</router-link> -->
       </div>
       <div class="links">
         <router-link to="/signup">Sign up</router-link>
