@@ -24,12 +24,18 @@ function add(rsvp) {
             console.log('rsvp added successfully');
         })
 }
-function remove(id) {
-    const _id = new ObjectId(id)
+function remove(filter) {
+    // if (filter.userId) {
+    //     filter.userId = new ObjectId(filter.userId)
+    // }
+    // if (filter.cheerId) {
+    //     filter.cheerId = new ObjectId(filter.cheerId)
+    // }
+    console.log('DEBUG::filter', filter);
+    console.log('DEBUG::typeof filter', typeof filter);
     return mongoService.connect()
-        .then(dbConn => {
-            const userCollection = dbConn.collection(COLLECTION_NAME);
-            return userCollection.remove({ _id })
+        .then(db => {
+            return db.collection(COLLECTION_NAME).remove(filter)
         })
 }
 

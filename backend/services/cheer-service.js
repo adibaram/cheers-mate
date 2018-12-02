@@ -71,7 +71,7 @@ function getById(_id) {
 }
 // REMOVE CHEER
 function remove(_id) {
-    let _id = new ObjectId(_id)
+    _id = new ObjectId(_id)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection(COLLECTION_NAME);

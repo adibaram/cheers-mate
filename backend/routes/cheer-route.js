@@ -47,8 +47,15 @@ function addCheerRoutes(app) {
     // DELETE
     app.delete('/cheer/:cheerId', (req, res) => {
         const cheerId = req.params.cheerId;
-        cheerService.remove(cheerId)
-            .then(() => res.end(`cheer ${cheerId} Deleted `));
+        Promise.all([
+            cheerService.remove(cheerId),
+            userCheerService.remove({cheerId})
+        ])
+            .then(() => res.end(`cheer ${cheerId} Deleted `))
+            .catch(err=>{
+                console.log('an error has benn accured: '+err);
+                throw new Error(errs);
+            })
     })
 
     // CREATE

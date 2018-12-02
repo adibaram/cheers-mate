@@ -38,10 +38,14 @@ function addRoutes(app) {
         let currUser = req.session.user;
         let userId = req.params.id;
         if (!currUser) throw new Error('user not logged in')
-        if (!currUser._id !== id) throw new Error('unauthorized, attempting to delete a non logged in user')
-        userService.remove(userId)
+        if (!currUser._id !== userId) throw new Error('unauthorized, attempting to delete a non logged in user')
+        Promise.all([
+            userCheerService.remove({userId}),
+            userService.remove(userId)
+        ])
             .then(()=> res.send(`user deleted successfully: ${userId}`))
-            .catch(err=> {
+            .catch(err =>
+                {
                 console.log('DEBUG::err', err);
                 res.send('an error accured: ' + err);
             })

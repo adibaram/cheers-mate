@@ -19,7 +19,16 @@ function addRoutes(app) {
             })
     })
 
-
+    app.delete('/userCheer/:cheerId', (req, res) => {
+        if (!req.session.user) throw new Error('user not logged in')
+        let cheerId = req.params.cheerId;
+        let userId = req.session.user._id;
+        rsvpService.remove({cheerId,userId})
+            .then(()=>res.end('deleted'))
+            .catch(err=>{
+                throw new Error('error: '+ err)
+            })
+    })
 
 
 }
