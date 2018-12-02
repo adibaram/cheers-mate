@@ -29,8 +29,9 @@
     </div>
 
 
-    <div class="filter-buttons">
+    <div class="filter-buttons"><a href="#list">
       <el-button type="warning">Search</el-button>
+    </a>
 
       <router-link to="/map">
       <el-button type="warning">Look Around</el-button>
