@@ -4,10 +4,10 @@ const ObjectId = require('mongodb').ObjectId;
 
 const COLLECTION_NAME = 'user';
 
-function checkLogin({nickname, password}) {
+function checkLogin({ nickname, password }) {
     return mongoService.connect()
         .then(db => db.collection(COLLECTION_NAME).findOne({ nickname }))
-        .then(user=>{
+        .then(user => {
             if (user.password === password) return user;
             else throw new Error('password does not match');
         })
@@ -17,15 +17,22 @@ function getById(id) {
     var _id = new ObjectId(id);
     return mongoService.connect()
         .then(db => db.collection(COLLECTION_NAME).findOne({ _id }))
-        .then(({nickname,email})=> {
+        .then(({ nickname, email }) => {
             console.log('DEBUG::nickname', nickname);
-            return {nickname,email}}
-            )
+            return { nickname, email }
+        }
+        )
 }
 
-function query() {
+function query(userCheers) {
+    let filter = (userCheers)? {
+        $or :userCheers.map(userCheer => {
+            let _id = new ObjectId(userCheer.userId);
+            return { _id };
+        })
+    } : {};
     return mongoService.connect()
-        .then(db => db.collection(COLLECTION_NAME).find({}).toArray())
+        .then(db => db.collection(COLLECTION_NAME).find(filter).toArray());
 }
 
 // todo  - add user only if nickname is not taken

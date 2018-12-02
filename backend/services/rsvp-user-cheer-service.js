@@ -1,16 +1,21 @@
 const mongoService = require('./mongo-service')
 const ObjectId = require('mongodb').ObjectId;
 
-const COLLECTION_NAME = 'cheer';
+const COLLECTION_NAME = 'rsvp-user-cheer';
 
+function query() {
+    return mongoService.connect()
+        .then(db => db.collection(COLLECTION_NAME).find({}).toArray())
+}
 
 function getByUser(userId) {
     return mongoService.connect()
-        .then(db => db.collection(COLLECTION_NAME).find({userId}))
+        .then(db => db.collection(COLLECTION_NAME).find({userId}).toArray())
 }
 function getByCheer(cheerId) {
     return mongoService.connect()
-        .then(db => db.collection(COLLECTION_NAME).find({cheerId}))
+        .then(db => db.collection(COLLECTION_NAME).find({cheerId}).toArray())
+        .catch(err=> console.log('DEBUG:rsvp service:err',err))
 }
 function add(rsvp) {
     return mongoService.connect()
@@ -29,6 +34,7 @@ function remove(id) {
 }
 
 module.exports = {
+    query,
     getByUser,
     getByCheer,
     add,

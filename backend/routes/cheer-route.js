@@ -1,5 +1,6 @@
 const cheerService = require('../services/cheer-service')
-
+const userService = require('../services/user-service')
+const userCheerService = require('../services/rsvp-user-cheer-service')
 
 function addCheerRoutes(app) {
     // CHEERS REST API:
@@ -32,10 +33,13 @@ function addCheerRoutes(app) {
         const cheerId = req.params.cheerId;
         Promise.all([
             cheerService.getById(cheerId),
+            userCheerService.getByCheer(cheerId)
+                .then(userCheers => {
+                    return userService.query(userCheers)
+                })
         ])
-            .then(([cheer]) => {
-                console.log('DEBUG::cheer', cheer);
-                res.json({ cheer })
+            .then(([cheer, users]) => {
+                res.json({ cheer, users })
             })
     })
 

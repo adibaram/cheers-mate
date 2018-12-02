@@ -5,17 +5,6 @@ const COLLECTION_NAME = 'cheer';
 
 // GET ALL
 function query(filter) {
-    /*
-        for (key in filter) {
-            filter[key] = {$regex:  new RegExp(filter[key].toLowerCase(), "i")}
-        }
-        return mongoService.connect()
-            .then(db => {
-                const collection = db.collection('cheer');
-                return collection.find(filter).toArray()
-            })
-    */
-//    console.log(filter)
     return mongoService.connect()
     .then(dbConn => {
         // SET FILTERS
@@ -62,11 +51,12 @@ function queryRadius(params) {
 }
 // GET SPECIFIC CHEER
 function getById(cheerId) {
+    let _id = new ObjectId(cheerId);
     return mongoService.connect()
         .then(db => {
             const collection = db.collection(COLLECTION_NAME);
             console.log('DEBUG::cheerId', cheerId);
-            return collection.findOne({ _id: cheerId })
+            return collection.findOne({ _id })
         })
 }
 // REMOVE CHEER

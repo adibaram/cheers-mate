@@ -6,7 +6,7 @@ const session = require('express-session');
 
 const addCheerRoutes = require('./routes/cheer-route');
 const addUserRoutes = require('./routes/user-route');
-
+const addUserCheerRoutes = require('./routes/rsvp-user-cheer-route');
 
 const app = express()  
 
@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 
 addCheerRoutes(app);
 addUserRoutes(app);
-
+addUserCheerRoutes(app);
 
 
 
