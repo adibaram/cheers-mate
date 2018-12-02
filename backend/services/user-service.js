@@ -9,8 +9,10 @@ function checkLogin({ nickname, password }) {
         .then(db => db.collection(COLLECTION_NAME).findOne({ nickname }))
         .then(user => {
             if (user.password === password) return user;
-            else throw new Error('password does not match');
+            throw new Error('password does not match');
+            // return 'error'
         })
+        // .catch(err=>console.log('DEBUG::err', err))
 }
 function checkNickname(nickname) {
     return mongoService.connect()
