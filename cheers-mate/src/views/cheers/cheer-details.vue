@@ -31,7 +31,7 @@
         <section class="main-info-container">
             <div class="description-attendees">
                 <div class="cover-image">
-                    <img src="https://via.placeholder.com/250x100" alt="">
+                    <img :src="(cheer.img)? cheer.img : 'https://via.placeholder.com/250x100'" alt="">
                 </div>
                 <div class="cheer-description">
                     <h3>Details:</h3>
@@ -40,7 +40,7 @@
                 <section class="cheer-attendees">
                     <h3>Attendees:</h3>
                     <div class="attendees">
-                        <div v-for="user in cheer.attendees" :key="">
+                        <div v-for="user in cheer.attendees" :key="user._id">
                             <user-card :user="user"></user-card>
                             <!-- <td v-for="prop in user" :key="">{{prop}}</td> -->
                         </div>

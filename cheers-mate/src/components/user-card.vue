@@ -2,9 +2,9 @@
 <section class="user-card-container">
     <el-row>
             <el-card :body-style="{ padding: '0px' }">
-            <img src="https://via.placeholder.com/100x100" class="image">
+            <img :src="(user.img)? user.img : 'https://via.placeholder.com/100x100'" class="image">
             <div style="padding: 14px;">
-                <span>{{user.name}}</span>
+                <span>{{user.nickname}}</span>
                 <div class="bottom clearfix">
                 <time class="time">{{ currentDate }}</time>
                 <!-- <el-button type="text" class="button">Operating button</el-button> -->
