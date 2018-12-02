@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.bcaf4f7e4f19e75ca5c1db7a7a189626.js"
+  "/precache-manifest.6b01046be68a7c0c2ea46addaafcf02c.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "cheers-mate"});
