@@ -31,7 +31,7 @@ export default {
         checkUser() {
             authService.checkUser(this.user)
                 .then(user => {
-                    console.log('logged in successfully')
+                    console.log('logged in')
                     this.$route.push('/');
                 })
                 .catch( err => {
