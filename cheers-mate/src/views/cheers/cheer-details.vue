@@ -48,7 +48,7 @@
                 </section>
             </div>
 
-            <div class="date-time-map">
+            <div class="date-time-map" v-if="cheer.position">
                 <div class="date-time">
                     <div class="icon"><i class="far fa-clock"></i></div>
                     <div class="info">
@@ -109,7 +109,9 @@ export default {
         loadCheer() {
             var cheerId = this.$route.params.cheerId;
             cheerService.getById(cheerId)
-                .then(res => this.cheer = res.cheer);
+                .then(res => {
+                    return this.cheer = res
+                });
         },
     },
     computed: {

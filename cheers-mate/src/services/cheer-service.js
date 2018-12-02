@@ -14,7 +14,9 @@ function query(filter={}) {
 }
 function getById(id) {
     return axios.get(`${BASE_URL}/${id}`)
-        .then(res => res.data);
+        .then(res => {
+            return res.data
+        });
 }
 function add(cheer) {
     return axios.post(BASE_URL,cheer)

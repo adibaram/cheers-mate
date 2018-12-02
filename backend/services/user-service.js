@@ -25,7 +25,7 @@ function getById(id) {
 }
 
 function query(userCheers) {
-    let filter = (userCheers)? {
+    let filter = (userCheers && userCheers.length)? {
         $or :userCheers.map(userCheer => {
             let _id = new ObjectId(userCheer.userId);
             return { _id };

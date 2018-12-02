@@ -39,6 +39,7 @@ function addCheerRoutes(app) {
                 })
         ])
             .then(([cheer, users]) => {
+                console.log('DEBUG::cheer,users', cheer,users);
                 cheer.attendees = users
                 res.json( cheer )
             })
