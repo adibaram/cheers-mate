@@ -13,6 +13,17 @@ function checkLogin({ nickname, password }) {
         })
 }
 
+function query() {
+    return mongoService.connect()
+    .then(db => db.collection(COLLECTION_NAME).find({}).toArray())
+    .then(users => {
+        users.forEach(user => {
+            delete user.password;
+        })
+        return users;
+    })
+}
+
 function getById(id) {
     var _id = new ObjectId(id);
     return mongoService.connect()
@@ -24,7 +35,7 @@ function getById(id) {
         )
 }
 
-function query(userCheers) {
+function getUsersFromCheer(userCheers) {
     if (!(userCheers && userCheers.length)) return Promise.resolve([])
 
     var filter = {
@@ -50,6 +61,18 @@ function add(user) {
         .then(db => db.collection(COLLECTION_NAME).insertOne(user))
 }
 
+function update(_id, user) {
+    _id = new ObjectId(_id)
+    return mongoService.connect()
+        .then(db => {
+            const collection = db.collection(COLLECTION_NAME);
+            return collection.updateOne({ _id }, { $set: user })
+                .then(res => {
+                    return res.modifiedCount;
+                })
+        })
+}
+
 function remove(userId) {
     userId = new ObjectId(userId)
     return mongoService.connect()
@@ -67,8 +90,10 @@ function remove(userId) {
 
 module.exports = {
     query,
+    getUsersFromCheer,
     getById,
     add,
+    update,
     remove,
     checkLogin
 }

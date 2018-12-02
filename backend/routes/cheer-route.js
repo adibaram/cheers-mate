@@ -35,7 +35,7 @@ function addCheerRoutes(app) {
             cheerService.getById(cheerId),
             userCheerService.getByCheer(cheerId)
                 .then(userCheers => {
-                    return userService.query(userCheers);
+                    return userService.getUsersFromCheer(userCheers);
                 })
         ])
             .then(([cheer, users]) => {
@@ -59,8 +59,8 @@ function addCheerRoutes(app) {
     })
 
     // UPDATE
-    app.put('/cheer/:cheerId', (req, res) => {
-        const id = req.params.cheerId;
+    app.put('/cheer/:id', (req, res) => {
+        const id = req.params.id;
         const newParams = req.body;
             cheerService.update(id,newParams)
             .then(cheer => res.json(cheer))

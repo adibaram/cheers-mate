@@ -70,8 +70,8 @@ function getById(_id) {
         });
 }
 // REMOVE CHEER
-function remove(cheerId) {
-    let _id = new ObjectId(cheerId)
+function remove(_id) {
+    let _id = new ObjectId(_id)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection(COLLECTION_NAME);
@@ -91,12 +91,12 @@ function add(cheer) {
         })
 }
 // UPDATE CHEER
-function update(id, cheer) {
-    _id = new ObjectId(id)
+function update(_id, cheer) {
+    _id = new ObjectId(_id)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection(COLLECTION_NAME);
-            return collection.updateOne({ _id: id }, { $set: cheer })
+            return collection.updateOne({ _id }, { $set: cheer })
                 .then(res => {
                     return res.modifiedCount;
                 })

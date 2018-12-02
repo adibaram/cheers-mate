@@ -47,6 +47,13 @@ function addRoutes(app) {
                 res.json({ user, cheers });
             });
     });
+    // UPDATE USER
+    app.put(`${BASE_URL}/:id`, (req, res) => {
+        const id = req.params.id;
+        const newParams = req.body;
+            userService.update(id,newParams)
+            .then(user => res.json(user))
+    })
     // REMOVE USER
     app.delete(`${BASE_URL}/:id`, (req,res)=>{
         let userId = req.params.id;
