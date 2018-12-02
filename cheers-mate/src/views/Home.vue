@@ -6,6 +6,20 @@
       <!-- </router-link> -->
       <!-- <h1>Look for events near you</h1> -->
       <cheer-filter></cheer-filter>
+      <div class="links-container flex">
+        <div class="flex link column">
+          <i class="fas fa-heart circle"></i>
+          <h3>Categories</h3>
+        </div>
+        <div class="flex link column">
+          <i class="fas fa-calendar-check circle"></i>
+          <h3>Date</h3>
+        </div>
+        <div class="flex link column">
+          <i class="fas fa-gift circle"></i>
+          <h3>Surprise me!</h3>
+        </div> 
+      </div>
     </div>
     <cheer-list></cheer-list>
   </section>
