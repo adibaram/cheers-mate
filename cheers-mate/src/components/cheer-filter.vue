@@ -2,13 +2,15 @@
 <section class="filter-container">
   <h2>look for new people to drink with</h2>
 
-    <label>
+    <div>
         <input class="filter-input" placeholder="Look by location" v-model="locationName" @input="updateFilter">
-    </label>
-    <!-- <label>
-        <input type="date" v-model="date" @change="updateFilter">
-    </label> -->
-    <div class="datepicker-trigger">
+    </div>
+    <div>
+        <input class="filter-input" placeholder="Date" onfocus="(this.type='date')" type="text" v-model="date" @change="updateFilter">
+    </div>
+     
+
+    <!-- <div class="datepicker-trigger">
       <input
         class="filter-input" 
         type="text"
@@ -26,23 +28,22 @@
         @date-one-selected="val => { dateOne = val }"
         @date-two-selected="val => { dateTwo = val }"
       />
-    </div>
+    </div> -->
 
 
-    <div class="filter-buttons"><a href="#list">
-      <el-button type="warning">Search</el-button>
-    </a>
+    <div class="filter-buttons">
+      <el-button type="warning" v-scroll-to="'#list'" @click.native="updateFilter" >Search</el-button>
 
       <router-link to="/map">
       <el-button type="warning">Look Around</el-button>
       </router-link>
-    </div>
+    </div> 
+
 </section>
 </template>
 
 <script>
 const moment = require('moment');
-import format from 'date-fns/format';
 
 export default {
   data() {
@@ -53,12 +54,13 @@ export default {
       // },
       locationName: '',
       date: '',
-      dateFormat: 'D MMM',
-      dateOne: '',
-      dateTwo: '',
+      // dateFormat: 'D MMM',
+      // dateOne: '',
+      // dateTwo: '',
       
     };
   },
+
   methods: {
     updateFilter() {
       let filter = this.filter;
@@ -66,39 +68,33 @@ export default {
       this.$store.dispatch({ type: "loadFilter", filter });
     },
 
-    formatDates(dateOne, dateTwo) {
-      let formattedDates = '';
-      if (dateOne) {
-        formattedDates = format(dateOne, this.dateFormat);
-      }
-      if (dateTwo) {
-        formattedDates += ' - ' + format(dateTwo, this.dateFormat);
-      }
-      // this.updateFilter();
-      return formattedDates;
-    }
+    // formatDates(dateOne, dateTwo) {
+    //   let formattedDates = '';
+    //   if (dateOne) {
+    //     formattedDates = format(dateOne, this.dateFormat);
+    //   }
+    //   if (dateTwo) {
+    //     formattedDates += ' - ' + format(dateTwo, this.dateFormat);
+    //   }
+    //   // this.updateFilter();
+    //   return formattedDates;
+    // }
   },
 
   computed: {
     filter() {
       return {
-        fromDate: moment(this.dateOne).format('X'),
-        toDate: moment(this.dateTwo).format('X'),
+        fromDate: moment(this.date).format('X'),
+        toDate: moment(this.date).add(24,'hours').format('X'),
       }
     },
-    fromDate() {
-      return moment(this.date).format('X');
-    },
-    toDate() {
-      return moment(this.date).add(24,'hours').format('X');
-    }
+    // fromDate() {
+    //   return moment(this.date).format('X');
+    // },
+    // toDate() {
+    //   return moment(this.date).add(24,'hours').format('X');
+    // }
   },
-
-  filters: {
-    timest(date) {
-      return moment(date).format('X');
-    } 
-  }
 };
 </script>
 
