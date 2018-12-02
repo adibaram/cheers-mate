@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="home-page-container">
     <div class="home">
       <!-- <router-link tag="div" to="/cheer/create" class="add-cheer"> -->
         <!-- <h4><i class="fas fa-plus"></i> Create a Cheer</h4> -->
@@ -22,6 +22,7 @@
       </div>
     </div>
     <cheer-list></cheer-list>
+
   </section>
 </template>
 
@@ -29,6 +30,7 @@
 // @ is an alias to /src
 import cheerList from './cheers/cheer-list.vue'
 import cheerFilter from '../components/cheer-filter.vue'
+
 
 export default {
   name: 'home',
