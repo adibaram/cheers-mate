@@ -124,6 +124,6 @@ input {
 }
 
 span .location {
-  
+
 }
 </style>

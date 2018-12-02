@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import cheersService from './services/cheer-service.js';
-import { log } from 'util';
+import userService from './services/user-service.js';
+import authService from './services/auth-service.js'; 
+// import { log } from 'util';
 
 Vue.use(Vuex)
 
@@ -12,7 +14,9 @@ export default new Vuex.Store({
     position: {
       lat:32,
       lng:34
-    }
+    },
+    loggedinUser: null
+    
   },
   getters: {
     getCheers(state) {
@@ -32,6 +36,9 @@ export default new Vuex.Store({
     },
     setFilter(state, {filter}) {
       state.filter = filter;
+    },
+    setUser(state, {user}) {
+      state.loggedinUser = user; 
     }
   },
   actions: {
@@ -48,7 +55,7 @@ export default new Vuex.Store({
     },
     findCurrPosition(context) {
       if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(({coords})=>{
+        navigator.geolocation.getCurrentPosition(({coords})=> {
           context.commit({type:'setPosition', coords})
         })
         } else console.log('cant find location');
@@ -56,6 +63,12 @@ export default new Vuex.Store({
     loadFilter(context, {filter}) {
       context.commit({type:'setFilter', filter});
       context.dispatch({type:'loadCheers'});      
+    },
+    signup(context, {user}) {
+      authService.signup(user)
+      .then(user => {
+          context.commit({type: 'setUser'}, user);
+      })
     }
   }
 })
