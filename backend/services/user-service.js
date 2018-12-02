@@ -12,6 +12,11 @@ function checkLogin({ nickname, password }) {
             else throw new Error('password does not match');
         })
 }
+function checkNickname(nickname) {
+    return mongoService.connect()
+        .then(db => db.collection(COLLECTION_NAME).findOne({nickname}))
+}
+
 
 function query() {
     return mongoService.connect()
@@ -23,6 +28,8 @@ function query() {
         return users;
     })
 }
+
+
 
 function getById(id) {
     var _id = new ObjectId(id);
@@ -95,5 +102,6 @@ module.exports = {
     add,
     update,
     remove,
-    checkLogin
+    checkLogin,
+    checkNickname
 }
