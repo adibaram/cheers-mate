@@ -13,8 +13,9 @@ function addAuthRoutes(app) {
                 res.json(user)
             })
             .catch(err => {
-                res.status(401).end({error:'invalid information'})
-                throw new Error(err.message)
+                console.log('DEBUG:auth routes:err', err);
+                res.status(401).end(err.toString())
+                // throw new Error(err.message)
             })
     })
 
