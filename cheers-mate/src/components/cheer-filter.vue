@@ -98,7 +98,13 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+
+input {
+  height: 30px;
+  width: 300px;
+  border-radius: 5px;
+}
 
 
 </style>

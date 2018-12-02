@@ -3,22 +3,22 @@ const CLOUD_NAME = 'cheers-mate';
 const UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
 const UPLOAD_PRESET = 'cheers-mate-guest';
 // on submit call to this function
-function uploadImg(elForm, ev) {
-    ev.preventDefault();
+function uploadImg(elInput) {
+    // ev.preventDefault();
    
     // A function to be called if request succeeds
     function onSuccess(res) {
         console.log('uploadedImg', res);
         console.log('uploadedImg', res.url);
+        return res.secure_url;
     }
 
-    doUploadImg(elForm, onSuccess);
+    doUploadImg(elInput, onSuccess);
 }
 
-function doUploadImg(elForm, onSuccess) {
-    var UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`
+function doUploadImg(elInput, onSuccess) {
     var formData = new FormData();
-    formData.append('file', elForm[0].files[0])
+    formData.append('file', elInput.files[0])
     formData.append('upload_preset', UPLOAD_PRESET);
 
     fetch(UPLOAD_URL, {
@@ -32,6 +32,10 @@ function doUploadImg(elForm, onSuccess) {
     .catch(function (error) {
         console.error(error)
     })
+}
+
+module.exports = {
+    uploadImg,
 }
 
 

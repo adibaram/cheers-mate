@@ -12,7 +12,7 @@
           <h3>Categories</h3>
         </div>
         <div class="flex link column">
-          <i class="fas fa-calendar-check circle"></i>
+          <i class="fas fa-calendar-check circle" @click="sortByDate" v-scroll-to="'#list'"></i>
           <h3>Date</h3>
         </div>
         <div class="flex link column">
@@ -37,8 +37,16 @@ export default {
   components: {
     cheerList,
     cheerFilter
+  },
+  methods: {
+    sortByDate() {
+      const filter = {
+        sortBy: 'date',
+      }
+      this.$store.dispatch({ type: "loadFilter", filter });
+    }
   }
-}
+};
 
 
 </script>

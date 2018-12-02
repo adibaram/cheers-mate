@@ -14,7 +14,7 @@
                 <input v-model="newUser.password" type="password" required>
             </label>
             <label> Your photo
-                <input type="file">
+                <input type="file" ref="img">
             </label>
             <button type="submit" class="signup">Sign Up</button>
         </form>     
@@ -24,6 +24,7 @@
 <script>
 
 import userService from '../services/user-service.js'
+import cloudinaryService from '../services/cloudinary-service.js';
 
 export default {
     data() {
@@ -34,15 +35,21 @@ export default {
                 password: '',
                 fullName: '', 
                 gender: '',
-                age: null
-            }
+                age: null,
+                img: null,
+            },
         }
     },
     methods: {
         createUser() {
             console.log('creating user');
-            this.$store.dispatch({type: 'signup', user: this.newUser})
-                .then(()=> this.$router.push('/'));
+            cloudinaryService.uploadImg(this.$refs.img)
+                .then(url => {
+                    console.log('DEBUG::url', url);
+                    this.newUser.img = url;
+                    this.$store.dispatch({type: 'signup', user: this.newUser})
+                        .then(()=> this.$router.push('/'));
+                })
 
             // userService.add(this.newUser)
             //     .then(user => this.$router.push('/'))
