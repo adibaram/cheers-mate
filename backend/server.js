@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
+const addAuthRoutes = require('./routes/auth-route');
 const addCheerRoutes = require('./routes/cheer-route');
 const addUserRoutes = require('./routes/user-route');
 const addUserCheerRoutes = require('./routes/rsvp-user-cheer-route');
@@ -23,17 +24,20 @@ app.use(session({
   secret: 'cheer app',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }
+  cookie: { 
+    secure: false,
+    expires: 600000
+   }
 }))
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+addAuthRoutes(app)
 addCheerRoutes(app);
 addUserRoutes(app);
 addUserCheerRoutes(app);
-
 
 
 const PORT = process.env.PORT || 3003;

@@ -5,28 +5,7 @@ const BASE_URL = '/user';
 
 function addRoutes(app) {
     
-    app.post(`/signup`, (req, res) => {
-        const user = req.body;
-        userService.add(user)
-            .then(() => res.json(user))
-            .catch(err => {
-                console.log('DEBUG::err', err);
-                res.send('an error accured: ' + err);
-            })
-      });
-      
-      app.put('/login', (req, res) => {
-        const userAuth = req.body;
-        console.log('DEBUG::userAuth', userAuth);
-        userService.checkLogin(userAuth)
-          .then(user => {
-            req.session.user = user
-            res.json(user)
-          })
-          .catch(err=> {
-              res.send(err.message)
-          })
-      })
+
 
     // GET ALL USERS;
     app.get(BASE_URL, (req, res) => {
@@ -56,7 +35,10 @@ function addRoutes(app) {
     })
     // REMOVE USER
     app.delete(`${BASE_URL}/:id`, (req,res)=>{
+        let currUser = req.session.user;
         let userId = req.params.id;
+        if (!currUser) throw new Error('user not logged in')
+        if (!currUser._id !== id) throw new Error('unauthorized, attempting to delete a non logged in user')
         userService.remove(userId)
             .then(()=> res.send(`user deleted successfully: ${userId}`))
             .catch(err=> {
