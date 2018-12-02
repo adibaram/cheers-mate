@@ -24,8 +24,12 @@ export default new Vuex.Store({
     },
     getCurrPosition(state) {
       return state.position;
+    },
+    getUser(state) {
+      return state.loggedinUser;
     }
   },
+
   mutations: {
     setCheers(state, {cheers}) {
       state.cheers = cheers;
@@ -39,6 +43,7 @@ export default new Vuex.Store({
     },
     setUser(state, {user}) {
       state.loggedinUser = user; 
+      console.log('logged in user', state.loggedinUser);
     }
   },
   actions: {
@@ -65,10 +70,20 @@ export default new Vuex.Store({
       context.dispatch({type:'loadCheers'});      
     },
     signup(context, {user}) {
-      authService.signup(user)
-      .then(user => {
-          context.commit({type: 'setUser'}, user);
-      })
-    }
+      return authService.signup(user)
+        .then(user => {
+            context.commit({type: 'setUser', user});
+        })
+    },
+    login(context, {user}){
+      return authService.checkUser(user)
+        .then( user => {console.log('login user', user)
+        context.commit({type: 'setUser', user})
+      });
+    },
+      logout(context) {
+        context.commit({type: 'setUser', user: null})
+        authService.logout()
+      }
   }
 })

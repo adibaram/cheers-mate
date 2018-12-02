@@ -4,7 +4,7 @@ const userService = require('../services/user-service');
 function addAuthRoutes(app) {
 
     app.put('/login', (req, res) => {
-        if (req.session.user) res.end('user is already logged in, please log out first')
+        if (req.session.user) res.status(406).end('user is already logged in, please log out first')
         const userAuth = req.body;
         console.log('DEBUG::userAuth', userAuth);
         userService.checkLogin(userAuth)
@@ -13,7 +13,9 @@ function addAuthRoutes(app) {
                 res.json(user)
             })
             .catch(err => {
-                throw new Error(err.message)
+                console.log('DEBUG:auth routes:err', err);
+                res.status(401).end(err.toString())
+                // throw new Error(err.message)
             })
     })
 
