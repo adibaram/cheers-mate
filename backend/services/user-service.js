@@ -17,9 +17,9 @@ function getById(id) {
     var _id = new ObjectId(id);
     return mongoService.connect()
         .then(db => db.collection(COLLECTION_NAME).findOne({ _id }))
-        .then(({ nickname, email }) => {
-            console.log('DEBUG::nickname', nickname);
-            return { nickname, email }
+        .then(user => {
+            delete user.password;
+            return user;
         }
         )
 }
@@ -32,7 +32,13 @@ function query(userCheers) {
         })
     } : {};
     return mongoService.connect()
-        .then(db => db.collection(COLLECTION_NAME).find(filter).toArray());
+        .then(db => db.collection(COLLECTION_NAME).find(filter).toArray())
+        .then(users=> {
+            users.forEach(user=>{
+                delete user.password;
+            })
+            return users;
+        })
 }
 
 // todo  - add user only if nickname is not taken

@@ -4,7 +4,10 @@
         "date": 1543777200000,
         "position": {
             "type": "Point",
-            "coordinates": {"lat" : 32.079, "lng" : 34.779194}
+            "coordinates": {
+                "lat": 32.079,
+                "lng": 34.779194
+            }
         },
         "locationName": "Shem Tov",
         "attendees": [
@@ -21,7 +24,10 @@
         "date": 1546300800000,
         "position": {
             "type": "Point",
-            "coordinates": {"lat" : 32.080224,"lng" : 34.7818127}
+            "coordinates": {
+                "lat": 32.080224,
+                "lng": 34.7818127
+            }
         },
         "locationName": "Mishbetzet",
         "attendees": [
@@ -41,7 +47,10 @@
         "date": 1546300800000,
         "position": {
             "type": "Point",
-            "coordinates":{"lat" : 32.080224,"lng" : 34.7818129}
+            "coordinates": {
+                "lat": 32.080224,
+                "lng": 34.7818129
+            }
         },
         "locationName": "Mishbetzet",
         "attendees": [
@@ -57,7 +66,10 @@
         "date": 1543352400000,
         "position": {
             "type": "Point",
-            "coordinates":{"lat" : 32.078202,"lng" : 34.774559}
+            "coordinates": {
+                "lat": 32.078202,
+                "lng": 34.774559
+            }
         },
         "locationName": "Beer Garden",
         "attendees": [
@@ -77,7 +89,10 @@
         "date": 1543352400000,
         "position": {
             "type": "Point",
-            "coordinates":{"lat" : 32.078202,"lng" : 34.774559}
+            "coordinates": {
+                "lat": 32.078202,
+                "lng": 34.774559
+            }
         },
         "locationName": "Beer Garden",
         "attendees": [
@@ -97,16 +112,42 @@
         "date": 1547336000000,
         "position": {
             "type": "Point",
-            "coordinates":{"lat" : 32.087422,"lng" : 34.803218}
+            "coordinates": {
+                "lat": 32.087422,
+                "lng": 34.803218
+            }
         },
-        "locationName": "Drinks President",
+        "locationName": "Drinks Minister",
         "attendees": [
             {
                 "name": "Adi"
             }
         ],
-        "desc": "Resting from coding",
         "category": "Happy Hour",
-        "spots": 2
+        "spots": 2,
+        "desc": "dancing all night"
+    },
+    {
+        "_id": "5c02e4229cabb4403495d123",
+        "date": 1543778230000,
+        "position": {
+            "type": "Point",
+            "coordinates": {
+                "lat": 32.11101,
+                "lng": 34.838956
+            }
+        },
+        "locationName": "Zoifer",
+        "attendees": [
+            {
+                "name": "Juval"
+            },
+            {
+                "name": "Adi"
+            }
+        ],
+        "desc": "New week Celebration",
+        "category": "Basketball",
+        "spots": 3
     }
 ]

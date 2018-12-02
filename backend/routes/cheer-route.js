@@ -39,7 +39,8 @@ function addCheerRoutes(app) {
                 })
         ])
             .then(([cheer, users]) => {
-                res.json({ cheer, users })
+                cheer.attendees = users
+                res.json( cheer )
             })
     })
 

@@ -1,5 +1,6 @@
 const userService = require('../services/user-service');
-const reviewService = require('../services/cheer-service');
+const userCheerService = require('../services/rsvp-user-cheer-service');
+const cheerService = require('../services/cheer-service');
 const BASE_URL = '/user';
 
 function addRoutes(app) {
@@ -37,11 +38,13 @@ function addRoutes(app) {
         const userId = req.params.id;
         Promise.all([
             userService.getById(userId),
-            // reviewService.query({ userId });
+            userCheerService.getByUser(userId)
+                .then(userCheers => {
+                    return cheerService.getCheersForUser(userCheers)
+                })
         ])
-            .then(([user, reviews]) => {
-                console.log({ user });
-                res.json({ user, reviews });
+            .then(([user, cheers]) => {
+                res.json({ user, cheers });
             });
     });
     // REMOVE USER
