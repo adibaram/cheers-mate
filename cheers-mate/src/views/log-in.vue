@@ -1,6 +1,8 @@
 <template>
     <section class="login-page-container">
-        
+        <form @submit.prevent>
+            
+        </form>
     </section>
 </template>
 
