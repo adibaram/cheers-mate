@@ -35,11 +35,10 @@ function addCheerRoutes(app) {
             cheerService.getById(cheerId),
             userCheerService.getByCheer(cheerId)
                 .then(userCheers => {
-                    return userService.query(userCheers)
+                    return userService.query(userCheers);
                 })
         ])
             .then(([cheer, users]) => {
-                console.log('DEBUG::cheer,users', cheer,users);
                 cheer.attendees = users
                 res.json( cheer )
             })

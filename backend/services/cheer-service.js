@@ -62,12 +62,12 @@ function queryRadius(params) {
 }
 // GET SPECIFIC CHEER
 function getById(_id) {
-    // let _id = new ObjectId(id);
+    _id = new ObjectId(_id);
     return mongoService.connect()
         .then(db => {
             const collection = db.collection(COLLECTION_NAME);
-            return collection.findOne({ _id })
-        })
+            return collection.findOne({ _id });
+        });
 }
 // REMOVE CHEER
 function remove(cheerId) {
@@ -93,7 +93,6 @@ function add(cheer) {
 // UPDATE CHEER
 function update(id, cheer) {
     _id = new ObjectId(id)
-    console.log('DEBUG::_id', _id);
     return mongoService.connect()
         .then(db => {
             const collection = db.collection(COLLECTION_NAME);

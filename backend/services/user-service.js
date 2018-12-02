@@ -25,16 +25,19 @@ function getById(id) {
 }
 
 function query(userCheers) {
-    let filter = (userCheers && userCheers.length)? {
-        $or :userCheers.map(userCheer => {
+    if (!(userCheers && userCheers.length)) return Promise.resolve([])
+
+    var filter = {
+        $or: userCheers.map(userCheer => {
             let _id = new ObjectId(userCheer.userId);
             return { _id };
         })
-    } : {};
+    }
+    console.log('DEBUG::filter', filter);
     return mongoService.connect()
         .then(db => db.collection(COLLECTION_NAME).find(filter).toArray())
-        .then(users=> {
-            users.forEach(user=>{
+        .then(users => {
+            users.forEach(user => {
                 delete user.password;
             })
             return users;
@@ -45,9 +48,6 @@ function query(userCheers) {
 function add(user) {
     return mongoService.connect()
         .then(db => db.collection(COLLECTION_NAME).insertOne(user))
-        .then(res => {
-            console.log('DEBUG:add user:res', res);
-        })
 }
 
 function remove(userId) {

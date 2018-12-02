@@ -1,7 +1,7 @@
 [
     {
-        "_id": "5bfe52f984acc159d53423af",
-        "date": 1543777200000,
+        "_id": ObjectId("5bfe52f984acc159d53423af"),
+        "date": 1543777200000.0,
         "position": {
             "type": "Point",
             "coordinates": {
@@ -10,18 +10,14 @@
             }
         },
         "locationName": "Shem Tov",
-        "attendees": [
-            {
-                "name": "Neta"
-            }
-        ],
+        "attendees": [],
         "desc": "Preparations for the Eurovision",
         "category": "Music",
-        "spots": 2
+        "spots": 2.0
     },
     {
-        "_id": "5bfe560584acc159d53423b0",
-        "date": 1546300800000,
+        "_id": ObjectId("5bfe560584acc159d53423b0"),
+        "date": 1546300800000.0,
         "position": {
             "type": "Point",
             "coordinates": {
@@ -30,21 +26,14 @@
             }
         },
         "locationName": "Mishbetzet",
-        "attendees": [
-            {
-                "name": "Good"
-            },
-            {
-                "name": "Vibes"
-            }
-        ],
+        "attendees": [],
         "desc": "New year celebration",
         "category": "Party",
-        "spots": 20
+        "spots": 20.0
     },
     {
-        "_id": "5bfe6c3a84acc159d53423b2",
-        "date": 1546300800000,
+        "_id": ObjectId("5bfe6c3a84acc159d53423b2"),
+        "date": 1546300800000.0,
         "position": {
             "type": "Point",
             "coordinates": {
@@ -53,17 +42,14 @@
             }
         },
         "locationName": "Mishbetzet",
-        "attendees": [
-            "Good",
-            "Vibes"
-        ],
+        "attendees": [],
         "desc": "New year celebration",
         "category": "Party",
-        "spots": 20
+        "spots": 20.0
     },
     {
-        "_id": "5bfe560584acc159d53423b1",
-        "date": 1543352400000,
+        "_id": ObjectId("5bfe560584acc159d53423b1"),
+        "date": 1543352400000.0,
         "position": {
             "type": "Point",
             "coordinates": {
@@ -72,21 +58,14 @@
             }
         },
         "locationName": "Beer Garden",
-        "attendees": [
-            {
-                "name": "Gal Gadot"
-            },
-            {
-                "name": "Bar Refaeli"
-            }
-        ],
+        "attendees": [],
         "desc": "Drink alot",
         "category": "Happy Hour",
-        "spots": 5
+        "spots": 5.0
     },
     {
-        "_id": "5bfe6c3a84acc159d53423b3",
-        "date": 1543352400000,
+        "_id": ObjectId("5bfe6c3a84acc159d53423b3"),
+        "date": 1543352400000.0,
         "position": {
             "type": "Point",
             "coordinates": {
@@ -95,21 +74,14 @@
             }
         },
         "locationName": "Beer Garden",
-        "attendees": [
-            {
-                "name": "Gal Gadot"
-            },
-            {
-                "name": "Bar Refaeli"
-            }
-        ],
+        "attendees": [],
         "desc": "Drink alot",
         "category": "Happy Hour",
-        "spots": 5
+        "spots": 5.0
     },
     {
-        "_id": "5bfe63f84045d90058102f84",
-        "date": 1547336000000,
+        "_id": ObjectId("5bfe63f84045d90058102f84"),
+        "date": 1547336000000.0,
         "position": {
             "type": "Point",
             "coordinates": {
@@ -117,19 +89,15 @@
                 "lng": 34.803218
             }
         },
-        "locationName": "Drinks Minister",
-        "attendees": [
-            {
-                "name": "Adi"
-            }
-        ],
+        "locationName": "Drinks President",
+        "attendees": [],
         "category": "Happy Hour",
-        "spots": 2,
+        "spots": 2.0,
         "desc": "dancing all night"
     },
     {
-        "_id": "5c02e4229cabb4403495d123",
-        "date": 1543778230000,
+        "_id": ObjectId("5c02e4229cabb4403495d123"),
+        "date": 1543778230000.0,
         "position": {
             "type": "Point",
             "coordinates": {
@@ -138,14 +106,7 @@
             }
         },
         "locationName": "Zoifer",
-        "attendees": [
-            {
-                "name": "Juval"
-            },
-            {
-                "name": "Adi"
-            }
-        ],
+        "attendees": [],
         "desc": "New week Celebration",
         "category": "Basketball",
         "spots": 3
