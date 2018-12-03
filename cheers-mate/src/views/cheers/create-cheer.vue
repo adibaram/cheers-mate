@@ -2,15 +2,20 @@
 <template>
   <section class="add-form">
     <!-- STEP 1 -->
-    <section class="step1">
+    <section class="step1" v-if="stepNum===1">
       <h5>STEP 1 OF 3</h5>
-      <h1>Where Do you want to meet up?</h1>
-      <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
-      <h1>For how many people?</h1>
-      <input type="number">
+      <label>
+        <h1>Where Do you want to meet up?</h1>
+        <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
+      </label>
+      <label>
+        <h1>For how many people?</h1>
+        <input type="number" v-model="newCheer.spots">
+      </label>
+      <el-button type="warning">Next Step</el-button>
     </section>
     <!-- STEP 2 -->
-    <section calss="step2">
+    <section calss="step2" v-if="stepNum===2">
       <h5>STEP 2 OF 3</h5>
       <h1>What will you talk about?</h1>
       <input
@@ -28,7 +33,7 @@
       </div>
     </section>
     <!-- STEP 3 -->
-    <section class="step3">
+    <section class="step3" v-if="stepNum===3">
       <h5>STEP 3 OF 3</h5>
       <h1>Pick a date and you're done!</h1>
       <el-date-picker
@@ -48,6 +53,7 @@ import googleService from "../../services/google-service.js";
 export default {
   data() {
     return {
+      stepNum: 1,
       categoryTxt: "",
       place: "",
       newCheer: {}
