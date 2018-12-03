@@ -2,7 +2,7 @@
 <template>
   <section class="add-form">
     <!-- STEP 1 -->
-    <section class="step1" v-if="">
+    <section class="step1">
       <h5>STEP 1 OF 3</h5>
       <h1>Where Do you want to meet up?</h1>
       <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
