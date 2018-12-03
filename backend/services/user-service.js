@@ -45,7 +45,7 @@ function getById(id) {
 }
 
 function getUsersFromCheer(userCheers) {
-    if (!(userCheers && userCheers.length)) return Promise.resolve([])
+    if (!userCheers || !userCheers.length) return Promise.resolve([])
 
     var filter = {
         $or: userCheers.map(userCheer => {
