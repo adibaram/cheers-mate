@@ -77,10 +77,8 @@ export default new Vuex.Store({
         })
     },
     login(context, {user, rememberPref}){
-      console.log('DEBUG:login action store:rememberPref', rememberPref);
       return authService.checkUser(user)
         .then(user => {
-          console.log('login user', user)
           context.commit({type: 'setUser', user , rememberPref})
         });
     },

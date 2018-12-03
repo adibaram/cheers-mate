@@ -16,8 +16,6 @@ app.use(cors({
   origin: ['http://localhost:8080'],
   credentials: true // enable set cookie
 }));        
-app.use(history());
-app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(session({
@@ -38,6 +36,9 @@ addAuthRoutes(app)
 addCheerRoutes(app);
 addUserRoutes(app);
 addUserCheerRoutes(app);
+
+app.use(history());
+app.use(express.static('public'));
 
 
 const PORT = process.env.PORT || 3003;

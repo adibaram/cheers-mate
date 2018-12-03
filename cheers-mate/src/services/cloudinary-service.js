@@ -8,8 +8,6 @@ export async function uploadImg(elInput) {
    
     // A function to be called if request succeeds
     function onSuccess(res) {
-        console.log('uploadedImg', res);
-        console.log('uploadedImg', res.url);
         return res.secure_url;
     }
     const res = await doUploadImg(elInput, onSuccess);

@@ -14,7 +14,6 @@ function addCheerRoutes(app) {
                 res.json(cheers)
             })
     })
-    // TODO
     // GET FROM RADIUS
     app.get('/cheer/radius', (req, res) => {
         var params = req.query;
@@ -28,7 +27,7 @@ function addCheerRoutes(app) {
                                 return userService.getUsersFromCheer(userCheers)
                                     .then(users=>{
                                         cheer.attendees = users;
-                                        return cheer
+                                        return cheer;
                                     })
                             })
                     }))

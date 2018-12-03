@@ -21,12 +21,10 @@ function remove(id) {
 
 function login(user, rememberPref = false) {
     if (!user) return;
-    console.log('DEBUG::rememberPref', rememberPref);
     if (rememberPref) {
         localStorage.setItem('user', JSON.stringify(user));
     } else {
         sessionStorage.setItem('user', JSON.stringify(user));
-        console.log('DEBUG:ADDED TO SESSION:sessionStorage.getItem(user)', sessionStorage.getItem('user')); 
     }
 }
 
