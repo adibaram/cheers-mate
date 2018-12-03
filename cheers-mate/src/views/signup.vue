@@ -19,18 +19,21 @@
                 <input type="number" placeholder="Age" v-model="newUser.age" min="1" max="200">
             </label>
             <label> 
-                <div class="gender-picker">
+                <span class="gender-picker">
                     <el-radio-group text-color="#ffffff" fill="#e6a23c" v-model="newUser.gender" size="mini">
                         <el-radio-button label="Male"></el-radio-button>
                         <el-radio-button label="Female"></el-radio-button>
                         <el-radio-button label="Unknown">Rather Not Say</el-radio-button>
                     </el-radio-group>
-                </div>
+                </span>
             </label>
             <label class="upload-photo">
-                <span id="add-photo">Add photo</span>
-                <input style="opacity: 0" type="file" ref="img">
-                <span v-if="$refs.img">{{$refs.img.value}}</span>
+                <input type="file" ref="img" @change="files = $refs.img.files" hidden>
+                <div>   
+                    <input v-if="files.length" type="text" :value="'Selected file: ' + files[0].name" disabled>
+                </div>
+                <span v-if="files.length" class="add-photo">Change Photo</span>
+                <span v-else class="add-photo">Add photo</span>
             </label>
             <button type="submit">Sign Up</button>
         </form>     
@@ -54,6 +57,7 @@ export default {
                 age: null,
                 img: null,
             },
+            files: []
         }
     },
     methods: {
@@ -84,14 +88,18 @@ export default {
 
 <style scoped lang="scss">
 
-    button , #add-photo{
-        width: 100px;
+    button {
+        border: 0;
+    }
+
+    button , .add-photo{
+        min-width: 100px;
         justify-content: center;
         color: white;
         background-color: #e6a23c;
         border-color: #e6a23c;
         align-self: center;
-        margin-top:40px;
+        margin-top:10px;
 
 
         display: inline-block;
@@ -111,10 +119,17 @@ export default {
         border-radius: 4px;
     }
 
-    button:hover , #add-photo:hover{
+    button:hover , .add-photo:hover{
         background: #ebb563;
         border-color: #ebb563;
         color: #fff;
+    }
+
+    .add-photo {
+        background-color: #909399;
+        &:hover {
+            background-color: #acacad; 
+        }
     }
 
     input {
