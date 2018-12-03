@@ -53,7 +53,6 @@ function getUsersFromCheer(userCheers) {
             return { _id };
         })
     }
-    console.log('DEBUG::filter', filter);
     return mongoService.connect()
         .then(db => db.collection(COLLECTION_NAME).find(filter).toArray())
         .then(users => {
