@@ -10,8 +10,9 @@
             <label>
                 <input v-model="user.password" placeholder="Password" type=" password" required>
             </label>
-            <label> Remember login?
-                <input type="checkbox" v-model="rememberPref">
+            <label> 
+                <input class="remember-me" type="checkbox" v-model="rememberPref">
+                Remember me
             </label>
             <button type="submit" class="login">Login</button>
         </form>

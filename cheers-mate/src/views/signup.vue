@@ -15,11 +15,12 @@
             <label> 
                 <input v-model="newUser.password" placeholder="Password" type="password" required>
             </label>
-            <label> Age
-                <input type="number" v-model="newUser.age" min="1" max="200">
+            <label> 
+                <input type="number" placeholder="Age" v-model="newUser.age" min="1" max="200">
             </label>
-            <label> Gender
+            <label> 
                 <select v-model="newUser.gender">
+                    <option value="" selected disabled hidden>Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="unknown">None of the above</option>
