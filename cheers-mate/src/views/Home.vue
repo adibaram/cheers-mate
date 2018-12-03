@@ -4,15 +4,15 @@
       <!-- <router-link tag="div" to="/cheer/create" class="add-cheer"> -->
         <!-- <h4><i class="fas fa-plus"></i> Create a Cheer</h4> -->
       <!-- </router-link> -->
-      <!-- <h1>Look for events near you</h1> -->
       <cheer-filter></cheer-filter>
+      <!-- <h1 class="head-txt">Wanna meet new mates to drink with?</h1> -->
       <div class="links-container flex">
         <div class="flex link column">
-          <i class="fas fa-heart circle"></i>
+          <i class="fas fa-heart circle" @click="sortBy('category')" v-scroll-to="'#list'"></i>
           <h3>Categories</h3>
         </div>
         <div class="flex link column">
-          <i class="fas fa-calendar-check circle" @click="sortByDate" v-scroll-to="'#list'"></i>
+          <i class="fas fa-calendar-check circle" @click="sortBy('date')" v-scroll-to="'#list'"></i>
           <h3>Date</h3>
         </div>
         <div class="flex link column">
@@ -39,9 +39,9 @@ export default {
     cheerFilter
   },
   methods: {
-    sortByDate() {
+    sortBy(sorter) {
       const filter = {
-        sortBy: 'date',
+        sortBy: sorter,
       }
       this.$store.dispatch({ type: "loadFilter", filter });
     }

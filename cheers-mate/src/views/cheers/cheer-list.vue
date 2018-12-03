@@ -41,6 +41,8 @@ export default {
 
   .cards {
     width: 250px;
+    height: 300px;
+    margin-bottom: 10px;
   }
 
 }

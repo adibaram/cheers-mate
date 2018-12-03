@@ -1,7 +1,7 @@
 <template>
 <section class="filter-container">
-  <h2>look for new people to drink with</h2>
-
+  <h2>Look for new people to drink with</h2>
+    <!-- <h2>Look for events to join</h2> -->
     <div>
         <input class="filter-input" placeholder="Look by location" v-model="locationName" @input="updateFilter">
     </div>

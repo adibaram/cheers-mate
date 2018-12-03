@@ -25,7 +25,6 @@ const datepickerOptions = {}
 // make sure we can use it in our components
 Vue.use(AirbnbStyleDatepicker, datepickerOptions)
 
-
 Vue.config.productionTip = false
 
 //Google Maps With Vue

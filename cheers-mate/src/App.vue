@@ -10,8 +10,8 @@
         <!-- <router-link to="/about">About</router-link> -->
       </div>
       <div class="links" v-if="!currUser">
-        <router-link to="/signup">Sign up</router-link>
-        <router-link to="/login">Log in</router-link>
+        <router-link class="router" to="/signup">Sign up</router-link>
+        <router-link class="router" to="/login">Log in</router-link>
       </div>
       <div class="logout" v-else>
         <span>Hello, {{currUser.nickname}}</span>
@@ -34,6 +34,11 @@ export default {
     logout() {
       this.$store.dispatch({type: 'logout'})
     }
+  },
+  created() {
+    console.log('DEBUG:store created:sessionStorage.getItem(user)', sessionStorage.getItem('user'));
+    if (sessionStorage.getItem('user')) this.$store.dispatch({type: 'login', user: JSON.parse(sessionStorage.getItem('user'))});
+    else if (localStorage.getItem('user')) this.$store.dispatch({type: 'login', user: JSON.parse(localStorage.getItem('user'))});
   }
 }
 </script>
