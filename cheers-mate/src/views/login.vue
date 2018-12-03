@@ -10,9 +10,8 @@
             <label>
                 <input v-model="user.password" placeholder="Password" type=" password" required>
             </label>
-            <label> 
-                <input class="remember-me" type="checkbox" v-model="rememberPref">
-                Remember me
+            <label>                 
+                <el-checkbox  class="remember-me" v-model="rememberPref">Remember me</el-checkbox>
             </label>
             <button type="submit" class="login">Login</button>
         </form>
@@ -60,6 +59,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+    .el-checkbox {
+        color: white;
+        &:hover {
+            color: #e6a23c;
+        }
+        &.is-checked {
+            color: #e6a23c;
+        }
+    }
+
     
     button {
         width: 100px;
@@ -89,8 +99,8 @@ export default {
     }
 
     button:hover {
-        background: #ebb563;
-        border-color: #ebb563;
+        background: #e6a23c;
+        border-color: #e6a23c;
         color: #fff;
     }
 

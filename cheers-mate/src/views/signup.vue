@@ -19,15 +19,18 @@
                 <input type="number" placeholder="Age" v-model="newUser.age" min="1" max="200">
             </label>
             <label> 
-                <select v-model="newUser.gender">
-                    <option value="" selected disabled hidden>Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="unknown">None of the above</option>
-                </select>
+                <div class="gender-picker">
+                    <el-radio-group text-color="#ffffff" fill="#e6a23c" v-model="newUser.gender" size="mini">
+                        <el-radio-button label="Male"></el-radio-button>
+                        <el-radio-button label="Female"></el-radio-button>
+                        <el-radio-button label="Unknown">Rather Not Say</el-radio-button>
+                    </el-radio-group>
+                </div>
             </label>
-            <label class="upload-photo"> Add photo
-                <input type="file" ref="img">
+            <label class="upload-photo">
+                <span id="add-photo">Add photo</span>
+                <input style="opacity: 0" type="file" ref="img">
+                <span v-if="$refs.img">{{$refs.img.value}}</span>
             </label>
             <button type="submit">Sign Up</button>
         </form>     
@@ -81,7 +84,7 @@ export default {
 
 <style scoped lang="scss">
 
-    button {
+    button , #add-photo{
         width: 100px;
         justify-content: center;
         color: white;
@@ -108,7 +111,7 @@ export default {
         border-radius: 4px;
     }
 
-    button:hover {
+    button:hover , #add-photo:hover{
         background: #ebb563;
         border-color: #ebb563;
         color: #fff;
@@ -120,6 +123,13 @@ export default {
         border-radius: 5px;
         opacity: 0.9;
         padding-left: 10px;
+    }
+
+    .gender-picker {
+        
+        el-radio-button:hover {
+            color: #ebb563;
+        }
     }
 
 
