@@ -9,6 +9,9 @@
             <label> Password
                 <input v-model="user.password" type="password" required>
             </label>
+            <label> Remember login?
+                <input type="checkbox" v-model="rememberPref">
+            </label>
             <button class="login">Login</button>
         </form>
     </section>
@@ -23,14 +26,16 @@ export default {
             user: {
                 nickname: '',
                 password: ''
-            }
+            },
+            rememberPref: false,
         }
     },
 
     methods: {
         checkUser() {
             let user = this.user;
-            this.$store.dispatch({type: 'login', user})
+            let rememberPref = this.rememberPref;
+            this.$store.dispatch({type: 'login', user , rememberPref})
                 .then(()=> this.$router.push('/'))
                 .catch(err => {
                     console.log('err', err);

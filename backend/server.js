@@ -16,7 +16,7 @@ app.use(cors({
   origin: ['http://localhost:8080'],
   credentials: true // enable set cookie
 }));        
-         
+app.use(history());
 app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(cookieParser());
@@ -41,7 +41,7 @@ addUserCheerRoutes(app);
 
 
 const PORT = process.env.PORT || 3003;
-app.use(history()).listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
+app.listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
 
 
 

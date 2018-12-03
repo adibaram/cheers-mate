@@ -41,8 +41,9 @@ export default new Vuex.Store({
     setFilter(state, {filter}) {
       state.filter = filter;
     },
-    setUser(state, {user}) {
+    setUser(state, {user , rememberPref}) {
       state.loggedinUser = user; 
+      userService.login(user,rememberPref);
       console.log('logged in user', state.loggedinUser);
     }
   },
@@ -75,15 +76,18 @@ export default new Vuex.Store({
             context.commit({type: 'setUser', user});
         })
     },
-    login(context, {user}){
+    login(context, {user, rememberPref}){
+      console.log('DEBUG:login action store:rememberPref', rememberPref);
       return authService.checkUser(user)
-        .then( user => {console.log('login user', user)
-        context.commit({type: 'setUser', user})
-      });
+        .then(user => {
+          console.log('login user', user)
+          context.commit({type: 'setUser', user , rememberPref})
+        });
     },
-      logout(context) {
-        context.commit({type: 'setUser', user: null})
-        authService.logout()
-      }
-  }
+    logout(context) {
+      context.commit({type: 'setUser', user: null})
+      authService.logout()
+    }
+  },
+
 })

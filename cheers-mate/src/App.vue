@@ -34,6 +34,11 @@ export default {
     logout() {
       this.$store.dispatch({type: 'logout'})
     }
+  },
+  created() {
+    console.log('DEBUG:store created:sessionStorage.getItem(user)', sessionStorage.getItem('user'));
+    if (sessionStorage.getItem('user')) this.$store.dispatch({type: 'login', user: JSON.parse(sessionStorage.getItem('user'))});
+    else if (localStorage.getItem('user')) this.$store.dispatch({type: 'login', user: JSON.parse(localStorage.getItem('user'))});
   }
 }
 </script>
