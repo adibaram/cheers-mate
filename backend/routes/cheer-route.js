@@ -14,15 +14,26 @@ function addCheerRoutes(app) {
                 res.json(cheers)
             })
     })
-    // TODO
     // GET FROM RADIUS
     app.get('/cheer/radius', (req, res) => {
         var params = req.query;
-        console.log('DEBUG::params', params);
         // if (params.lat && params.lng && params.radius) {
             cheerService.queryRadius(params)
                 .then(cheers => {
-                    res.json(cheers);
+                    Promise.all(cheers.map(cheer=>{
+                        return userCheerService.getByCheer(cheer._id.toString())
+                            .then(userCheers=>{
+                                console.log('DEBUG:',cheer.locationName,':userCheers', userCheers);
+                                return userService.getUsersFromCheer(userCheers)
+                                    .then(users=>{
+                                        cheer.attendees = users;
+                                        return cheer;
+                                    })
+                            })
+                    }))
+                    .then(cheers=>{
+                        res.json(cheers);
+                    })
                 })
         // } else throw new Error('params are not defined');
     })

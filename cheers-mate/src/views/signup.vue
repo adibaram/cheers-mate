@@ -15,6 +15,16 @@
             <label> 
                 <input v-model="newUser.password" placeholder="Password" type="password" required>
             </label>
+            <label> Age
+                <input type="number" v-model="newUser.age" min="1" max="200">
+            </label>
+            <label> Gender
+                <select v-model="newUser.gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="unknown">None of the above</option>
+                </select>
+            </label>
             <label class="upload-photo"> Add photo
                 <input type="file" ref="img">
             </label>
@@ -26,7 +36,7 @@
 <script>
 
 import userService from '../services/user-service.js'
-import cloudinaryService from '../services/cloudinary-service.js';
+import {uploadImg} from '../services/cloudinary-service.js';
 
 export default {
     data() {
@@ -45,12 +55,19 @@ export default {
     methods: {
         createUser() {
             console.log('creating user');
-            cloudinaryService.uploadImg(this.$refs.img)
+            uploadImg(this.$refs.img)
                 .then(url => {
                     console.log('DEBUG::url', url);
                     this.newUser.img = url;
+                    console.log('DEBUG::this.newUser', this.newUser);
                     this.$store.dispatch({type: 'signup', user: this.newUser})
-                        .then(()=> this.$router.push('/'));
+                        .then(()=> this.$router.push('/'))
+                        .catch(err=>{
+                            console.log('DEBUG:CANT CREATE USER:err', err);
+                        })
+                })
+                .catch(err => {
+                    console.log('DEBUG:CANT UPLOAD IMG:err', err);
                 })
 
             // userService.add(this.newUser)

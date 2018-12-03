@@ -5,15 +5,15 @@
         <form @submit.prevent="checkUser" class="flex column">
             <h3>Login</h3><br>
             <label>
-                <input v-model="user.nickname" type="text" placeholder=" User Name"required>
+                <input v-model="user.nickname" type="text" placeholder=" User Name" required>
             </label>
             <label>
                 <input v-model="user.password" placeholder="Password" type=" password" required>
             </label>
-
-                  <!-- <input class="filter-input" v-model="user.nickname" type="text" placeholder="👤 User Name" required>
-                  <input class="filter-input" v-model="user.password" placeholder="🔑 Password" type="password" required> -->
-            <button type="submit">Login</button>    
+            <label> Remember login?
+                <input type="checkbox" v-model="rememberPref">
+            </label>
+            <button type="submit" class="login">Login</button>
         </form>
     </section>
 </template>
@@ -27,14 +27,16 @@ export default {
             user: {
                 nickname: '',
                 password: ''
-            }
+            },
+            rememberPref: false,
         }
     },
 
     methods: {
         checkUser() {
             let user = this.user;
-            this.$store.dispatch({type: 'login', user})
+            let rememberPref = this.rememberPref;
+            this.$store.dispatch({type: 'login', user , rememberPref})
                 .then(()=> this.$router.push('/'))
                 .catch(err => {
                     console.log('err', err);
@@ -99,8 +101,4 @@ export default {
         padding-left: 10px;
     }
 
-
-  
-
-  
 </style>

@@ -26,6 +26,7 @@ function query(filter) {
         })
 }
 function getCheersForUser(userCheers) {
+    if (!userCheers || !userCheers.length) return Promise.resolve([])
     let filter = {
         $or: userCheers.map(userCheer => {
             let _id = new ObjectId(userCheer.cheerId);
@@ -40,7 +41,6 @@ function getCheersForUser(userCheers) {
 }
 // GET FROM RADIUS
 function queryRadius(params) {
-    console.log('DEBUG::params', params);
     const locationFilter = {
         position: {
             $near: {

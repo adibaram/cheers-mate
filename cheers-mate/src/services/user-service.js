@@ -20,10 +20,11 @@ function remove(id) {
 }
 
 function login(user, rememberPref = false) {
+    if (!user) return;
     if (rememberPref) {
         localStorage.setItem('user', JSON.stringify(user));
     } else {
-        sessionStorage.setItem('user', JSON.stringify(user)); 
+        sessionStorage.setItem('user', JSON.stringify(user));
     }
 }
 

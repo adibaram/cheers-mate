@@ -1,8 +1,14 @@
 
 <template>
-    <section>
-        <!-- <h1>Create a Cheer and Invite Your Friends!</h1> -->
-        <section calss="add-form">
+    <section class="add-form">
+                    <!-- STEP 1 -->
+        <section>
+            <h5>STEP 1 OF 3</h5>
+            <h1>Where Do you want to meet up?</h1>
+            <input type="text">
+        </section>
+                    <!-- STEP 2 -->
+        <section calss="step2">
             <h5>STEP 2 OF 3</h5>
             <h1>What will you talk about?</h1>
             <input v-model="categoryTxt"
@@ -21,6 +27,7 @@
 <script>
 
 import categoriesService from '../../services/categories-service.js';
+import googleService from '../../services/google-service.js'
 
 export default {
     data() {
@@ -33,7 +40,6 @@ export default {
         getCategories() {
             categoriesService.query(this.categoryTxt)
         .then(res => {
-            console.log('categories', res);
             
             this.categories = res
         });
@@ -41,6 +47,7 @@ export default {
     },
     created() {
         this.getCategories()
+        googleService.getPlaceFromTxt('israel')
     }
 }
 </script>

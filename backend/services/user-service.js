@@ -45,7 +45,7 @@ function getById(id) {
 }
 
 function getUsersFromCheer(userCheers) {
-    if (!(userCheers && userCheers.length)) return Promise.resolve([])
+    if (!userCheers || !userCheers.length) return Promise.resolve([])
 
     var filter = {
         $or: userCheers.map(userCheer => {
@@ -53,7 +53,6 @@ function getUsersFromCheer(userCheers) {
             return { _id };
         })
     }
-    console.log('DEBUG::filter', filter);
     return mongoService.connect()
         .then(db => db.collection(COLLECTION_NAME).find(filter).toArray())
         .then(users => {

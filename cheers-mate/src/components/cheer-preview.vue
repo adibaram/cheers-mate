@@ -50,6 +50,7 @@ export default {
 <style scoped>
 .card {
   cursor: pointer;
+  height: 100%;
 }
 .time {
   font-size: 13px;
@@ -81,12 +82,4 @@ export default {
   clear: both;
 }
 
-input {
-  height: 30px;
-  width: 300px;
-  border-radius: 5px;
-}
-
-span .location {
-}
 </style>

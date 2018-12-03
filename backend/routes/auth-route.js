@@ -21,22 +21,22 @@ function addAuthRoutes(app) {
 
     app.post('/signup', (req, res) => {
         const user = req.body;
-
         userService.checkNickname(user.nickname)
-            .then(user => {
-                if (user) res.end('nickname already exist')
+            .then(isExist => {
+                if (isExist) {
+                    res.status(403).end('nickname already exist')
+            }
                 else {
                     userService.add(user)
-                    .then(() => res.json(user))
-                    .catch(err => {
-                        console.log('DEBUG::err', err);
-                        throw new Error('an error accured: ' + err);
-                    })
+                        .then(() => res.json(user))
+                        .catch(err => {
+                            res.status(401).end(err.toString())
+                        })
                 }
             })
     });
 
-    app.put('/logout', (req,res) =>{
+    app.put('/logout', (req, res) => {
         if (req.session.user) {
             res.end(`user ${req.session.user.nickname} logged out successfully`)
             req.session.destroy();
