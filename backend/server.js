@@ -8,6 +8,7 @@ const addAuthRoutes = require('./routes/auth-route');
 const addCheerRoutes = require('./routes/cheer-route');
 const addUserRoutes = require('./routes/user-route');
 const addUserCheerRoutes = require('./routes/rsvp-user-cheer-route');
+const history = require('connect-history-api-fallback');
 
 const app = express()  
 
@@ -17,7 +18,6 @@ app.use(cors({
 }));        
          
 app.use(express.static('public'));
-
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(session({
@@ -41,7 +41,7 @@ addUserCheerRoutes(app);
 
 
 const PORT = process.env.PORT || 3003;
-app.listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
+app.use(history()).listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
 
 
 
