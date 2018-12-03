@@ -4,8 +4,8 @@
       <!-- <router-link tag="div" to="/cheer/create" class="add-cheer"> -->
         <!-- <h4><i class="fas fa-plus"></i> Create a Cheer</h4> -->
       <!-- </router-link> -->
-      <!-- <h1>Look for events near you</h1> -->
       <cheer-filter></cheer-filter>
+      <!-- <h1 class="head-txt">Wanna meet new mates to drink with?</h1> -->
       <div class="links-container flex">
         <div class="flex link column">
           <i class="fas fa-heart circle"></i>

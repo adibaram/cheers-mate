@@ -1,22 +1,24 @@
 <template>
-    <section class="signuo-page-container">
-        <form @submit.prevent="createUser" class="flex column">
-            <label> Full Name
-                <input v-model="newUser.fullName" type="text" required>
+    <section class="signup-page-container container darken-pseudo darken-with-text">
+
+        <form @submit.prevent="createUser" class="signup flex column">
+            <h3>New around?</h3><br>
+            <label> 
+                <input v-model="newUser.fullName" placeholder="Full Name" type="text" required>
             </label>
-            <label> User Name
-                <input v-model="newUser.nickname" type="text" required>
+            <label> 
+                <input v-model="newUser.nickname" placeholder="User Name" type="text" required>
             </label>
-            <label> Email
-                <input v-model="newUser.email" type="text">
+            <label> 
+                <input v-model="newUser.email" placeholder="Email" type="text">
             </label>
-            <label> Password
-                <input v-model="newUser.password" type="password" required>
+            <label> 
+                <input v-model="newUser.password" placeholder="Password" type="password" required>
             </label>
-            <label> Your photo
+            <label class="upload-photo"> Add photo
                 <input type="file" ref="img">
             </label>
-            <button type="submit" class="signup">Sign Up</button>
+            <button type="submit">Sign Up</button>
         </form>     
     </section>    
 </template>
@@ -58,8 +60,50 @@ export default {
 }
 </script>
 
-<style>
-    .signup button {
+
+<style scoped lang="scss">
+
+    button {
         width: 100px;
+        justify-content: center;
+        color: white;
+        background-color: #e6a23c;
+        border-color: #e6a23c;
+        align-self: center;
+        margin-top:40px;
+
+
+        display: inline-block;
+        line-height: 1;
+        white-space: nowrap;
+        cursor: pointer;
+        -webkit-appearance: none;
+        text-align: center;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        outline: 0;
+        -webkit-transition: .1s;
+        transition: .1s;
+        font-weight: 500;
+        padding: 12px 20px;
+        font-size: 14px;
+        border-radius: 4px;
     }
+
+    button:hover {
+        background: #ebb563;
+        border-color: #ebb563;
+        color: #fff;
+    }
+
+    input {
+        width: 300px;
+        height: 30px;
+        border-radius: 5px;
+        opacity: 0.9;
+        padding-left: 10px;
+    }
+
+
+  
 </style>

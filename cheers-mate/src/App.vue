@@ -10,8 +10,8 @@
         <!-- <router-link to="/about">About</router-link> -->
       </div>
       <div class="links" v-if="!currUser">
-        <router-link to="/signup">Sign up</router-link>
-        <router-link to="/login">Log in</router-link>
+        <router-link class="router" to="/signup">Sign up</router-link>
+        <router-link class="router" to="/login">Log in</router-link>
       </div>
       <div class="logout" v-else>
         <span>Hello, {{currUser.nickname}}</span>
