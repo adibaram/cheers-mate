@@ -6,6 +6,7 @@
         </gmap-autocomplete>
         <button @click="addMarker">Add</button>
     </label> -->
+
     <GmapMap
       ref="gmapRef"
       :center="currPosition"
