@@ -27,14 +27,18 @@
                     </el-radio-group>
                 </span>
             </label>
-            <label class="upload-photo">
-                <input type="file" ref="img" @change="files = $refs.img.files" hidden>
+
+            <section>
+                <input id="img-upload" type="file" ref="img" @input="file = $refs.img.files[0]" hidden>
                 <div>   
-                    <input v-if="files.length" type="text" :value="'Selected file: ' + files[0].name" disabled>
+                    <input v-if="file" type="text" :value="'Selected file: ' + file.name" disabled>
                 </div>
-                <span v-if="files.length" class="add-photo">Change Photo</span>
-                <span v-else class="add-photo">Add photo</span>
-            </label>
+                <label class="upload-photo" for="img-upload">
+                    <span v-if="file" class="add-photo">Change Photo</span>
+                    <span v-else class="add-photo">Add photo</span>
+                </label>
+            </section>
+
             <button type="submit">Sign Up</button>
         </form>     
     </section>    
@@ -57,7 +61,7 @@ export default {
                 age: null,
                 img: null,
             },
-            files: []
+            file: null
         }
     },
     methods: {
@@ -87,6 +91,10 @@ export default {
 
 
 <style scoped lang="scss">
+
+    .upload-demo {
+        width: 100px;
+    }
 
     button {
         border: 0;
@@ -140,12 +148,20 @@ export default {
         padding-left: 10px;
     }
 
-    .gender-picker {
-        
+
+
+    .gender-picker { 
         el-radio-button:hover {
             color: #ebb563;
         }
     }
+    
+    .upload-photo {
+        font-size: 20px;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
 
 
   

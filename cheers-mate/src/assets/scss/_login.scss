@@ -6,7 +6,13 @@
     width: 100vw;
     height: 90vh;
     margin: 0 auto;
+    
+    button {
+        border: 0;
+    }
+
 }
+
 
 .darken-pseudo {
     position: relative;
@@ -32,11 +38,13 @@
     position: relative;
     z-index: 1;
     
+    
 }
 
-.upload-photo {
-    font-size: 20px;
-}
+    label {
+        width: fit-content;
+        margin: 0 auto;
+    }
 
 .remember-me {
     font-size: 20px;

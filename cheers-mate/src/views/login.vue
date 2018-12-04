@@ -98,9 +98,9 @@ export default {
         border-radius: 4px;
     }
 
-    button:hover {
-        background: #e6a23c;
-        border-color: #e6a23c;
+    button.login:hover {
+        background: #ebb563;
+        border-color: #ebb563;
         color: #fff;
     }
 
