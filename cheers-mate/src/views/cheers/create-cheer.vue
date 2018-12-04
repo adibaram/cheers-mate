@@ -12,7 +12,7 @@
         <h1>For how many people?</h1>
         <input type="number" v-model="newCheer.spots">
       </label>
-      <el-button type="warning">Next Step</el-button>
+      <el-button type="warning" @click="submitFirstStep">Next Step</el-button>
     </section>
     <!-- STEP 2 -->
     <section calss="step2" v-if="stepNum===2">
@@ -60,6 +60,11 @@ export default {
     };
   },
   methods: {
+    submitFirstStep() {
+        if (!this.place) return;
+        this.cheer.locationName = this.place.formatted_address
+        debugger
+    },
     getCategories() {
       categoriesService.query(this.categoryTxt).then(res => {
         this.categories = res;
