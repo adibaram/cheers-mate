@@ -19,16 +19,26 @@
                 <input type="number" placeholder="Age" v-model="newUser.age" min="1" max="200">
             </label>
             <label> 
-                <select v-model="newUser.gender">
-                    <option value="" selected disabled hidden>Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="unknown">None of the above</option>
-                </select>
+                <span class="gender-picker">
+                    <el-radio-group text-color="#ffffff" fill="#e6a23c" v-model="newUser.gender" size="mini">
+                        <el-radio-button label="Male"></el-radio-button>
+                        <el-radio-button label="Female"></el-radio-button>
+                        <el-radio-button label="Unknown">Rather Not Say</el-radio-button>
+                    </el-radio-group>
+                </span>
             </label>
-            <label class="upload-photo"> Add photo
-                <input type="file" ref="img">
-            </label>
+
+            <section>
+                <input id="img-upload" type="file" ref="img" @input="file = $refs.img.files[0]" hidden>
+                <div>   
+                    <input v-if="file" type="text" :value="'Selected file: ' + file.name" disabled>
+                </div>
+                <label class="upload-photo" for="img-upload">
+                    <span v-if="file" class="add-photo">Change Photo</span>
+                    <span v-else class="add-photo">Add photo</span>
+                </label>
+            </section>
+
             <button type="submit">Sign Up</button>
         </form>     
     </section>    
@@ -51,6 +61,7 @@ export default {
                 age: null,
                 img: null,
             },
+            file: null
         }
     },
     methods: {
@@ -81,14 +92,22 @@ export default {
 
 <style scoped lang="scss">
 
-    button {
+    .upload-demo {
         width: 100px;
+    }
+
+    button {
+        border: 0;
+    }
+
+    button , .add-photo{
+        min-width: 100px;
         justify-content: center;
         color: white;
         background-color: #e6a23c;
         border-color: #e6a23c;
         align-self: center;
-        margin-top:40px;
+        margin-top:10px;
 
 
         display: inline-block;
@@ -108,10 +127,17 @@ export default {
         border-radius: 4px;
     }
 
-    button:hover {
+    button:hover , .add-photo:hover{
         background: #ebb563;
         border-color: #ebb563;
         color: #fff;
+    }
+
+    .add-photo {
+        background-color: #909399;
+        &:hover {
+            background-color: #acacad; 
+        }
     }
 
     input {
@@ -121,6 +147,21 @@ export default {
         opacity: 0.9;
         padding-left: 10px;
     }
+
+
+
+    .gender-picker { 
+        el-radio-button:hover {
+            color: #ebb563;
+        }
+    }
+    
+    .upload-photo {
+        font-size: 20px;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
 
 
   

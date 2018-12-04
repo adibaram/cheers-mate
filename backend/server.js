@@ -10,32 +10,33 @@ const addUserRoutes = require('./routes/user-route');
 const addUserCheerRoutes = require('./routes/rsvp-user-cheer-route');
 const history = require('connect-history-api-fallback');
 
-const app = express()  
+const app = express()
 
 app.use(cors({
   origin: ['http://localhost:8080'],
   credentials: true // enable set cookie
-}));        
+}));
 app.use(bodyParser.json())
 app.use(cookieParser());
 app.use(session({
   secret: 'cheer app',
   resave: false,
   saveUninitialized: true,
-  cookie: { 
+  cookie: {
     secure: false,
     expires: 600000
-   }
+  }
 }))
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
 
 addAuthRoutes(app)
 addCheerRoutes(app);
 addUserRoutes(app);
 addUserCheerRoutes(app);
+
+// app.get('/', (req, res) => {
+//   res.redirect('/')
+// })
 
 app.use(history());
 app.use(express.static('public'));
