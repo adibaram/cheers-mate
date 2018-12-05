@@ -5,7 +5,7 @@
       :body-style="{ padding: '10px' }"
       @click.native="$router.push(`/cheer/${cheer._id}`)"
     >
-      <img src="@/assets/img/bgs/mates.jpeg" class="image">
+      <img src="@/assets/img/bgs/mates.jpeg" ref="previewImg" class="image">
       <div style="padding: 14px;">
         <span class="location">
           <i class="fas fa-map-marker-alt"></i>
@@ -31,6 +31,10 @@ export default {
       type: Object,
       default: {}
     }
+  },
+  mounted() {
+    if (this.cheer.img && this.cheer.img.length)
+      this.$refs.previewImg.src = this.cheer.img 
   },
   computed: {
     spotsLeft() {

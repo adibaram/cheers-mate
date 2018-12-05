@@ -16,7 +16,6 @@ export default new Vuex.Store({
       lng:34
     },
     loggedinUser: null,
-    msgs: []
   },
   getters: {
     getCheers(state) {
@@ -28,9 +27,6 @@ export default new Vuex.Store({
     getUser(state) {
       return state.loggedinUser;
     },
-    getMsgs(state) {
-      return state.msgs.reverse();
-    }
   },
 
   mutations: {
@@ -49,9 +45,6 @@ export default new Vuex.Store({
       userService.login(user,rememberPref);
       console.log('logged in user', state.loggedinUser);
     },
-    addMsg(state, msg) {
-      state.msgs.push(msg);
-    },
   },
   actions: {
     loadCheers(context) {
@@ -66,9 +59,6 @@ export default new Vuex.Store({
         })
     },
 
-    addMsg(context, msg) {
-      context.commit('addMsg',msg);
-    },
 
     getUserById(context,{userId}) {
       return userService.getById(userId);

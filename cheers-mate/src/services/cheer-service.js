@@ -21,6 +21,14 @@ function getById(id) {
 function add(cheer) {
     return axios.post(BASE_URL,cheer)
 }
+
+function update(id,cheer) {
+    return axios.put(`${BASE_URL}/${id}`,cheer)
+        .then(res => {
+            return res.data
+        });
+}
+
 function remove(id) {
     return axios.delete(`${BASE_URL}/${id}`)
         .then(res => res.data);
@@ -29,12 +37,6 @@ export default {
     query,
     getById,
     add,
+    update,
     remove
-}
-
-function _getLocationName({lat,lng}) {
-    var locationName = '';
-    locationName = `lat: ${lat}, lng: ${lng}`;
-
-    return locationName;
 }
