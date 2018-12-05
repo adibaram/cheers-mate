@@ -46,6 +46,12 @@ export default new Router({
       name: 'login',
       component: () => import('./views/login.vue')
     },
+
+    {
+      path: '/user/:userId',
+      name: 'user',
+      component: () => import('./views/user-details.vue')
+    },
     
     
     

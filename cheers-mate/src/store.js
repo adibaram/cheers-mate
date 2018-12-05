@@ -59,6 +59,7 @@ export default new Vuex.Store({
           
         })
     },
+
     findCurrPosition(context) {
       if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(({coords})=> {
