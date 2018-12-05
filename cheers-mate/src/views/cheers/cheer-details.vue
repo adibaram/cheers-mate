@@ -15,8 +15,8 @@
                             Are You Going?
                             <span class="spots-left" v-if="cheer.attendees">Spots left: {{spotsLeft}}</span>
                         </h4>
-                        <el-button class="btn" size="small" type="primary" icon="el-icon-check"></el-button>
-                        <el-button class="btn" size="small" type="primary" icon="el-icon-close" plain></el-button>
+                        <el-button class="btn" size="small" type="warning" icon="el-icon-check" @click="userAttending(true)" ></el-button>
+                        <el-button class="btn" size="small" type="warning" icon="el-icon-close" @click="userAttending(false)" plain></el-button>
                     </div>
                     <div class="share">
                         <span>Share: </span>
@@ -104,15 +104,32 @@ export default {
     },
     created() {
         this.loadCheer();
+        this.$socket.emit('joinRoom', `room-chat_${this.$route.params.cheerId}`);
+
     },
     methods: {
         loadCheer() {
             var cheerId = this.$route.params.cheerId;
             cheerService.getById(cheerId)
                 .then(res => {
-                    return this.cheer = res
+                    return this.cheer = res;
                 });
         },
+        userAttending(isAttending) {
+            console.log('DEBUG::isAttending', isAttending);
+            const cheerId = this.$route.params.cheerId;
+            const currUser = this.$store.getters.getUser;
+            var userId;
+            if(currUser) {
+                userId = currUser._id;
+                console.log('userId', userId);
+                if (isAttending) {
+                    this.$socket.emit('userAttending',{userId, cheerId})
+                }
+            } else {
+                this.$router.push('/login');
+            }
+        }
     },
     computed: {
         date() {
