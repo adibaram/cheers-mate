@@ -1,0 +1,58 @@
+// ALL STEPS
+.add-form {
+    margin: 15px;
+
+    & h5 {
+        margin-bottom: 10px;
+    }
+
+    & h1 {
+        margin-bottom: 5px;
+    }
+    & input {
+        width: 500px;
+        height: 50px;
+        border-radius: 30px;
+        margin-bottom: 20px;
+      }
+    & .btn-holder {
+      display: flex;
+      width: fit-content;
+    }
+
+  }
+  
+  [class^=step] {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+  }
+  .next-step-btn {
+    max-width: 100px;
+    text-align: center;
+  }
+// STEP 2
+.categories-holder {
+  margin-bottom: 20px;
+}
+  .category-select {
+    padding: 10px;
+    margin: 10px;
+    border: 1px lightgrey solid;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .category-select:hover {
+    background-color: rgba(211, 211, 211, 0.249);
+  }
+  .categoryactive {
+    box-shadow: 0 0 10px 0 var(--secondary) inset;
+  }
+  // STEP 3
+.el-input {
+  width: fit-content;
+}
+
+  
