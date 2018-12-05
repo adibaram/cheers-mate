@@ -11,6 +11,8 @@ const addUserCheerRoutes = require('./routes/rsvp-user-cheer-route');
 const history = require('connect-history-api-fallback');
 
 const app = express()
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 app.use(cors({
   origin: ['http://localhost:8080'],
@@ -42,8 +44,15 @@ app.use(history());
 app.use(express.static('public'));
 
 
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });
+});
+
 const PORT = process.env.PORT || 3003;
-app.listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
+http.listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
 
 
 
