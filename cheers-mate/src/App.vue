@@ -37,6 +37,12 @@ export default {
     },
     renderMsg(msg) {
       this.msgToShow = msg;
+    },
+    userAttended({userId}) {
+      this.$store.dispatch('getUserById', userId)
+        .then(user => {
+          console.log(`${user.nickname} attended to the cheer!`)
+        })
     }
   },
   data: () => ({
@@ -68,12 +74,6 @@ export default {
         user: JSON.parse(localStorage.getItem("user"))
       });
 
-    setTimeout(() => {
-      this.$socket.emit("assignMsg", {
-        msg: { txt: "puki", at: Date.now() },
-        room: "1a"
-      });
-    }, 2000);
   }
 };
 </script>

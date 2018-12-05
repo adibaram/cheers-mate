@@ -67,6 +67,17 @@
                 <div class="map">
                     <img :src="mapPic" alt="map"/>
                 </div>
+                <section class="chat">
+                    <section class="chat-msg-list">
+                        <ul>
+                            <li v-for="msg in msgs" :key="msg.at">
+                                {{msg.txt}}
+                            </li>
+                        </ul>
+                        <input type="text" ref="newMsgInput">
+                        <button @click="sendMsg">send</button>
+                    </section>
+                </section>
             </div>
             
         </section>
@@ -106,6 +117,10 @@ export default {
     created() {
         this.loadCheer();
         this.$socket.emit('joinRoom', `room-chat_${this.$route.params.cheerId}`);
+        this.$socket.emit("assignMsg", {
+            msg: { txt: "puki", at: Date.now() },
+            roomId: `room-chat_${this.$route.params.cheerId}`
+        });
 
     },
     methods: {
@@ -123,13 +138,21 @@ export default {
             var userId;
             if(currUser) {
                 userId = currUser._id;
-                console.log('userId', userId);
                 if (isAttending) {
                     this.$socket.emit('userAttending',{userId, cheerId})
                 }
             } else {
                 this.$router.push('/login');
             }
+        },
+        sendMsg() {
+            const msgInput = this.$refs.newMsgInput;
+            const txt = msgInput.value;
+            const msg = {txt, at: Date.now()};
+            const cheerId = this.$route.params.cheerId;
+            this.$socket.emit('newChatMsg' , {msg,cheerId});
+            msgInput.value = '';
+
         }
     },
     computed: {
@@ -147,11 +170,20 @@ export default {
         },
         mapPic() {
             return `https://maps.googleapis.com/maps/api/staticmap?center=${this.cheer.position.coordinates.lat},${this.cheer.position.coordinates.lng}&markers=color:red%7Clabel:C%7C${this.cheer.position.coordinates.lat},${this.cheer.position.coordinates.lng}&zoom=16&size=600x400&key=AIzaSyDSpb5jrUSIDb124D7Qpjd4XJQ6d8oVPW0`
+        },
+        msgs() {
+            return this.$store.getters.getMsgs;
         }
     },
 
     components: {
         userCard,
+    },
+
+    sockets: {
+        gotNewChatMsg(msg) {
+            this.$store.dispatch('addMsg', msg);
+        }
     }
 };
 </script>
