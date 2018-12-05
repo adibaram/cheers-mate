@@ -12,7 +12,7 @@
         <h1>For how many people?</h1>
         <input type="number" v-model="newCheer.spots">
       </label>
-      <el-button type="warning" @click="submitFirstStep">Next Step</el-button>
+      <el-button class="next-step-btn" type="warning" @click="submitFirstStep">Next Step</el-button>
     </section>
     <!-- STEP 2 -->
     <section calss="step2" v-if="stepNum===2">
@@ -31,6 +31,10 @@
           :key="category.name"
         >{{category.name}}</div>
       </div>
+      <div class="btn-holder">
+        <el-button class="next-step-btn" type="warning" @click="prevStep">Prev Step</el-button>
+        <el-button class="next-step-btn" type="warning" @click="submitSecondStep">Next Step</el-button>
+      </div>
     </section>
     <!-- STEP 3 -->
     <section class="step3" v-if="stepNum===3">
@@ -42,6 +46,10 @@
         placeholder="Select date and time"
         :picker-options="pickerOptions1"
       ></el-date-picker>
+      <div class="btn-holder">
+        <el-button class="next-step-btn" type="warning" @click="prevStep">Prev Step</el-button>
+        <el-button class="next-step-btn" type="warning" @click="submitCheer">Create Cheer</el-button>
+      </div>
     </section>
   </section>
 </template>
@@ -56,14 +64,28 @@ export default {
       stepNum: 1,
       categoryTxt: "",
       place: "",
-      newCheer: {}
+      newCheer: {
+
+      }
     };
   },
   methods: {
     submitFirstStep() {
-        if (!this.place) return;
-        this.cheer.locationName = this.place.formatted_address
-        debugger
+        this.newCheer.locationName = this.place.formatted_address
+
+
+
+        this.stepNum++;
+
+    },
+    submitSecondStep() {
+      this.stepNum++;
+    },
+    submitCheer() {
+
+    },
+    prevStep() {
+      this.stepNum--;
     },
     getCategories() {
       categoriesService.query(this.categoryTxt).then(res => {
@@ -81,26 +103,3 @@ export default {
 };
 </script>
 
-<style>
-.category-select {
-  padding: 10px;
-  margin: 10px;
-  border: 1px lightgrey solid;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.category-select:hover {
-  background-color: rgba(211, 211, 211, 0.249);
-}
-
-input {
-  width: 500px;
-  height: 50px;
-  border-radius: 30px;
-}
-
-.add-form {
-  margin: 15px;
-}
-</style>
