@@ -8,12 +8,14 @@ import './assets/scss/main.scss';
 // import {Alert} from 'element-ui';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
+import VueSocketIO from 'vue-socket.io';
 // import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
 // import component and stylesheet
 import AirbnbStyleDatepicker from 'vue-airbnb-style-datepicker'
 import 'vue-airbnb-style-datepicker/dist/vue-airbnb-style-datepicker.min.css'
+
 
 // vue scroll
 const VueScrollTo = require('vue-scrollto');
@@ -35,8 +37,19 @@ Vue.use(VueGoogleMaps, {
   }
 })
 
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: 'http://localhost:3003',
+  vuex: {
+      store,
+      actionPrefix: 'SOCKET_',
+      mutationPrefix: 'SOCKET_'
+  }
+}))
+
 //Element Lib
 // Vue.use(Alert)
+
 
 
 new Vue({
