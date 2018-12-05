@@ -38,10 +38,11 @@
                     {{cheer.desc}}
                 </div>
                 <section class="cheer-attendees">
-                    <h3>Attendees:</h3>
+                    <h3 v-if="cheer.attendees"> Attendees:</h3>
+                    <h3 v-else>Be the first one to join!</h3>
                     <div class="attendees">
                         <div v-for="user in cheer.attendees" :key="user._id">
-                            <user-card :user="user"></user-card>
+                            <user-card class="user-card" :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
                             <!-- <td v-for="prop in user" :key="">{{prop}}</td> -->
                         </div>
                     </div>
@@ -138,6 +139,6 @@ export default {
 };
 </script>
 
-<style>
-
+<style >
+ 
 </style>

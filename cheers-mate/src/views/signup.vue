@@ -66,15 +66,19 @@ export default {
     },
     methods: {
         createUser() {
-            console.log('creating user');
+            console.log('creating user');          
             uploadImg(this.$refs.img)
+                
                 .then(url => {
-                    console.log('DEBUG::url', url);
+                    // console.log('DEBUG::url', url);
+                if (!url) {
+                    url = `https://api.adorable.io/avatars/256/${this.newUser.email}.png`
+                }                     
                     this.newUser.img = url;
                     console.log('DEBUG::this.newUser', this.newUser);
                     this.$store.dispatch({type: 'signup', user: this.newUser})
                         .then(()=> this.$router.push('/'))
-                        .catch(err=>{
+                        .catch(err=> {
                             console.log('DEBUG:CANT CREATE USER:err', err);
                         })
                 })
