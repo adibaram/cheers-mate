@@ -1,25 +1,25 @@
 <template>
-    <section>
-      <el-card
-        class="card cheer-preview-container"
-        :body-style="{ padding: '10px' }"
-        @click.native="$router.push(`/cheer/${cheer._id}`)"
-      >
-        <img src="@/assets/img/bgs/mates.jpeg" class="image">
-        <div style="padding: 14px;">
-          <span class="location">
-            <i class="fas fa-map-marker-alt"></i>
-            {{cheer.locationName}}
-          </span>
-          <br>
-          <span v-if="cheer.attendees">Spots: {{cheer.attendees.length}} of {{cheer.spots}}</span>
-          <div class="bottom clearfix">
-            <time class="time">{{ date(cheer) }}</time>
-            <!-- <el-button type="text" class="button">Operating button</el-button> -->
-          </div>
+  <section>
+    <el-card
+      class="card cheer-preview-container"
+      :body-style="{ padding: '10px' }"
+      @click.native="$router.push(`/cheer/${cheer._id}`)"
+    >
+      <img src="@/assets/img/bgs/mates.jpeg" class="image">
+      <div style="padding: 14px;">
+        <span class="location">
+          <i class="fas fa-map-marker-alt"></i>
+          {{cheer.locationName}}
+        </span>
+        <br>
+        <span v-if="cheer.attendees">only {{spotsLeft}} spots left</span>
+        <div class="bottom clearfix">
+          <time class="time">{{ date(cheer) }}</time>
+          <!-- <el-button type="text" class="button">Operating button</el-button> -->
         </div>
-      </el-card>
-    </section>
+      </div>
+    </el-card>
+  </section>
 </template>
 
 <script>
@@ -32,19 +32,21 @@ export default {
       default: {}
     }
   },
-  methods: {
-    date({ date }) {
-      return moment(date).format("dddd, LL");
+  computed: {
+    spotsLeft() {
+      return this.cheer.spots - this.cheer.attendees.length;
     },
     relativeDate() {
       return moment(this.cheer.date).fromNow();
     },
-    spotsLeft() {
-      return this.cheer.spots - this.cheer.attendees.length;
-    },
     time() {
       return moment(this.cheer.date).format("hh:mm A");
     }
+  },
+  methods: {
+    date({ date }) {
+      return moment(date).format("dddd, LL");
+    },
   }
 };
 </script>
@@ -83,5 +85,4 @@ export default {
 .clearfix:after {
   clear: both;
 }
-
 </style>
