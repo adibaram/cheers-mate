@@ -1,17 +1,30 @@
 
 <template>
+
+
   <section class="add-form">
     <!-- STEP 1 -->
     <section id="step1" class="step1">
-      <h5>STEP 1 OF 3</h5>
-      <label>
-        <h1>Where Do you want to meet up?</h1>
+      <div>
+        <img src="@/assets/img/icons/placeholder.png" height="80px">
+        <h5>STEP 1 OF 3</h5>
+      </div>
+      <!-- <label> -->
+        <h1>Where do you want to meet up?</h1>
         <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
-      </label>
-      <label>
+      <!-- </label> -->
+      <!-- <label> -->
         <h1>For how many people?</h1>
         <input type="number" v-model="newCheer.spots">
-      </label>
+      <!-- </label> -->
+      <el-alert
+        class="fill-alert"
+        v-if="showErr"
+        title="Error"
+        type="error"
+        description="Please select a location"
+        show-icon>
+      </el-alert>      
       <el-button
         class="next-step-btn"
         v-scroll-to="'#step2'"
@@ -23,7 +36,10 @@
     <!-- STEP 2 -->
     <section id="step2">
       <section v-if="stepNum>1" class="step2">
-        <h5>STEP 2 OF 3</h5>
+        <div>
+          <img src="@/assets/img/icons/chat.png" height="80px">
+          <h5>STEP 2 OF 3</h5>
+        </div>
         <h1>What will you talk about?</h1>
         <input
           v-model="categoryTxt"
@@ -56,10 +72,14 @@
     <!-- STEP 3 -->
     <section id="step3">
       <section class="step3" v-if="stepNum>2">
-        <h5>STEP 3 OF 3</h5>
+        <div>
+          <img src="@/assets/img/icons/calendar.png" height="80px">
+          <h5>STEP 3 OF 3</h5>
+        </div>
         <h1>Pick a date and you're done!</h1>
         <el-date-picker v-model="newCheer.date"
                         type="datetime"
+                        class="el-date-picker"
                         format="dd/MM HH:mm"
                         placeholder="Select date and time"
                         :picker-options="pickerOptions"></el-date-picker>
@@ -78,6 +98,7 @@ export default {
   data() {
     return {
       stepNum: 1,
+      showErr: false,
       newCheer: {
         date: Date.now(),
         locationName: "",
@@ -126,6 +147,15 @@ export default {
   },
   methods: {
     submitFirstStep() {
+      console.log(this.place.geometry)
+
+      if (this.place.geometry === undefined) { 
+        this.showErr = true;
+        return
+      } else {
+        this.showErr = false;
+      }
+
       this.newCheer.locationName = this.place.name;
       this.newCheer.address = this.place.formatted_address;
       this.newCheer.position.coordinates.lat = this.place.geometry.location.lat();
@@ -153,11 +183,13 @@ export default {
     },
     setPlace(place) {
       this.place = place;
+      this.showErr = false;
       console.log("DEBUG::this.place", this.place);
     }
   },
   created() {
     this.getCategories();
+    if (!this.$store.getters.getUser) this.$router.push('/login');
   }
 };
 </script>

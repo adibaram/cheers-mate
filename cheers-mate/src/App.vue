@@ -1,31 +1,37 @@
 <template>
-  <section>
+  <section class="create-cheer-page">
     <header>
       <div class="container">
         <router-link to="/" tag="div">
           <h1 class="main-logo">Cheers🍻</h1>
         </router-link>
-        <div class="links" v-if="!currUser">
-          <router-link class="auth-link" to="/signup">Sign up</router-link>
-          <router-link class="auth-link" to="/login">Log in</router-link>
-        </div>
-        <div class="links logout" v-else>
-          <el-dropdown>
-            <span class="el-dropdown-link">Hello {{currUser.nickname}}
-              <i class="el-icon-arrow-down el-icon--right"></i>
-            </span>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>Profile</el-dropdown-item>
-              <el-dropdown-item>Other Shit</el-dropdown-item>
-              <el-dropdown-item><span @click="logout">Logout</span></el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+        <section class="links">
+          <router-link class="auth-link" to="/cheer/create">Create a cheer</router-link>
+          <!-- <router-link class="auth-link" to="/login">Create a cheer</router-link> -->
+          
+          <div class="links sign" v-if="!currUser">
+            <router-link class="auth-link" to="/signup">Sign up</router-link>
+            <router-link class="auth-link" to="/login">Log in</router-link>
+          </div>
+          <div class="links logout" v-else>
+            <el-dropdown>
+              <span class="el-dropdown-link">Hello {{currUser.nickname}}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item><span @click="goProfile">Profile</span></el-dropdown-item>
+                <el-dropdown-item>Other</el-dropdown-item>
+                <el-dropdown-item><span @click="logout">Logout</span></el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            </div>
+          </section>
           <!-- <div class="auth-link" @click="logout">logout</div>
           <span>Hello,
             <br>
             {{currUser.nickname}}
           </span> -->
-        </div>
+
       </div>
     </header>
     <router-view/>
@@ -44,17 +50,28 @@ export default {
       );
     }
   },
+  data() {
+    return {
+      logedInUser: []
+    }
+  },
   computed: {
     currUser() {
+      this.logedInUser = this.$store.getters.getUser;
       return this.$store.getters.getUser;
     }
   },
   methods: {
     logout() {
       this.$store.dispatch({ type: "logout" });
-    }
+      this.$router.push(`/`)
+    },
+    goProfile() {
+      this.$router.push(`/user/${this.logedInUser._id}`)
+    },
   },
   created() {
+
     console.log(
       "DEBUG:store created:sessionStorage.getItem(user)",
       sessionStorage.getItem("user")

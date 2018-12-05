@@ -62,7 +62,7 @@ export default {
 };
 </script>
     
-<style scoped>
+<style lang="scss" scoped>
     .cheer-card {
         width: 250px;
         height: 300px;    

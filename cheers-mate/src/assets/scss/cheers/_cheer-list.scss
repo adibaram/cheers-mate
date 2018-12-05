@@ -27,3 +27,70 @@
         }
     }
 }
+
+.cheer-list-container {
+    margin: 20px;
+    // display: flex;
+    // flex-wrap: wrap;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: auto;
+      grid-gap: 1rem;
+  
+    .cards {
+      width: 250px;
+      height: 300px;
+      margin-bottom: 10px;
+    }
+      
+}
+
+@media (max-width: 1050px) {
+    .cheer-list-container {
+        margin: 15px;
+        // display: flex;
+        // flex-wrap: wrap;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: auto;
+        grid-gap: 1rem;
+    }
+
+    .cards {
+        width: 250px;
+        height: 300px;
+        margin-bottom: 10px;
+      }
+}
+
+@media (max-width: 800px) {
+    .cheer-list-container {
+        margin: 15px;
+        // display: flex;
+        // flex-wrap: wrap;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: auto;
+        grid-gap: 1rem;
+    }
+
+    .cards {
+        width: 250px;
+        height: 300px;
+        margin-bottom: 10px;
+      }
+}
+
+@media (max-width: 510px) {
+    .cheer-list-container {
+        // margin: 15px;
+        // display: flex;
+        // flex-wrap: wrap;
+        grid-template-columns: repeat(1, 1fr);
+        grid-auto-rows: auto;
+        grid-gap: 1rem;
+    }
+
+    .cards {
+        width: 250px;
+        height: 300px;
+        // margin-bottom: 10px;
+      }
+}

@@ -11,8 +11,8 @@
           <i class="fas fa-map-marker-alt"></i>
           {{cheer.locationName}}
         </span>
-        <br>
-        <span v-if="cheer.attendees">only {{spotsLeft}} spots left</span>
+        <br><br>
+        <span v-if="cheer.attendees"><i class="fas fa-users"></i> {{spotsLeft}} seats left</span>
         <div class="bottom clearfix">
           <time class="time">{{ date(cheer) }}</time>
           <!-- <el-button type="text" class="button">Operating button</el-button> -->
@@ -51,7 +51,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .card {
   cursor: pointer;
   height: 100%;
