@@ -106,5 +106,9 @@ input {
   border-radius: 5px;
 }
 
+.el-button--warning:hover {
+  opacity: 1;
+}
+
 
 </style>

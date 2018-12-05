@@ -1,0 +1,24 @@
+.user-image {
+    max-height: 250px;
+    border-radius: 30%;
+    align-items: center;
+
+}
+
+.user-header {
+    background-image: url('../img/bgs/user.jpg');
+    background-repeat: no-repeat;
+    background-size: auto;
+    object-fit: cover;
+    width: 100vw;
+    align-items: center;
+
+    h1 {
+        font-size: 40px;
+        margin: 20px;
+        color: white;
+        border: black;
+    }
+
+}
+
