@@ -1,26 +1,40 @@
 <template>
-  <section>
+  <section class="create-cheer-page">
     <header>
       <div class="container">
         <router-link to="/" tag="div">
           <h1 class="main-logo">Cheers🍻</h1>
         </router-link>
-        <div class="links">
-          <!-- <router-link to="/cheer">Cheers</router-link> -->
-          <!-- <router-link to="/about">About</router-link> -->
-        </div>
-        <div class="links" v-if="!currUser">
-          <router-link class="router" to="/signup">Sign up</router-link>
-          <router-link class="router" to="/login">Log in</router-link>
-        </div>
-        <div class="logout" v-else>
-          <span>Hello, {{currUser.nickname}}</span>
-          <button @click="logout">logout</button>
-        </div>
+        <section class="links">
+          <router-link class="auth-link" to="/cheer/create">Create a cheer</router-link>
+          <!-- <router-link class="auth-link" to="/login">Create a cheer</router-link> -->
+          
+          <div class="links sign" v-if="!currUser">
+            <router-link class="auth-link" to="/signup">Sign up</router-link>
+            <router-link class="auth-link" to="/login">Log in</router-link>
+          </div>
+          <div class="links logout" v-else>
+            <el-dropdown>
+              <span class="el-dropdown-link">Hello {{currUser.nickname}}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item><span @click="goProfile">Profile</span></el-dropdown-item>
+                <el-dropdown-item>Other</el-dropdown-item>
+                <el-dropdown-item><span @click="logout">Logout</span></el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            </div>
+          </section>
+          <!-- <div class="auth-link" @click="logout">logout</div>
+          <span>Hello,
+            <br>
+            {{currUser.nickname}}
+          </span> -->
+
       </div>
     </header>
     <router-view/>
-    <p v-if="msgToShow" style="color:red;">{{msgToShow}}</p>
   </section>
 </template>
 
@@ -46,19 +60,26 @@ export default {
     }
   },
   data: () => ({
-    msgToShow: null
+    msgToShow: null,
+    logedInUser: []
   }),
   computed: {
     currUser() {
+      this.logedInUser = this.$store.getters.getUser;
       return this.$store.getters.getUser;
     }
   },
   methods: {
     logout() {
       this.$store.dispatch({ type: "logout" });
-    }
+      this.$router.push(`/`)
+    },
+    goProfile() {
+      this.$router.push(`/user/${this.logedInUser._id}`)
+    },
   },
   created() {
+
     console.log(
       "DEBUG:store created:sessionStorage.getItem(user)",
       sessionStorage.getItem("user")

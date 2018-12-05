@@ -34,20 +34,3 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.cheer-list-container {
-  margin: 20px;
-  // display: flex;
-  // flex-wrap: wrap;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: auto;
-    grid-gap: 1rem;
-
-  .cards {
-    width: 250px;
-    height: 300px;
-    margin-bottom: 10px;
-  }
-
-}
-</style>

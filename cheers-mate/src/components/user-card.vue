@@ -16,7 +16,7 @@
         
 </template>
 
-<style scoped>
+<style scoped lang="scss">
   .time {
     font-size: 13px;
     color: #999;

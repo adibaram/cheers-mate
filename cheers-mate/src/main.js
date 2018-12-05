@@ -1,9 +1,11 @@
-import Vue from 'vue'
-import App from './App.vue'
-import * as VueGoogleMaps from 'vue2-google-maps'
-import router from './router'
-import store from './store'
-import './registerServiceWorker'
+import Vue from 'vue';
+import App from './App.vue';
+import * as VueGoogleMaps from 'vue2-google-maps';
+import VueSocketIO from 'vue-socket.io';
+
+import router from './router';
+import store from './store';
+import './registerServiceWorker';
 import './assets/scss/main.scss';
 // import {Alert} from 'element-ui';
 import ElementUI from 'element-ui';

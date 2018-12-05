@@ -16,24 +16,22 @@ header {
     }
     & .links {
       display: flex;
+      align-items: center;
     }
-    a {
-      align-self: center;
+    .auth-link, .logout span {
+      text-align: center;
       font-weight: bold;
       font-family: Nunito;
       color: black;
       padding: 8px;
       text-decoration: none;
-
       &.router-link-exact-active {
         color: #f8ad0b;
       }
+      &:hover {
+        text-decoration: underline;
+      }
     }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
     h1 {
       font-size: 50px;
     }
