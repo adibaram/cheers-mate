@@ -6,21 +6,28 @@ function query(filter) {
     return mongoService.connect()
         .then(dbConn => {
             // SET FILTERS
-            const byNameRegex = new RegExp(filter.locationName, 'i');
-            let filterObj = {
-                'locationName': byNameRegex,
-            };
+            var filterObj = {}
 
-            if (+filter.fromDate) {
-                filterObj.date = {
-                    $gt: +filter.fromDate * 1000,
-                    $lt: +filter.toDate * 1000
+            if (filter) {
+                const byNameRegex = new RegExp(filter.locationName, 'i');
+                let filterObj = {
+                    'locationName': byNameRegex,
+                };
+                if (+filter.fromDate) {
+                    filterObj.date += {
+                        $gt: +filter.fromDate * 1000,
+                        $lt: +filter.toDate * 1000
+                    }
                 }
-                console.log('DEBUG::filterObj', filterObj);
+                console.log('DEBUG::cheers query sorter');
+                sorter = {
+                    [filter.sortBy]: 1
+                };
             }
 
+
             const cheerCollection = dbConn.collection(COLLECTION_NAME);
-            if (filter.sortBy) return cheerCollection.find(filterObj).sort({ [filter.sortBy]: 1 }).toArray();
+            if (filter && filter.sortBy) return cheerCollection.find(filterObj).sort(sorter).toArray();
             return cheerCollection.find(filterObj).toArray()
 
         })
