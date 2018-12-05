@@ -55,11 +55,12 @@
     </section>
     <!-- STEP 3 -->
     <section id="step3">
-      <section class="step3" >
+      <section class="step3" v-if="stepNum>2">
         <h5>STEP 3 OF 3</h5>
         <h1>Pick a date and you're done!</h1>
         <el-date-picker v-model="newCheer.date"
-                        type="date"
+                        type="datetime"
+                        format="dd/MM HH:mm"
                         placeholder="Select date and time"
                         :picker-options="pickerOptions"></el-date-picker>
         <el-button class="next-step-btn" type="warning" @click="submitCheer">Cheers!</el-button>
@@ -69,7 +70,7 @@
 </template>
 
 <script>
-// v-if="stepNum>2"
+// 
 import categoriesService from "../../services/categories-service.js";
 import cheerService from "../../services/cheer-service.js";
 
