@@ -59,8 +59,9 @@ export default new Vuex.Store({
         })
     },
 
-
-    getUserById(context, { userId }) {
+    // THIS IS SUPPOSED TO GET PAYLOAD, BUT GETTNG JUST THE ID.
+    // DONT CHANGE THIS IF YOU WANT THE CODE TO WORK
+    getUserById(context,  userId ) {
       return userService.getById(userId);
     },
 
