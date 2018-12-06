@@ -13,8 +13,13 @@
             <label>                 
                 <el-checkbox  class="remember-me" v-model="rememberPref">Remember me</el-checkbox>
             </label>
+        
+
             <button type="submit" class="login">Login</button>
+
+            <h6>New member? <router-link class="auth-link" to="/signup">Sign up here</router-link></h6>
         </form>
+            
     </section>
 </template>
 
@@ -79,7 +84,7 @@ export default {
         border-color: #e6a23c;
         align-self: center;
         margin-top: 50px;
-
+        margin-bottom: 50px;
 
         display: inline-block;
         line-height: 1;
@@ -110,6 +115,12 @@ export default {
         border-radius: 5px;
         opacity: 0.9;
         padding-left: 10px;
+    }
+
+    h5, a {
+        margin: 30px;
+        // text-decoration: none;
+        color: #ebb563;
     }
 
 </style>
