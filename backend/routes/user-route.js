@@ -5,7 +5,11 @@ const BASE_URL = '/user';
 
 function addRoutes(app) {
     
-
+    // DEBUGG LOGGED IN USER
+    app.get(BASE_URL+'/loggedin', (req, res)=>{
+        let user = req.session.user;
+        res.json(user);
+    })
 
     // GET ALL USERS;
     app.get(BASE_URL, (req, res) => {
