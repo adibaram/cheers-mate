@@ -82,9 +82,10 @@
                                 {{msg}}
                             </li>
                         </ul>
-                        <form @submit.prevent="sendMsg">
-                            <input type="text" ref="newMsgInput">
-                            <button>send</button>
+                        <form @submit.prevent="sendMsg" ref="chat" >
+                            <input v-if="!$store.getters.getUser" value="please login to chat.." type="text" disabled>
+                            <input ref="newMsgInput" v-else :disabled="enableChat" type="text">
+                            <button :disabled="enableChat" >send</button>
                         </form>
                     </section>
                 </section>
@@ -124,6 +125,10 @@ export default {
         this.$socket.emit('joinRoom', `room-chat_${this.$route.params.cheerId}`);
 
     },
+    mounted() {
+       
+    },
+
     methods: {
         loadCheer() {
             var cheerId = this.$route.params.cheerId;
@@ -209,6 +214,9 @@ export default {
             if (idx >= 0) return true;
             else return false;
 
+        },
+        enableChat() {
+            return (!this.$store.getters.getUser)? true : false;   
         }
     },
 
