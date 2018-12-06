@@ -3,10 +3,7 @@ import axios from 'axios';
 const BASE_URL = (process.env.NODE_ENV !== 'development')? 
                 '/user' : 'http://localhost:3003/user';
 
-function getLoggedInUser() {
-    return axios.get(`${BASE_URL}/loggedin`)
-        .then(res=>console.log('DEBUG:logged in user:res', res))
-}
+
 
 
 function getById(id) {
@@ -32,6 +29,7 @@ function login(user, rememberPref = false) {
         sessionStorage.setItem('user', JSON.stringify(user));
     }
 }
+
 
 
 export default {

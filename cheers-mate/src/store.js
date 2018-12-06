@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import cheersService from './services/cheer-service.js';
 import userService from './services/user-service.js';
-import authService from './services/auth-service.js'; 
+import authService from './services/auth-service.js';
 // import { log } from 'util';
 
 Vue.use(Vuex)
@@ -12,8 +12,8 @@ export default new Vuex.Store({
     cheers: [],
     filter: {},
     position: {
-      lat:32,
-      lng:34
+      lat: 32,
+      lng: 34
     },
     loggedinUser: null,
   },
@@ -30,65 +30,76 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    setCheers(state, {cheers}) {
+    setCheers(state, { cheers }) {
       state.cheers = cheers;
     },
-    setPosition(state, {coords}) {
+    setPosition(state, { coords }) {
       state.position.lat = coords.latitude;
       state.position.lng = coords.longitude;
     },
-    setFilter(state, {filter}) {
+    setFilter(state, { filter }) {
       state.filter = filter;
     },
-    setUser(state, {user , rememberPref}) {
-      state.loggedinUser = user; 
-      userService.login(user,rememberPref);
+    setUser(state, { user, rememberPref }) {
+      state.loggedinUser = user;
+      userService.login(user, rememberPref);
       console.log('logged in user', state.loggedinUser);
     },
   },
   actions: {
     loadCheers(context) {
       console.log('loading cheers...');
-      
+
       return cheersService.query(context.state.filter)
-        .then(cheers=>{
-          context.commit({type:'setCheers', cheers});
+        .then(cheers => {
+          context.commit({ type: 'setCheers', cheers });
           console.log('filter', context.state.filter);
           console.log('cheers loaded:', cheers);
-          
+
         })
     },
 
 
-    getUserById(context,{userId}) {
+    getUserById(context, { userId }) {
       return userService.getById(userId);
     },
 
     findCurrPosition(context) {
-      if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(({coords})=> {
-          context.commit({type:'setPosition', coords})
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(({ coords }) => {
+          context.commit({ type: 'setPosition', coords })
         })
-        } else console.log('cant find location');
+      } else console.log('cant find location');
     },
-    loadFilter(context, {filter}) {
-      context.commit({type:'setFilter', filter});
-      context.dispatch({type:'loadCheers'});      
+    loadFilter(context, { filter }) {
+      context.commit({ type: 'setFilter', filter });
+      context.dispatch({ type: 'loadCheers' });
     },
-    signup(context, {user}) {
+    signup(context, { user }) {
       return authService.signup(user)
         .then(user => {
-            context.commit({type: 'setUser', user});
+          context.commit({ type: 'setUser', user });
         })
     },
-    login(context, {user, rememberPref}){
-      return authService.checkUser(user)
-        .then(user => {
-          context.commit({type: 'setUser', user , rememberPref})
-        });
+    login(context, { user, rememberPref }) {
+      authService.getLoggedInUser()
+        .then(sessionUser => {
+          if (sessionUser) {
+            context.commit({ type: 'setUser', user:sessionUser, rememberPref })
+          } else {
+            authService.checkUser(user)
+              .then(loggedInUser => {
+                context.commit({ type: 'setUser', user:loggedInUser, rememberPref })
+              });
+          }
+        })
+        .catch(err=>{
+          console.log('DEBUG::err', err);
+        })
+
     },
     logout(context) {
-      context.commit({type: 'setUser', user: null})
+      context.commit({ type: 'setUser', user: null })
       authService.logout()
     }
   },
