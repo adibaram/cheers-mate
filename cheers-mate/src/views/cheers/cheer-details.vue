@@ -76,8 +76,8 @@
                 </div> -->
 
                 <section class="chat">
-                    <h1>Let's start talking</h1>
                     <section class="chat-msg-list">
+                    <h1>Let's start talking</h1>
                         <ul class="clean-list">
                             <li v-if="cheer.msgs" v-for="msg in msgs" :key="msg.at">
                                 {{msg.from}}: {{msg.txt}}
@@ -251,7 +251,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
     .chat {
         border: 1px solid rgba(128, 128, 128, 0.157);
@@ -260,6 +260,26 @@ export default {
         margin-left: 100px;
         padding: 30px;
         margin: 20px;
+
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #fff;
+
+        input , button{
+            padding: 10px;
+        }
+    }
+
+    .attendees {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .main-info-container {
+        display: flex;
+        justify-content: space-between;
+        max-width: 90vw;
     }
 
 </style>
