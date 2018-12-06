@@ -68,8 +68,8 @@
                 <div class="address">
                     <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
                     <div class="info">
-                        <div class="street">{{cheer.position}}</div>
-                        <div class="city">{{cheer.position}}</div>
+                        <div class="street">{{cheer.address}}</div>
+                        <!-- <div class="city">{{cheer.position}}</div> -->
                     </div>
                 </div>
                 <div class="map">
@@ -79,11 +79,13 @@
                     <section class="chat-msg-list">
                         <ul>
                             <li v-if="cheer.msgs" v-for="msg in msgs" :key="msg.at">
-                                {{msg.txt}}
+                                {{msg}}
                             </li>
                         </ul>
-                        <input type="text" ref="newMsgInput">
-                        <button @click="sendMsg">send</button>
+                        <form @submit.prevent="sendMsg">
+                            <input type="text" ref="newMsgInput">
+                            <button>send</button>
+                        </form>
                     </section>
                 </section>
             </div>
@@ -96,6 +98,7 @@
 // IMPORTS
 import cheerService from '../../services/cheer-service.js';
 import userCard from '../../components/user-card.vue';
+import userService from '../../services/user-service.js';
 const moment = require('moment');
 
 export default {
@@ -140,8 +143,7 @@ export default {
                 } else {
                     const idx = this.cheer.attendees.findIndex(user=>user._id === userId)
                     if (idx >= 0) {
-                        this.cheer.attendees.splice(idx, 1);
-                        cheerService.update(cheerId,this.cheer)
+                        cheerService.removeAttendance(cheerId)
                             .then(()=>this.loadCheer());
                         
                     }
@@ -151,20 +153,25 @@ export default {
             }
         },
         sendMsg() {
+            // GET MSG
             const msgInput = this.$refs.newMsgInput;
             const txt = msgInput.value;
             if (!txt.trim().length) return;
 
+            // DECLARATION
             const cheerId = this.$route.params.cheerId;
             const currUser = this.$store.getters.getUser;
             const userId = (currUser)? currUser._id : '';
+            const msg = {
+                userId, 
+                txt, 
+                at: Date.now(), 
+                from: this.$store.getters.getUser.nickname
+            };
 
-            const msg = {userId, txt, at: Date.now()};
-
+            // LET THE WORLD KNOW
             this.$socket.emit('newChatMsg' , {msg,cheerId});
-            if (!this.cheer.msgs) this.cheer.msgs = [msg];
-            else this.cheer.msgs.push(msg);
-            cheerService.update(cheerId,this.cheer)
+            cheerService.update(cheerId,this.cheer);
             msgInput.value = '';
 
         },
@@ -187,12 +194,16 @@ export default {
             return `https://maps.googleapis.com/maps/api/staticmap?center=${this.cheer.position.coordinates.lat},${this.cheer.position.coordinates.lng}&markers=color:red%7Clabel:C%7C${this.cheer.position.coordinates.lat},${this.cheer.position.coordinates.lng}&zoom=16&size=600x400&key=AIzaSyDSpb5jrUSIDb124D7Qpjd4XJQ6d8oVPW0`
         },
         msgs() {
-            return this.cheer.msgs;
+            var msgs = this.cheer.msgs;
+            // msgs.forEach(msg=> {
+            //     userService.getById(msg.userId).then(user=> msg.from = user.nickname); 
+            // })
+            return msgs;
         },
         userIsGoing() {
             const currUser = this.$store.getters.getUser;
             var userId;
-            if(currUser) userId = currUser._id;
+            if(currUser && this.cheer.attendees) userId = currUser._id;
             else return false;
             const idx = this.cheer.attendees.findIndex(user=>user._id === userId);
             if (idx >= 0) return true;

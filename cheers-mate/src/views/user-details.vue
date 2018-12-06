@@ -8,9 +8,9 @@
         <div class="user-details-cheers">
         <h1 v-if="!userCheers.length">No events to show yet</h1>
 
+            <h1>Upcoming events</h1>
             <section class="cards" v-for="cheer in userCheers" :key="cheer._id">
                 <div class="cheer-card" v-if="cheer.date > currDate">
-                <h1>Upcoming events</h1>
                     <cheer-preview :cheer="cheer"></cheer-preview>
                 </div>
             </section>

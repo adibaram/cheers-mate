@@ -8,7 +8,7 @@
                 <input v-model="user.nickname" type="text" placeholder=" User Name" required>
             </label>
             <label>
-                <input v-model="user.password" placeholder="Password" type=" password" required>
+                <input v-model="user.password" placeholder="Password" type="password" required>
             </label>
             <label>                 
                 <el-checkbox  class="remember-me" v-model="rememberPref">Remember me</el-checkbox>
