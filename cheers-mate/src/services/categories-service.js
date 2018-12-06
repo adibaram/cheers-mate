@@ -218,7 +218,6 @@ function query(filter='') {
 // function getCategories(filter) {
 //     return axios.get(`${API_URL}?key=${API_KEY}`)
 //         .then(res => {
-//             debugger
 //             console.log('categories', res);
 //         })
 // }

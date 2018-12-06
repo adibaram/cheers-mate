@@ -169,10 +169,10 @@ export default {
       this.stepNum++;
     },
     submitCheer() {
-      // cheerService.add(this.newCheer)
-      //   .then(cheer =>{
-      //     this.$route.push(`/cheer/${cheer._id}`)
-      //   })
+      cheerService.add(this.newCheer)
+        .then(cheer =>{
+          this.$router.push(`/cheer/${cheer._id}`)
+        })
       console.log("DEBUG::this.newCheer", this.newCheer);
     },
     prevStep() {
