@@ -227,8 +227,9 @@ export default {
 
         },
         backgroundImg() {
-            if (!this.cheer.img) return `background-image: url(https://moneycrashers-sparkchargemedia.netdna-ssl.com/wp-content/uploads/2017/08/bachelor-party-bar-drinks-1024x576.jpg);`;
-            else return `background-image: url(${this.cheer.img});`
+            if (!this.cheer.img) return `background-image: url(https://moneycrashers-sparkchargemedia.netdna-ssl.com/wp-content/uploads/2017/08/bachelor-party-bar-drinks-1024x576.jpg)`;
+            else return `background-image: url(${this.cheer.img})`;
+        },
         enableChat() {
             return (!this.$store.getters.getUser)? true : false;   
         }
