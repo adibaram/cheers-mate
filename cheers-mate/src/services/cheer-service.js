@@ -20,6 +20,7 @@ function getById(id) {
 }
 function add(cheer) {
     return axios.post(BASE_URL,cheer)
+        .then(res => res.data)
 }
 
 function update(id,cheer) {
@@ -33,10 +34,20 @@ function remove(id) {
     return axios.delete(`${BASE_URL}/${id}`)
         .then(res => res.data);
 }
+
+const USER_CHEER_URL = (process.env.NODE_ENV !== 'development')? 
+                '/userCheer' : 'http://localhost:3003/userCheer';
+
+function removeAttendance(cheerId) {
+    return axios.delete(`${USER_CHEER_URL}/${cheerId}`)
+        .then(res => res.data);
+}
+
 export default {
     query,
     getById,
     add,
     update,
-    remove
+    remove,
+    removeAttendance,
 }

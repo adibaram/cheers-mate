@@ -15,7 +15,7 @@
           </div>
           <div class="links logout" v-else>
             <el-dropdown>
-              <span class="el-dropdown-link">Hello {{currUser.nickname}}
+              <span style="cursor:pointer;" class="el-dropdown-link">Hello {{currUser.nickname}}
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
@@ -36,7 +36,7 @@
     </header>
     <router-view/>
     <footer>
-      
+
     </footer>
   </section>
 </template>
@@ -60,6 +60,7 @@ export default {
         .then(user => {
           console.log(`${user.nickname} attended to the cheer!`)
         })
+        .catch(err=>console.log('DEBUG:userAttended socket App.vue:userId,err', userId,err))
     }
   },
   data: () => ({

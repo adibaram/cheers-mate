@@ -19,7 +19,7 @@ function query(filter) {
                         $lt: +filter.toDate * 1000
                     }
                 }
-                console.log('DEBUG::cheers query sorter');
+                console.log('DEBUG::cheers query sorter', filterObj);
                 sorter = {
                     [filter.sortBy]: 1
                 };

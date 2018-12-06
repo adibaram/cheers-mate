@@ -1,8 +1,8 @@
 
 import axios from 'axios';
 
-const BASE_URL = (process.env.NODE_ENV !== 'development')? 
-                '' : 'http://localhost:3003';
+const BASE_URL = (process.env.NODE_ENV !== 'development') ?
+    '' : 'http://localhost:3003';
 
 
 function signup(user) {
@@ -18,16 +18,22 @@ function checkUser(user) {
 
 function logout() {
     // remove user from session storage to log user out
-    if (sessionStorage.getItem('user')) sessionStorage.removeItem('user');
-    if (localStorage.getItem('user')) localStorage.removeItem('user');
-
+    axios.put(`${BASE_URL}/logout`)
+        .then(res => {
+            if (sessionStorage.getItem('user')) sessionStorage.removeItem('user');
+            if (localStorage.getItem('user')) localStorage.removeItem('user');
+        })
+}
+function getLoggedInUser() {
+    return axios.get(`${BASE_URL}/loggedin`)
+        .then(res=>res.data)
 }
 
-
-export default { 
+export default {
     signup,
     checkUser,
-    logout
+    logout,
+    getLoggedInUser
 }
 
 
