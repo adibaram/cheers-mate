@@ -9,14 +9,13 @@
         <img src="@/assets/img/icons/placeholder.png" height="80px">
         <h5>STEP 1 OF 3</h5>
       </div>
-      <!-- <label> -->
-        <h1>Where do you want to meet up?</h1>
+
+        <h1>Select a cool bar for your meet up</h1>
         <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
-      <!-- </label> -->
-      <!-- <label> -->
+
         <h1>For how many people?</h1>
         <input type="number" v-model="newCheer.spots">
-      <!-- </label> -->
+
       <el-alert
         class="fill-alert"
         v-if="showErr"
