@@ -45,13 +45,8 @@ addUserCheerRoutes(app);
 app.use(history());
 app.use(express.static('public'));
 
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-});
+const socketService = require('./services/socket-service')
+socketService(io)
 
 const PORT = process.env.PORT || 3003;
 http.listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));

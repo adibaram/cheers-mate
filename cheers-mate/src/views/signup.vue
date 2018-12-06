@@ -68,7 +68,6 @@ export default {
         createUser() {
             console.log('creating user');          
             uploadImg(this.$refs.img)
-                
                 .then(url => {
                     // console.log('DEBUG::url', url);
                 if (!url) {

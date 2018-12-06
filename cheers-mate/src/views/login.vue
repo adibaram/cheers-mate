@@ -42,7 +42,7 @@ export default {
             let user = this.user;
             let rememberPref = this.rememberPref;
             this.$store.dispatch({type: 'login', user , rememberPref})
-                .then(()=> this.$router.push('/'))
+                .then(()=> this.$router.go(-1))
                 .catch(err => {
                     console.log('err', err);
                 })

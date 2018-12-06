@@ -9,10 +9,11 @@ import './registerServiceWorker';
 import './assets/scss/main.scss';
 // import {Alert} from 'element-ui';
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import 'element-ui/lib/theme-chalk/index.css'
 
 import lang from 'element-ui/lib/locale/lang/en';
 import locale from 'element-ui/lib/locale';
+import VueSocketIO from 'vue-socket.io';
 // import 'element-ui/lib/theme-chalk/index.css';
 locale.use(lang)
 Vue.use(ElementUI);

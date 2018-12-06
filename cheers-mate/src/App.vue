@@ -41,20 +41,28 @@
 <script>
 export default {
   sockets: {
-    connect: function() {
+    connect() {
       console.log("socket connected");
     },
-    customEmit: function(data) {
+    customEmit(data) {
       console.log(
         'this method was fired by the socket server. eg: io.emit("customEmit", data)'
       );
+    },
+    renderMsg(msg) {
+      this.msgToShow = msg;
+    },
+    userAttended({userId}) {
+      this.$store.dispatch('getUserById', userId)
+        .then(user => {
+          console.log(`${user.nickname} attended to the cheer!`)
+        })
     }
   },
-  data() {
-    return {
-      logedInUser: []
-    }
-  },
+  data: () => ({
+    msgToShow: null,
+    logedInUser: []
+  }),
   computed: {
     currUser() {
       this.logedInUser = this.$store.getters.getUser;
@@ -86,6 +94,7 @@ export default {
         type: "login",
         user: JSON.parse(localStorage.getItem("user"))
       });
+
   }
 };
 </script>
