@@ -60,7 +60,8 @@ export default new Vuex.Store({
     },
 
 
-    getUserById(context,{userId}) {
+    getUserById(context, userId) {
+      console.log('DEBUG::store userId', userId);
       return userService.getById(userId);
     },
 
