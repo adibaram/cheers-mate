@@ -113,7 +113,8 @@ export default {
         desc: "",
         category: [],
         spots: 20,
-        img: ""
+        img: "",
+        msgs: []
       },
       categoryTxt: "",
       place: "",
@@ -161,6 +162,7 @@ export default {
       this.newCheer.position.coordinates.lat = this.place.geometry.location.lat();
       this.newCheer.position.coordinates.lng = this.place.geometry.location.lng();
       this.newCheer.img = this.place.photos[0].getUrl();
+      this.newCheer.spots = +this.newCheer.spots;
       this.stepNum++;
     },
     submitSecondStep() {

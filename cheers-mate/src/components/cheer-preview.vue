@@ -4,6 +4,7 @@
       class="card cheer-preview-container"
       :body-style="{ padding: '10px' }"
       @click.native="$router.push(`/cheer/${cheer._id}`)"
+      shadow="hover"
     >
       <img src="@/assets/img/bgs/mates.jpeg" ref="previewImg" class="image">
       <div style="padding: 14px;">

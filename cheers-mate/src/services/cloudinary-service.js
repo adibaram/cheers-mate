@@ -17,7 +17,7 @@ export async function uploadImg(elInput) {
 
 function doUploadImg(elInput, onSuccess) {
     var formData = new FormData();
-    formData.append('file', elInput.files[0])
+    formData.append('file', elInput.files[0]);
     formData.append('upload_preset', UPLOAD_PRESET);
 
     return fetch(UPLOAD_URL, {
@@ -25,11 +25,11 @@ function doUploadImg(elInput, onSuccess) {
         body: formData
     })
     .then(function (response) {
-        return response.json()
+        return response.json();
     })
     .then(onSuccess)
     .catch(function (error) {
-        console.error(error)
+        console.error(error);
     })
 }
 

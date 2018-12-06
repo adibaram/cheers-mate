@@ -89,12 +89,6 @@
             </div>
             
         </section>
-
-        <br>
-        <br>
-        <hr>
-        <hr>
-        {{cheer}}
     </section>
 </template>
 
