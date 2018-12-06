@@ -35,6 +35,9 @@
       </div>
     </header>
     <router-view/>
+    <footer>
+      
+    </footer>
   </section>
 </template>
 

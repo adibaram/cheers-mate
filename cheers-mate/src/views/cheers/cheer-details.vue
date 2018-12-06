@@ -10,13 +10,21 @@
             
             <div class="attending-share">
                 <div class="spot-attendance">
-                    <div class="is-going">
+                    <div class="is-going" v-if="!userIsGoing">
                         <h4 class="txt">
                             Are You Going?
                             <span class="spots-left" v-if="cheer.attendees">Spots left: {{spotsLeft}}</span>
                         </h4>
                         <el-button class="btn" size="small" type="warning" icon="el-icon-check" @click="userAttending(true)" ></el-button>
                         <el-button class="btn" size="small" type="warning" icon="el-icon-close" @click="userAttending(false)" plain></el-button>
+                    </div>
+                    <div class="is-going" v-else >
+                        <h4 class="txt">
+                            You are attending to this cheer!
+                            <span class="spots-left" v-if="cheer.attendees">Spots left: {{spotsLeft}}</span>
+                        </h4>
+                        <el-button class="btn" size="small" type="warning" icon="el-icon-close" @click="userAttending(false)" plain>Cancel</el-button>
+
                     </div>
                     <div class="share">
                         <span>Share: </span>
@@ -70,7 +78,7 @@
                 <section class="chat">
                     <section class="chat-msg-list">
                         <ul>
-                            <li v-for="msg in msgs" :key="msg.at">
+                            <li v-if="cheer.msgs" v-for="msg in msgs" :key="msg.at">
                                 {{msg.txt}}
                             </li>
                         </ul>
@@ -81,12 +89,6 @@
             </div>
             
         </section>
-
-        <br>
-        <br>
-        <hr>
-        <hr>
-        {{cheer}}
     </section>
 </template>
 
@@ -117,10 +119,6 @@ export default {
     created() {
         this.loadCheer();
         this.$socket.emit('joinRoom', `room-chat_${this.$route.params.cheerId}`);
-        this.$socket.emit("assignMsg", {
-            msg: { txt: "puki", at: Date.now() },
-            roomId: `room-chat_${this.$route.params.cheerId}`
-        });
 
     },
     methods: {
@@ -132,7 +130,6 @@ export default {
                 });
         },
         userAttending(isAttending) {
-            console.log('DEBUG::isAttending', isAttending);
             const cheerId = this.$route.params.cheerId;
             const currUser = this.$store.getters.getUser;
             var userId;
@@ -140,6 +137,14 @@ export default {
                 userId = currUser._id;
                 if (isAttending) {
                     this.$socket.emit('userAttending',{userId, cheerId})
+                } else {
+                    const idx = this.cheer.attendees.findIndex(user=>user._id === userId)
+                    if (idx >= 0) {
+                        this.cheer.attendees.splice(idx, 1);
+                        cheerService.update(cheerId,this.cheer)
+                            .then(()=>this.loadCheer());
+                        
+                    }
                 }
             } else {
                 this.$router.push('/login');
@@ -148,12 +153,22 @@ export default {
         sendMsg() {
             const msgInput = this.$refs.newMsgInput;
             const txt = msgInput.value;
-            const msg = {txt, at: Date.now()};
+            if (!txt.trim().length) return;
+
             const cheerId = this.$route.params.cheerId;
+            const currUser = this.$store.getters.getUser;
+            const userId = (currUser)? currUser._id : '';
+
+            const msg = {userId, txt, at: Date.now()};
+
             this.$socket.emit('newChatMsg' , {msg,cheerId});
+            if (!this.cheer.msgs) this.cheer.msgs = [msg];
+            else this.cheer.msgs.push(msg);
+            cheerService.update(cheerId,this.cheer)
             msgInput.value = '';
 
-        }
+        },
+
     },
     computed: {
         date() {
@@ -172,7 +187,17 @@ export default {
             return `https://maps.googleapis.com/maps/api/staticmap?center=${this.cheer.position.coordinates.lat},${this.cheer.position.coordinates.lng}&markers=color:red%7Clabel:C%7C${this.cheer.position.coordinates.lat},${this.cheer.position.coordinates.lng}&zoom=16&size=600x400&key=AIzaSyDSpb5jrUSIDb124D7Qpjd4XJQ6d8oVPW0`
         },
         msgs() {
-            return this.$store.getters.getMsgs;
+            return this.cheer.msgs;
+        },
+        userIsGoing() {
+            const currUser = this.$store.getters.getUser;
+            var userId;
+            if(currUser) userId = currUser._id;
+            else return false;
+            const idx = this.cheer.attendees.findIndex(user=>user._id === userId);
+            if (idx >= 0) return true;
+            else return false;
+
         }
     },
 
@@ -182,7 +207,11 @@ export default {
 
     sockets: {
         gotNewChatMsg(msg) {
-            this.$store.dispatch('addMsg', msg);
+            if (!this.cheer.msgs) this.cheer.msgs = [msg];
+            else this.cheer.msgs.push(msg);
+        },
+        updateCheer(){
+            this.loadCheer();
         }
     }
 };
