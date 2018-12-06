@@ -6,7 +6,7 @@
       <!-- </router-link> -->
       <cheer-filter></cheer-filter>
       <!-- <h1 class="head-txt">Wanna meet new mates to drink with?</h1> -->
-      <div class="links-container flex">
+      <!-- <div class="links-container flex">
         <div class="flex link column">
           <i class="fas fa-heart circle" @click="sortBy('category')" v-scroll-to="'#list'"></i>
           <h3>Categories</h3>
@@ -19,7 +19,7 @@
           <i class="fas fa-gift circle"></i>
           <h3>Surprise me!</h3>
         </div> 
-      </div>
+      </div> -->
     </div>
     <cheer-list></cheer-list>
 

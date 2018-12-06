@@ -101,7 +101,8 @@ export default {
       showErr: false,
       newCheer: {
         date: Date.now(),
-        locationName: "",
+        locationName: '',
+        cheerCreator: '',
         position: {
           type: "Point",
           coordinates: {
@@ -109,15 +110,15 @@ export default {
             lng: 0
           }
         },
-        address: "",
-        desc: "",
+        address: '',
+        desc: '',
         category: [],
         spots: 20,
         img: "",
         msgs: []
       },
-      categoryTxt: "",
-      place: "",
+      categoryTxt: '',
+      place: '',
       pickerOptions: {
         shortcuts: [
           {
@@ -162,6 +163,7 @@ export default {
       this.newCheer.position.coordinates.lat = this.place.geometry.location.lat();
       this.newCheer.position.coordinates.lng = this.place.geometry.location.lng();
       this.newCheer.img = this.place.photos[0].getUrl();
+      this.newCheer.cheerCreator = this.$store.getters.getUser;
       this.newCheer.spots = +this.newCheer.spots;
       this.stepNum++;
     },
