@@ -21,6 +21,9 @@ Vue.use(ElementUI);
 import AirbnbStyleDatepicker from 'vue-airbnb-style-datepicker'
 import 'vue-airbnb-style-datepicker/dist/vue-airbnb-style-datepicker.min.css'
 
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 
 // vue scroll
 const VueScrollTo = require('vue-scrollto');

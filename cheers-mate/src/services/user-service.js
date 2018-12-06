@@ -4,6 +4,8 @@ const BASE_URL = (process.env.NODE_ENV !== 'development')?
                 '/user' : 'http://localhost:3003/user';
 
 
+
+
 function getById(id) {
     return axios.get(`${BASE_URL}/${id}`)
         .then(res => res.data);
@@ -27,6 +29,7 @@ function login(user, rememberPref = false) {
         sessionStorage.setItem('user', JSON.stringify(user));
     }
 }
+
 
 
 export default {

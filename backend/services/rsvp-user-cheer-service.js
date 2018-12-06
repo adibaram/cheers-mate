@@ -18,6 +18,11 @@ function getByCheer(cheerId) {
         .then(db => db.collection(COLLECTION_NAME).find({cheerId}).toArray())
         .catch(err=> console.log('DEBUG:rsvp service:err',err))
 }
+function getByBoth({cheerId, userId}) {
+    return mongoService.connect()
+    .then(db => db.collection(COLLECTION_NAME).find({cheerId, userId}).toArray())
+    .catch(err=> console.log('DEBUG:rsvp service:err',err))
+}
 function add(rsvp) {
     return mongoService.connect()
         .then(db => db.collection(COLLECTION_NAME).insertOne(rsvp))
@@ -27,15 +32,14 @@ function add(rsvp) {
 }
 function remove(filter) {
     return mongoService.connect()
-        .then(db => {
-            return db.collection(COLLECTION_NAME).remove(filter)
-        })
+        .then(db => db.collection(COLLECTION_NAME).remove(filter))
 }
 
 module.exports = {
     query,
     getByUser,
     getByCheer,
+    getByBoth,
     add,
     remove
 }

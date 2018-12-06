@@ -6,7 +6,6 @@ const BASE_URL = '/user';
 function addRoutes(app) {
     
 
-
     // GET ALL USERS;
     app.get(BASE_URL, (req, res) => {
         userService.query()

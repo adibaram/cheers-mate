@@ -60,6 +60,7 @@ export default {
         .then(user => {
           console.log(`${user.nickname} attended to the cheer!`)
         })
+        .catch(err=>console.log('DEBUG:userAttended socket App.vue:userId,err', userId,err))
     }
   },
   data: () => ({
