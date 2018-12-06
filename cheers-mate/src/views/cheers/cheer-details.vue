@@ -79,15 +79,15 @@
                     <section class="chat-msg-list">
                         <ul>
                             <li v-if="cheer.msgs" v-for="msg in msgs" :key="msg.at">
-                                {{msg}}
+                                {{msg.from}}: {{msg.txt}}
                             </li>
                         </ul>
+                    </section>
                         <form @submit.prevent="sendMsg" ref="chat" >
                             <input v-if="!$store.getters.getUser" value="please login to chat.." type="text" disabled>
                             <input ref="newMsgInput" v-else :disabled="enableChat" type="text">
                             <button :disabled="enableChat" >send</button>
                         </form>
-                    </section>
                 </section>
             </div>
             
