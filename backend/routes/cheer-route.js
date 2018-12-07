@@ -8,7 +8,6 @@ function addCheerRoutes(app) {
     // LIST
     app.get('/cheer', (req, res) => {
         var filter = req.query;
-        console.log('DEBUG::filter', filter);
         cheerService.query(filter)
             .then(cheers => {
                 res.json(cheers)
@@ -78,8 +77,8 @@ function addCheerRoutes(app) {
     // UPDATE
     app.put('/cheer/:id', (req, res) => {
         const id = req.params.id;
-        const newParams = req.body;
-            cheerService.update(id,newParams)
+        const newData = req.body;
+            cheerService.update(id,{$set : newData})
             .then(cheer => res.json(cheer))
     })
 

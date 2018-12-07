@@ -7,7 +7,7 @@
                     <span>{{date}}</span>
                 </div>
                 <span class="location-name">{{cheer.locationName}}</span>
-                <br><br><span class="attens-num">{{cheer.attendees.length}} mates comming!</span>
+                <br><br><span v-if="cheer.attendees" class="attens-num">{{cheer.attendees.length}} mates comming!</span>
             </div>
     
             
@@ -55,7 +55,7 @@
                     {{cheer.desc}}
                 </div> -->
                 <section class="cheer-attendees">
-                    <h3 v-if="cheer.attendees.length"> Attendees:</h3>
+                    <h3 v-if="cheer.attendees && cheer.attendees.length"> Attendees:</h3>
                     <h3 v-else>Be the first one to join!</h3>
                     <div class="attendees">
                         <div v-for="user in cheer.attendees" :key="user._id">
@@ -115,7 +115,11 @@ const moment = require('moment');
 export default {
     data() {
         return {
-            cheer: {}, 
+            cheer: {
+                position: {
+                    coordinates:{}
+                }
+            }, 
             /* {
                 _id: utilService.makeId(),
                 date,
@@ -132,7 +136,7 @@ export default {
     },
     created() {
         this.loadCheer();
-        this.$socket.emit('joinRoom', `room-chat_${this.$route.params.cheerId}`);
+        this.$socket.emit('joinRoom', this.$route.params.cheerId);
 
     },
     mounted() {
@@ -172,7 +176,7 @@ export default {
             // GET MSG
             const msgInput = this.$refs.newMsgInput;
             const txt = msgInput.value;
-            if (!txt.trim().length) return;
+            if (!txt.trim()) return;
 
             // DECLARATION
             const cheerId = this.$route.params.cheerId;
@@ -187,7 +191,6 @@ export default {
 
             // LET THE WORLD KNOW
             this.$socket.emit('newChatMsg' , {msg,cheerId});
-            cheerService.update(cheerId,this.cheer);
             msgInput.value = '';
 
         },
@@ -280,6 +283,11 @@ export default {
         display: flex;
         justify-content: space-between;
         max-width: 90vw;
+    }
+
+    .chat-msg-list {
+        max-height: 400px;
+        overflow-y: scroll;
     }
 
 </style>
