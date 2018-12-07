@@ -232,6 +232,7 @@ export default {
 
     sockets: {
         gotNewChatMsg(msg) {
+            console.log('DEBUG::got new msg');
             if (!this.cheer.msgs) this.cheer.msgs = [msg];
             else this.cheer.msgs.push(msg);
         },
