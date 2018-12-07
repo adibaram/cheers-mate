@@ -120,18 +120,6 @@ export default {
                     coordinates:{}
                 }
             }, 
-            /* {
-                _id: utilService.makeId(),
-                date,
-                position,
-                locationName: _getLocationName(location),
-                attendance,
-                desc,
-                spots,
-                language,
-
-
-            } */
         }
     },
     created() {
