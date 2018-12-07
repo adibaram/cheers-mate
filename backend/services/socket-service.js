@@ -1,4 +1,6 @@
 const rsvpUserCheer = require('./rsvp-user-cheer-service.js');
+const cheerService = require('./cheer-service.js');
+
 
 module.exports = io => {
 
@@ -15,8 +17,8 @@ module.exports = io => {
 
 
         socket.on('newChatMsg', ({msg, cheerId})=>{
-            const roomId = `room-chat_${cheerId}`;
-            io.to(roomId).emit('gotNewChatMsg', msg);
+            cheerService.update(cheerId,{$push: {msgs: msg}})
+            io.to(cheerId).emit('gotNewChatMsg', msg);
 
         });
 

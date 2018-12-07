@@ -19,7 +19,6 @@ function query(filter) {
                         $lt: +filter.toDate * 1000
                     }
                 }
-                console.log('DEBUG::cheers query sorter', filterObj);
                 sorter = {
                     [filter.sortBy]: 1
                 };
@@ -59,7 +58,6 @@ function queryRadius(params) {
             }
         }
     }
-    console.log('DEBUG::locationFilter', locationFilter);
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('cheer');
@@ -98,12 +96,12 @@ function add(cheer) {
         })
 }
 // UPDATE CHEER
-function update(_id, cheer) {
+function update(_id, newData) {
     _id = new ObjectId(_id)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection(COLLECTION_NAME);
-            return collection.updateOne({ _id }, { $set: cheer })
+            return collection.updateOne({ _id }, newData)
                 .then(res => {
                     return res.modifiedCount;
                 })
