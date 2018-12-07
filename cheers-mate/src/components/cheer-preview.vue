@@ -12,7 +12,7 @@
           <i class="fas fa-map-marker-alt"></i>
           {{cheer.locationName}}
         </span>
-        <br><br>
+        <br><span class="categories" v-for="cat in cheer.category" :key="cat">{{cat}}</span><br>
         <span><i class="fas fa-users"></i> {{spotsLeft}} seats left</span>
         <div class="bottom clearfix">
           <time class="time">{{ date(cheer) }}</time>
@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     date({ date }) {
-      return moment(date).format("dddd, LL");
+      return moment(date).format("dddd, ll");
     },
   }
 };
@@ -90,5 +90,16 @@ export default {
 
 .clearfix:after {
   clear: both;
+}
+
+.categories {
+    padding: 2px;
+    margin: 3px;
+    // border: 1px var(--secondary) solid;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 0 var(--secondary) inset;
+    display: inline-block;
+
+
 }
 </style>

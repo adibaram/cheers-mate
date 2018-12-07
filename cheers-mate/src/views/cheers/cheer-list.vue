@@ -25,7 +25,7 @@ export default {
     }
   },
   created() {
-    let filter = {};
+    let filter = {sortBy: 'date'};
     this.$store.dispatch({ type: "loadFilter", filter });
   },
   components: {

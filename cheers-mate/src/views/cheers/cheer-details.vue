@@ -38,7 +38,7 @@
 
                     <div class="categories">
                         <h1>We are going to talk about </h1>
-                        <h2 v-if="cheer.category" v-for="category in cheer.category" :key="cheer.date">{{category}}<br></h2>
+                        <h2 v-if="cheer.category" v-for="category in cheer.category" :key="category">{{category}}<br></h2>
                         <h1 v-else>Everything</h1>
                     </div>
                 </div>
@@ -85,9 +85,8 @@
                         </ul>
                     </section>
                         <form @submit.prevent="sendMsg" ref="chat" >
-                            <input v-if="!$store.getters.getUser" value="please login to chat.." type="text" disabled>
-                            <input ref="newMsgInput" v-else :disabled="enableChat" type="text">
-                            <button :disabled="enableChat" >send</button>
+                            <input ref="newMsgInput" type="text">
+                            <button>send</button>
                         </form>
                 </section>
 
@@ -169,12 +168,13 @@ export default {
             // DECLARATION
             const cheerId = this.$route.params.cheerId;
             const currUser = this.$store.getters.getUser;
-            const userId = currUser._id || '';
+            const from = (currUser)? currUser.nickname : 'Guest';
+            const userId = (currUser)? currUser._id : '';
             const msg = {
                 userId, 
                 txt, 
                 at: Date.now(), 
-                from: currUser.nickname || 'Guest'
+                from
             };
 
             // LET THE WORLD KNOW
@@ -232,7 +232,6 @@ export default {
 
     sockets: {
         gotNewChatMsg(msg) {
-            console.log('DEBUG::got new msg');
             if (!this.cheer.msgs) this.cheer.msgs = [msg];
             else this.cheer.msgs.push(msg);
         },

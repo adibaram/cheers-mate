@@ -161,10 +161,11 @@
 .categories h2 {
     width: fit-content;
     padding: 5px;
-    margin: 15px;
+    margin: 10px;
     border: 1px lightgrey solid;
     border-radius: 5px;
     font-size: 15px;
+    display: inline-block;
 }
 
 .categories {
