@@ -23,7 +23,6 @@ function addCheerRoutes(app) {
                     Promise.all(cheers.map(cheer=>{
                         return userCheerService.getByCheer(cheer._id.toString())
                             .then(userCheers=>{
-                                console.log('DEBUG:',cheer.locationName,':userCheers', userCheers);
                                 return userService.getUsersFromCheer(userCheers)
                                     .then(users=>{
                                         cheer.attendees = users;

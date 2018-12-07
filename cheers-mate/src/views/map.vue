@@ -1,12 +1,5 @@
 <template>
   <section>
-    <!-- <label>
-        <gmap-autocomplete
-          @place_changed="setPlace">
-        </gmap-autocomplete>
-        <button @click="addMarker">Add</button>
-    </label> -->
-
     <GmapMap
       ref="gmapRef"
       :center="currPosition"
