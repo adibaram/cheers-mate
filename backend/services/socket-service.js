@@ -18,7 +18,9 @@ module.exports = io => {
 
         socket.on('newChatMsg', ({msg, cheerId})=>{
             cheerService.update(cheerId,{$push: {msgs: msg}})
-            io.to(cheerId).emit('gotNewChatMsg', msg);
+                .then(() => {
+                    io.to(cheerId).emit('gotNewChatMsg', msg);
+                });
 
         });
 

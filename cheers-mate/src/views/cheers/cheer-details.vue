@@ -120,18 +120,6 @@ export default {
                     coordinates:{}
                 }
             }, 
-            /* {
-                _id: utilService.makeId(),
-                date,
-                position,
-                locationName: _getLocationName(location),
-                attendance,
-                desc,
-                spots,
-                language,
-
-
-            } */
         }
     },
     created() {
@@ -244,6 +232,7 @@ export default {
 
     sockets: {
         gotNewChatMsg(msg) {
+            console.log('DEBUG::got new msg');
             if (!this.cheer.msgs) this.cheer.msgs = [msg];
             else this.cheer.msgs.push(msg);
         },

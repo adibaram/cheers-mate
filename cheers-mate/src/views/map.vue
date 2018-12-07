@@ -76,7 +76,6 @@ export default {
                       <div class="info-header">${cheer.locationName}</div>
                       <div class="info-content">
                           <p>${cheer.date}</p>
-                          <p>${cheer.attendees.length} are coming!</p>  
                       </div>
                    </section>`);
     },
