@@ -177,12 +177,12 @@ export default {
             // DECLARATION
             const cheerId = this.$route.params.cheerId;
             const currUser = this.$store.getters.getUser;
-            const userId = (currUser)? currUser._id : '';
+            const userId = currUser._id || '';
             const msg = {
                 userId, 
                 txt, 
                 at: Date.now(), 
-                from: this.$store.getters.getUser.nickname
+                from: currUser.nickname || 'Guest'
             };
 
             // LET THE WORLD KNOW
