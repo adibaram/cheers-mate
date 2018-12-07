@@ -13,7 +13,7 @@
           {{cheer.locationName}}
         </span>
         <br><br>
-        <span v-if="cheer.attendees"><i class="fas fa-users"></i> {{spotsLeft}} seats left</span>
+        <span><i class="fas fa-users"></i> {{spotsLeft}} seats left</span>
         <div class="bottom clearfix">
           <time class="time">{{ date(cheer) }}</time>
           <!-- <el-button type="text" class="button">Operating button</el-button> -->
@@ -39,7 +39,8 @@ export default {
   },
   computed: {
     spotsLeft() {
-      return this.cheer.spots - this.cheer.attendees.length;
+      if(!this.cheer.attendees) return this.cheer.spots;
+      else return this.cheer.spots - this.cheer.attendees.length;
     },
     relativeDate() {
       return moment(this.cheer.date).fromNow();

@@ -1,19 +1,22 @@
 <template>
     <section class="cheer-details-container">
         <section class="title-attendance-container">
-            <div class="name-date">
+            
+            <div class="name-date dark" :style="backgroundImg">
                 <div class="date">
                     <span>{{date}}</span>
                 </div>
                 <span class="location-name">{{cheer.locationName}}</span>
+                <br><br><span class="attens-num">{{cheer.attendees.length}} mates comming!</span>
             </div>
+    
             
             <div class="attending-share">
                 <div class="spot-attendance">
                     <div class="is-going" v-if="!userIsGoing">
                         <h4 class="txt">
                             Are You Going?
-                            <span class="spots-left" v-if="cheer.attendees">Spots left: {{spotsLeft}}</span>
+                            <span class="spots-left" v-if="cheer.attendees">{{spotsLeft}} Spots left</span>
                         </h4>
                         <el-button class="btn" size="small" type="warning" icon="el-icon-check" @click="userAttending(true)" ></el-button>
                         <el-button class="btn" size="small" type="warning" icon="el-icon-close" @click="userAttending(false)" plain></el-button>
@@ -27,10 +30,16 @@
 
                     </div>
                     <div class="share">
-                        <span>Share: </span>
+                        <span> </span>
                         <i class="fab fa-facebook-square"></i>
                         <i class="fab fa-twitter-square"></i>
                         <i class="fab fa-linkedin"></i>
+                    </div>
+
+                    <div class="categories">
+                        <h1>We are going to talk about </h1>
+                        <h2 v-if="cheer.category" v-for="category in cheer.category" :key="cheer.date">{{category}}<br></h2>
+                        <h1 v-else>Everything</h1>
                     </div>
                 </div>
             </div>
@@ -38,15 +47,15 @@
         
         <section class="main-info-container">
             <div class="description-attendees">
-                <div class="cover-image">
+                <!-- <div class="cover-image">
                     <img :src="(cheer.img)? cheer.img : 'https://via.placeholder.com/250x100'" alt="">
-                </div>
-                <div class="cheer-description">
+                </div> -->
+                <!-- <div class="cheer-description">
                     <h3>Details:</h3>
                     {{cheer.desc}}
-                </div>
+                </div> -->
                 <section class="cheer-attendees">
-                    <h3 v-if="cheer.attendees"> Attendees:</h3>
+                    <h3 v-if="cheer.attendees.length"> Attendees:</h3>
                     <h3 v-else>Be the first one to join!</h3>
                     <div class="attendees">
                         <div v-for="user in cheer.attendees" :key="user._id">
@@ -57,41 +66,42 @@
                 </section>
             </div>
 
-            <div class="date-time-map" v-if="cheer.position">
+            <!-- <div class="date-time-map" v-if="cheer.position">
                 <div class="date-time">
                     <div class="icon"><i class="far fa-clock"></i></div>
                     <div class="info">
                         <div class="date">{{date}}</div>
                         <div>{{time}}</div>
                     </div>
-                </div>
-                <div class="address">
-                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="info">
-                        <div class="street">{{cheer.address}}</div>
-                        <!-- <div class="city">{{cheer.position}}</div> -->
-                    </div>
-                </div>
-                <div class="map">
-                    <img :src="mapPic" alt="map"/>
-                </div>
+                </div> -->
+
                 <section class="chat">
+                    <h1>Let's start talking</h1>
                     <section class="chat-msg-list">
-                        <ul>
+                        <ul class="clean-list">
                             <li v-if="cheer.msgs" v-for="msg in msgs" :key="msg.at">
-                                {{msg}}
+                                {{msg.from}}: {{msg.txt}}
                             </li>
                         </ul>
+                    </section>
                         <form @submit.prevent="sendMsg" ref="chat" >
                             <input v-if="!$store.getters.getUser" value="please login to chat.." type="text" disabled>
                             <input ref="newMsgInput" v-else :disabled="enableChat" type="text">
                             <button :disabled="enableChat" >send</button>
                         </form>
-                    </section>
                 </section>
-            </div>
-            
+
         </section>
+            <div class="address">
+                 <div class="icon"><i class="fas fa-map-marker-alt"></i>{{cheer.address}}</div>
+                 <!-- <div class="info">
+                    <div class="street">{{cheer.address}}</div>
+                    <div class="city">{{cheer.position}}</div>
+                </div> -->
+                </div>
+            <div class="map">
+                <img :src="mapPic" alt="map"/>
+            </div>        
     </section>
 </template>
 
@@ -134,6 +144,7 @@ export default {
             var cheerId = this.$route.params.cheerId;
             cheerService.getById(cheerId)
                 .then(res => {
+                    console.log('this cheer:', res)
                     return this.cheer = res;
                 });
         },
@@ -215,6 +226,10 @@ export default {
             else return false;
 
         },
+        backgroundImg() {
+            if (!this.cheer.img) return `background-image: url(https://moneycrashers-sparkchargemedia.netdna-ssl.com/wp-content/uploads/2017/08/bachelor-party-bar-drinks-1024x576.jpg)`;
+            else return `background-image: url(${this.cheer.img})`;
+        },
         enableChat() {
             return (!this.$store.getters.getUser)? true : false;   
         }
@@ -236,6 +251,15 @@ export default {
 };
 </script>
 
-<style >
- 
+<style scoped>
+
+    .chat {
+        border: 1px solid rgba(128, 128, 128, 0.157);
+        border-radius: 10px;
+        width: 400px;
+        margin-left: 100px;
+        padding: 30px;
+        margin: 20px;
+    }
+
 </style>

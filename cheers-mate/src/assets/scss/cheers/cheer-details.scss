@@ -2,20 +2,42 @@
 .title-attendance-container {
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
+    // border: 1px solid black;
     padding: 10px;
     margin: 10px;
     
+    
     .name-date {
+        
+        height: 300px;
+        width: 500px;
+        background-repeat: no-repeat;
+        background-size: 550px;
+        background: black(0, 0, 0, 0.3);
+        object-fit: cover;
+        color: white;
+        // text-shadow: 2px 2px #00000071;
+        text-shadow: 1px 1px 15px #000000;
+        letter-spacing: 2px;
         width: 60%;
-        margin: 0 10px;
         text-align: left;
+    
+        .dark {
+            background-image: linear-gradient(to right bottom, 
+            rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+        }
+        
+
         .date {
-            opacity: 0.8;
-            font-size: 0.8rem;
+            // opacity: 0.8;
+            font-size: 20px;
+            padding: 20px;
+            font-family: Anton;
+            // font-weight: bold;
         }
 
         .location-name {
+            padding: 20px;
             font-size: 2em;
             font-weight: bold;
             font-family: Anton;
@@ -35,7 +57,7 @@
                     
                     .spots-left {
                         opacity: 0.8;
-                        font-size: 0.8rem;
+                        font-size: 1.2 rem;
                     }
                 }
                 .btn {
@@ -72,8 +94,9 @@
 
 .main-info-container {
     display: flex;
-    border: 1px solid red;
-    margin: 10px;
+    // border: 1px solid red;
+    max-width: 750px;
+    margin: 30px;
     justify-content: space-between;
 
     .description-attendees {
@@ -126,11 +149,34 @@
         }
 
         .map > * {
-            width: 100%;
+            width: 400px;
         }
     }
 }
 
 .user-card { 
     cursor: pointer;
+}
+
+.categories h2 {
+    width: fit-content;
+    padding: 5px;
+    margin: 15px;
+    border: 1px lightgrey solid;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.categories {
+    margin-top: 20px;
+}
+
+.attens-num {
+    font-size: 20px;
+    padding: 20px;
+    font-family: Anton;
+}
+
+.map img {
+    width: 400px;
 }

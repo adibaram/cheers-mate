@@ -8,21 +8,21 @@
         <div class="user-details-cheers">
         <h1 v-if="!userCheers.length">No events to show yet</h1>
 
-            <h1>Upcoming events</h1>
-            <section class="cards" v-for="cheer in userCheers" :key="cheer._id">
-                <div class="cheer-card" v-if="cheer.date > currDate">
-                    <cheer-preview :cheer="cheer"></cheer-preview>
-                </div>
-            </section>
+        <h1 v-if="upcomingEvents">Upcoming events</h1>
+        <section class="cards" v-for="cheer in userCheers" :key="cheer.date" v-if="cheer.date > currDate">
+            <div class="cheer-card">
+                <cheer-preview :cheer="cheer"></cheer-preview>
+            </div>
+        </section>
 
-            <section class="cards" v-for="cheer in userCheers" :key="cheer._id">
-                <div class="cheer-card" v-if="cheer.date < currDate">
-                <h1>Past events</h1>
-                    <cheer-preview :cheer="cheer"></cheer-preview>
-                </div>
-            </section>
+        <h1 v-if="pastEvents">Past events</h1>
+         <section class="cards" v-for="cheer in userCheers" v-if="cheer.date < currDate" :key="cheer._id">
+            <div class="cheer-card">
+                <cheer-preview :cheer="cheer"></cheer-preview>
+            </div>
+        </section>
         </div>
-        <pre>{{user}}</pre>
+        <!-- <pre>{{user}}</pre> -->
 
         <div class="user-contact"></div>
     </section>
@@ -35,25 +35,38 @@ import cheerPreview from "../components/cheer-preview.vue";
 
 export default {
   created() {
-    this.loadUser();
+    this.loadUser()
+        .then(res => {
+            this.checkEvents();
+        })
+
   },
   data() {
     return {
       user: {},
       userCheers: [],
-      currDate: Date.now()
+      currDate: Date.now(),
+      pastEvents: false,
+      upcomingEvents: false
     };
   },
   methods: {
     loadUser() {
       var userId = this.$route.params.userId;
-      userService.getById(userId).then(res => {
+      return userService.getById(userId).then(res => {
         this.user = res.user;
         this.userCheers = res.cheers;
         console.log(res.cheers);
         console.log(this.currDate);
 
       });
+    },
+    checkEvents() {
+        for (let i = 0; i < this.userCheers.length; i++ ) {
+            let currCheer = this.userCheers[i];
+            if (currCheer.date > this.currDate) this.upcomingEvents = true;
+            if (currCheer.date < this.currDate) this.pastEvents = true;            
+        }
     }
   },
   components: {

@@ -1,16 +1,16 @@
 <template>
 <section class="user-card-container">
     <el-row>
-            <el-card :body-style="{ padding: '0px' }">
+            <!-- <el-card :body-style="{ padding: '0px' }"> -->
             <img :src="(user.img)? user.img : 'https://via.placeholder.com/100x100'" class="image">
-            <div style="padding: 14px;">
+            <!-- <div style="padding: 14px;">
                 <span>{{user.nickname}}</span>
                 <div class="bottom clearfix">
                 <time class="time">{{ currentDate }}</time>
-                <!-- <el-button type="text" class="button">Operating button</el-button> -->
+                <el-button type="text" class="button">Operating button</el-button>
                 </div>
-            </div>
-            </el-card>
+            </div> -->
+            <!-- </el-card> -->
     </el-row>
 </section>
         
@@ -33,8 +33,9 @@
   }
 
   .image {
-    width: 100%;
+    width: 150px;
     display: block;
+    border-radius: 10%;
   }
 
   .clearfix:before,

@@ -21,10 +21,7 @@ module.exports = io => {
         });
 
         socket.on('userAttending', ({userId , cheerId})=> {
-            console.log('DEBUG:socket service user attending:userId,cheerId', userId,cheerId);
-            const roomId = `room-attendance_${cheerId}`;
-            socket.join(roomId);
-            io.to(roomId).emit('userAttended',{userId});
+            io.emit('userAttended',{userId});
             rsvpUserCheer.add({userId , cheerId})
                 .then(()=>{
                     socket.emit('updateCheer');
