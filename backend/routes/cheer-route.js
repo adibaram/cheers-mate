@@ -9,9 +9,21 @@ function addCheerRoutes(app) {
     app.get('/cheer', (req, res) => {
         var filter = req.query;
         cheerService.query(filter)
-            .then(cheers => {
-                res.json(cheers)
+        .then(cheers => {
+            Promise.all(cheers.map(cheer=>{
+                return userCheerService.getByCheer(cheer._id.toString())
+                    .then(userCheers=>{
+                        return userService.getUsersFromCheer(userCheers)
+                            .then(users=>{
+                                cheer.attendees = users;
+                                return cheer;
+                            })
+                    })
+            }))
+            .then(cheers=>{
+                res.json(cheers);
             })
+        })
     })
     // GET FROM RADIUS
     app.get('/cheer/radius', (req, res) => {
