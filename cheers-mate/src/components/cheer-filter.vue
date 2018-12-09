@@ -8,34 +8,13 @@
     <div>
         <input class="filter-input" placeholder="Date" onfocus="(this.type='date')" type="text" v-model="date" @change="updateFilter">
     </div>
-     
-
-    <!-- <div class="datepicker-trigger">
-      <input
-        class="filter-input" 
-        type="text"
-        id="datepicker-trigger"
-        placeholder="Select dates"
-        :value="formatDates(dateOne, dateTwo)"
-      >
-
-      <AirbnbStyleDatepicker
-        :trigger-element-id="'datepicker-trigger'"
-        :mode="'range'"
-        :fullscreen-mobile="true"
-        :date-one="dateOne"
-        :date-two="dateTwo"
-        @date-one-selected="val => { dateOne = val }"
-        @date-two-selected="val => { dateTwo = val }"
-      />
-    </div> -->
 
 
     <div class="filter-buttons">
       <el-button type="warning" v-scroll-to="'#list'" @click.native="updateFilter" >Search</el-button>
 
       <router-link to="/map">
-      <el-button type="warning">Look Around</el-button>
+      <el-button type="info">Look Around</el-button>
       </router-link>
     </div> 
 

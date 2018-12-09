@@ -61,6 +61,7 @@ export default {
 .card {
   cursor: pointer;
   height: 100%;
+  // height: 300px;
 }
 .time {
   font-size: 13px;
@@ -78,8 +79,9 @@ export default {
 }
 
 .image {
-  width: 100%;
+  max-width: 100%;
   display: block;
+  max-height: 200px;
 }
 
 .clearfix:before,

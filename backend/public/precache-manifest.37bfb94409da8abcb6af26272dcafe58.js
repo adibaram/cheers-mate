@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "93b7b73f3695593d7c9a",
-    "url": "/css/app.aea12bbb.css"
+    "revision": "d9c5a15f405bfe8304a2",
+    "url": "/css/app.cb773b8f.css"
   },
   {
-    "revision": "93b7b73f3695593d7c9a",
-    "url": "/js/app.62248558.js"
+    "revision": "d9c5a15f405bfe8304a2",
+    "url": "/js/app.07f7e352.js"
   },
   {
     "revision": "5f0aa85fd08ccadf4127",
@@ -64,12 +64,12 @@ self.__precacheManifest = [
     "url": "/js/chunk-vendors.8b0f4069.js"
   },
   {
-    "revision": "6f0a76321d30f3c8120915e57f7bd77e",
-    "url": "/fonts/element-icons.6f0a7632.ttf"
-  },
-  {
     "revision": "2fad952a20fbbcfd1bf2ebb210dccf7a",
     "url": "/fonts/element-icons.2fad952a.woff"
+  },
+  {
+    "revision": "6f0a76321d30f3c8120915e57f7bd77e",
+    "url": "/fonts/element-icons.6f0a7632.ttf"
   },
   {
     "revision": "d6759143baffd6711527ab1dcffcf093",
@@ -88,12 +88,12 @@ self.__precacheManifest = [
     "url": "/fonts/Anton-Regular.b13e6268.ttf"
   },
   {
-    "revision": "c41c2502180f63ce383b6e3cc042617a",
-    "url": "/fonts/Nunito-Light.c41c2502.ttf"
-  },
-  {
     "revision": "d8f23c91592f64063ee36a7265208e08",
     "url": "/img/user.d8f23c91.jpg"
+  },
+  {
+    "revision": "c41c2502180f63ce383b6e3cc042617a",
+    "url": "/fonts/Nunito-Light.c41c2502.ttf"
   },
   {
     "revision": "f28994d5a6053b11a87f61d9cecaa944",
@@ -112,7 +112,7 @@ self.__precacheManifest = [
     "url": "/img/cheer-marker.aa9b2afb.png"
   },
   {
-    "revision": "4b9466f307b8f6364c07d3b888e1605e",
+    "revision": "abbfe44879afe1a8be8c047c4c0e9b24",
     "url": "/index.html"
   },
   {

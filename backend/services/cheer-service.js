@@ -7,10 +7,9 @@ function query(filter) {
         .then(dbConn => {
             // SET FILTERS
             var filterObj = {}
-
             if (filter) {
                 const byNameRegex = new RegExp(filter.locationName, 'i');
-                let filterObj = {
+                filterObj = {
                     'locationName': byNameRegex,
                 };
                 if (+filter.fromDate) {
@@ -23,6 +22,7 @@ function query(filter) {
                     [filter.sortBy]: 1
                 };
             }
+            console.log('DEBUG::filterObj', filterObj);
 
 
             const cheerCollection = dbConn.collection(COLLECTION_NAME);
