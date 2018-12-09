@@ -47,7 +47,7 @@ Vue.use(VueGoogleMaps, {
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:3003',
+  connection: 'http://localhost:3003' || '',
   vuex: {
       store,
       actionPrefix: 'SOCKET_',
