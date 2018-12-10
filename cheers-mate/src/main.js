@@ -14,15 +14,22 @@ import 'element-ui/lib/theme-chalk/index.css'
 import lang from 'element-ui/lib/locale/lang/en';
 import locale from 'element-ui/lib/locale';
 // import 'element-ui/lib/theme-chalk/index.css';
+
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+
+//vue material
+// import VueMaterial from 'vue-material'
+// import 'vue-material/dist/vue-material.min.css'
+// import 'vue-material/dist/theme/default.css'
+
+// Vue.use(VueMaterial)
 locale.use(lang)
 Vue.use(ElementUI);
 
 // import component and stylesheet
 import AirbnbStyleDatepicker from 'vue-airbnb-style-datepicker'
 import 'vue-airbnb-style-datepicker/dist/vue-airbnb-style-datepicker.min.css'
-
-import axios from 'axios';
-axios.defaults.withCredentials = true;
 
 
 // vue scroll
@@ -38,6 +45,9 @@ Vue.use(AirbnbStyleDatepicker, datepickerOptions)
 Vue.config.productionTip = false
 
 //Google Maps With Vue
+
+
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyDSpb5jrUSIDb124D7Qpjd4XJQ6d8oVPW0',
