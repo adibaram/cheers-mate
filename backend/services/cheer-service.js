@@ -7,10 +7,9 @@ function query(filter) {
         .then(dbConn => {
             // SET FILTERS
             var filterObj = {}
-
             if (filter) {
                 const byNameRegex = new RegExp(filter.locationName, 'i');
-                let filterObj = {
+                filterObj = {
                     'locationName': byNameRegex,
                 };
                 if (+filter.fromDate) {
@@ -19,11 +18,11 @@ function query(filter) {
                         $lt: +filter.toDate * 1000
                     }
                 }
-                console.log('DEBUG::cheers query sorter', filterObj);
                 sorter = {
                     [filter.sortBy]: 1
                 };
             }
+            console.log('DEBUG::filterObj', filterObj);
 
 
             const cheerCollection = dbConn.collection(COLLECTION_NAME);
@@ -59,7 +58,6 @@ function queryRadius(params) {
             }
         }
     }
-    console.log('DEBUG::locationFilter', locationFilter);
     return mongoService.connect()
         .then(db => {
             const collection = db.collection('cheer');
@@ -98,12 +96,12 @@ function add(cheer) {
         })
 }
 // UPDATE CHEER
-function update(_id, cheer) {
+function update(_id, newData) {
     _id = new ObjectId(_id)
     return mongoService.connect()
         .then(db => {
             const collection = db.collection(COLLECTION_NAME);
-            return collection.updateOne({ _id }, { $set: cheer })
+            return collection.updateOne({ _id }, newData)
                 .then(res => {
                     return res.modifiedCount;
                 })

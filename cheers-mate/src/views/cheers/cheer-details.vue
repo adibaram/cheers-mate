@@ -7,7 +7,7 @@
                     <span>{{date}}</span>
                 </div>
                 <span class="location-name">{{cheer.locationName}}</span>
-                <br><br><span class="attens-num">{{cheer.attendees.length}} mates comming!</span>
+                <br><br><span v-if="cheer.attendees" class="attens-num">{{cheer.attendees.length}} mates comming!</span>
             </div>
     
             
@@ -38,7 +38,7 @@
 
                     <div class="categories">
                         <h1>We are going to talk about </h1>
-                        <h2 v-if="cheer.category" v-for="category in cheer.category" :key="cheer.date">{{category}}<br></h2>
+                        <h2 v-if="cheer.category" v-for="category in cheer.category" :key="category">{{category}}<br></h2>
                         <h1 v-else>Everything</h1>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     {{cheer.desc}}
                 </div> -->
                 <section class="cheer-attendees">
-                    <h3 v-if="cheer.attendees.length"> Attendees:</h3>
+                    <h3 v-if="cheer.attendees && cheer.attendees.length"> Attendees:</h3>
                     <h3 v-else>Be the first one to join!</h3>
                     <div class="attendees">
                         <div v-for="user in cheer.attendees" :key="user._id">
@@ -76,8 +76,8 @@
                 </div> -->
 
                 <section class="chat">
-                    <h1>Let's start talking</h1>
                     <section class="chat-msg-list">
+                    <h1>Let's start talking</h1>
                         <ul class="clean-list">
                             <li v-if="cheer.msgs" v-for="msg in msgs" :key="msg.at">
                                 {{msg.from}}: {{msg.txt}}
@@ -85,9 +85,8 @@
                         </ul>
                     </section>
                         <form @submit.prevent="sendMsg" ref="chat" >
-                            <input v-if="!$store.getters.getUser" value="please login to chat.." type="text" disabled>
-                            <input ref="newMsgInput" v-else :disabled="enableChat" type="text">
-                            <button :disabled="enableChat" >send</button>
+                            <input ref="newMsgInput" type="text">
+                            <button>send</button>
                         </form>
                 </section>
 
@@ -115,24 +114,16 @@ const moment = require('moment');
 export default {
     data() {
         return {
-            cheer: {}, 
-            /* {
-                _id: utilService.makeId(),
-                date,
-                position,
-                locationName: _getLocationName(location),
-                attendance,
-                desc,
-                spots,
-                language,
-
-
-            } */
+            cheer: {
+                position: {
+                    coordinates:{}
+                }
+            }, 
         }
     },
     created() {
         this.loadCheer();
-        this.$socket.emit('joinRoom', `room-chat_${this.$route.params.cheerId}`);
+        this.$socket.emit('joinRoom', this.$route.params.cheerId);
 
     },
     mounted() {
@@ -172,22 +163,22 @@ export default {
             // GET MSG
             const msgInput = this.$refs.newMsgInput;
             const txt = msgInput.value;
-            if (!txt.trim().length) return;
+            if (!txt.trim()) return;
 
             // DECLARATION
             const cheerId = this.$route.params.cheerId;
             const currUser = this.$store.getters.getUser;
+            const from = (currUser)? currUser.nickname : 'Guest';
             const userId = (currUser)? currUser._id : '';
             const msg = {
                 userId, 
                 txt, 
                 at: Date.now(), 
-                from: this.$store.getters.getUser.nickname
+                from
             };
 
             // LET THE WORLD KNOW
             this.$socket.emit('newChatMsg' , {msg,cheerId});
-            cheerService.update(cheerId,this.cheer);
             msgInput.value = '';
 
         },
@@ -251,7 +242,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 
     .chat {
         border: 1px solid rgba(128, 128, 128, 0.157);
@@ -260,6 +251,31 @@ export default {
         margin-left: 100px;
         padding: 30px;
         margin: 20px;
+
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #fff;
+
+        input , button{
+            padding: 10px;
+        }
+    }
+
+    .attendees {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .main-info-container {
+        display: flex;
+        justify-content: space-between;
+        max-width: 90vw;
+    }
+
+    .chat-msg-list {
+        max-height: 400px;
+        overflow-y: scroll;
     }
 
 </style>

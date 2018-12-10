@@ -1,23 +1,22 @@
 <template>
   <section>
-      <el-card
-        class="card cheer-preview-container"
-        :body-style="{ padding: '10px' }"
-        @click.native="$router.push(`/cheer/${cheer._id}`)"
-        shadow="hover"
-      >
-        <img src="@/assets/img/bgs/mates.jpeg" ref="previewImg" class="image">
-        <div style="padding: 14px;">
-          <span class="location">
-            <i class="fas fa-map-marker-alt"></i>
-            {{cheer.locationName}}
-          </span>
-          <br><br>
-          <span><i class="fas fa-users"></i> {{spotsLeft}} seats left</span>
-          <div class="bottom clearfix">
-            <time class="time">{{ date(cheer) }}</time>
-            <el-button type="text" class="button">Operating button</el-button>
-          </div>
+    <el-card
+      class="card cheer-preview-container"
+      :body-style="{ padding: '10px' }"
+      @click.native="$router.push(`/cheer/${cheer._id}`)"
+      shadow="hover"
+    >
+      <img src="@/assets/img/bgs/mates.jpeg" ref="previewImg" class="image">
+      <div style="padding: 14px;">
+        <span class="location">
+          <i class="fas fa-map-marker-alt"></i>
+          {{cheer.locationName}}
+        </span>
+        <br><span class="categories" v-for="cat in cheer.category" :key="cat">{{cat}}</span><br>
+        <span><i class="fas fa-users"></i> {{spotsLeft}} seats left</span>
+        <div class="bottom clearfix">
+          <time class="time">{{ date(cheer) }}</time>
+          <!-- <el-button type="text" class="button">Operating button</el-button> -->
         </div>
       </el-card>
 
@@ -54,7 +53,7 @@ export default {
   },
   methods: {
     date({ date }) {
-      return moment(date).format("dddd, LL");
+      return moment(date).format("dddd, ll");
     },
     setImg() {
     return `url(${this.cheer.img})`;
@@ -67,6 +66,7 @@ export default {
 .card {
   cursor: pointer;
   height: 100%;
+  // height: 300px;
 }
 .time {
   font-size: 13px;
@@ -84,8 +84,9 @@ export default {
 }
 
 .image {
-  width: 100%;
+  max-width: 100%;
   display: block;
+  max-height: 200px;
 }
 
 .clearfix:before,
@@ -98,10 +99,14 @@ export default {
   clear: both;
 }
 
-  .md-card {
-    width: 320px;
-    margin: 4px;
+.categories {
+    padding: 2px;
+    margin: 3px;
+    // border: 1px var(--secondary) solid;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 0 var(--secondary) inset;
     display: inline-block;
-    vertical-align: top;
-  }
+
+
+}
 </style>

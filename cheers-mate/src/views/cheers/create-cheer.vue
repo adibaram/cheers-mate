@@ -164,6 +164,7 @@ export default {
       this.newCheer.img = this.place.photos[0].getUrl();
       this.newCheer.cheerCreator = this.$store.getters.getUser;
       this.newCheer.spots = +this.newCheer.spots;
+      this.newCheer.attendees = [];
       this.stepNum++;
     },
     submitSecondStep() {

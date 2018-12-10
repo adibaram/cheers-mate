@@ -1,12 +1,5 @@
 <template>
   <section>
-    <!-- <label>
-        <gmap-autocomplete
-          @place_changed="setPlace">
-        </gmap-autocomplete>
-        <button @click="addMarker">Add</button>
-    </label> -->
-
     <GmapMap
       ref="gmapRef"
       :center="currPosition"
@@ -83,7 +76,6 @@ export default {
                       <div class="info-header">${cheer.locationName}</div>
                       <div class="info-content">
                           <p>${cheer.date}</p>
-                          <p>${cheer.attendees.length} are coming!</p>  
                       </div>
                    </section>`);
     },

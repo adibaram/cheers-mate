@@ -5,9 +5,31 @@
         <router-link to="/" tag="div">
           <h1 class="main-logo">Cheers🍻</h1>
         </router-link>
+        <!-- <el-menu :default-active="activeIndex" background-color="#faf9f7" text-color="#e6a23c" class="el-menu-demo links" mode="horizontal" menu-trigger="click">
+        <el-submenu index="1" class="links">
+            <template slot="title">Menu</template>
+            <el-menu-item index="1-1" router="/cheer/create"><router-link class="auth-link" to="/cheer/create">Create a cheer</router-link></el-menu-item>
+            <el-submenu index="1-2">
+              <template slot="title"><div class="links sign" v-if="!currUser">
+            <router-link class="auth-link" to="/signup">Sign up</router-link>
+            <router-link class="auth-link" to="/login">Log in</router-link>
+          </div>
+          <div class="links logout" v-else>
+              <span style="cursor:pointer;" class="el-dropdown-link">Hello {{currUser.nickname}}
+                <i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+            </div></template>
+              <el-menu-item index="1-2-1"><span @click="goProfile">Profile</span></el-menu-item>
+              <el-menu-item index="1-2-2">Other</el-menu-item>
+              <el-menu-item index="1-2-3"><span @click="logout">Logout</span></el-menu-item>
+            </el-submenu>
+        </el-submenu>
+        </el-menu>
+        <section class="links">   
+        </section> -->
+
         <section class="links">
           <router-link class="auth-link" to="/cheer/create">Create a cheer</router-link>
-          <!-- <router-link class="auth-link" to="/login">Create a cheer</router-link> -->
           
           <div class="links sign" v-if="!currUser">
             <router-link class="auth-link" to="/signup">Sign up</router-link>
@@ -15,7 +37,7 @@
           </div>
           <div class="links logout" v-else>
             <el-dropdown>
-              <span style="cursor:pointer;" class="el-dropdown-link">Hello {{currUser.nickname}}
+              <span style="cursor:pointer;" class="el-dropdown-link logged-in-greet">Hello {{currUser.nickname}}
                 <i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
@@ -25,7 +47,7 @@
               </el-dropdown-menu>
             </el-dropdown>
             </div>
-          </section>
+        </section>
           <!-- <div class="auth-link" @click="logout">logout</div>
           <span>Hello,
             <br>

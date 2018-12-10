@@ -18,7 +18,6 @@ function addRoutes(app) {
         let userCheer = req.body;
         rsvpService.getByBoth(userCheer)
             .then(isAttending => {
-                console.log('DEBUG::isAttending', isAttending);
                 if (isAttending) res.status('403').end('userCheer already exists'); 
                 rsvpService.add(userCheer)
                     .then(()=>{

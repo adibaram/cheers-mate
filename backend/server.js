@@ -51,7 +51,7 @@ socketService(io)
 const PORT = process.env.PORT || 3003;
 http.listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
 
-setTimeout(updateCheerTimes, 2000)
+// setTimeout(updateCheerTimes, 2000)
 
 
 
