@@ -1,5 +1,6 @@
 <template>
   <section class="home-page-container">
+    <loading-modal></loading-modal>
     <div class="home">
       <!-- <router-link tag="div" to="/cheer/create" class="add-cheer"> -->
         <!-- <h4><i class="fas fa-plus"></i> Create a Cheer</h4> -->
@@ -30,13 +31,15 @@
 // @ is an alias to /src
 import cheerList from './cheers/cheer-list.vue'
 import cheerFilter from '../components/cheer-filter.vue'
+import loadingModal from '../components/loading-modal.vue';
 
 
 export default {
   name: 'home',
   components: {
     cheerList,
-    cheerFilter
+    cheerFilter,
+    loadingModal
   },
   methods: {
     sortBy(sorter) {
@@ -45,7 +48,8 @@ export default {
       }
       this.$store.dispatch({ type: "loadFilter", filter });
     }
-  }
+  },
+  
 };
 
 

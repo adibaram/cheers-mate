@@ -1,0 +1,22 @@
+.notification-content {
+
+    .user-link {
+        font-weight: bold;
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .cheer-link {
+        font-weight: bold;
+        text-decoration: none;
+        color: var(--secondary);
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

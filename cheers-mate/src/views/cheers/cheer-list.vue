@@ -28,6 +28,9 @@ export default {
     let filter = {sortBy: 'date'};
     this.$store.dispatch({ type: "loadFilter", filter });
   },
+  updated() {
+    this.$store.dispatch({ type: 'setLoading', isLoading: false});
+  },
   components: {
     cheerPreview
   }
