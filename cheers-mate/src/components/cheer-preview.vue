@@ -18,8 +18,8 @@
           <time class="time">{{ date(cheer) }}</time>
           <!-- <el-button type="text" class="button">Operating button</el-button> -->
         </div>
-      </div>
-    </el-card>
+      </el-card>
+
   </section>
 </template>
 
@@ -27,15 +27,17 @@
 const moment = require("moment");
 
 export default {
-  props: {
+  props: {  
     cheer: {
       type: Object,
       default: {}
     }
   },
   mounted() {
-    if (this.cheer.img && this.cheer.img.length)
-      this.$refs.previewImg.src = this.cheer.img 
+    if (this.cheer.img && this.cheer.img.length) {
+      this.$refs.previewImg.src = this.cheer.img;
+
+    }
   },
   computed: {
     spotsLeft() {
@@ -52,6 +54,9 @@ export default {
   methods: {
     date({ date }) {
       return moment(date).format("dddd, ll");
+    },
+    setImg() {
+    return `url(${this.cheer.img})`;
     },
   }
 };
