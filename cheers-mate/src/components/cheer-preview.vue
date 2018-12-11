@@ -18,6 +18,7 @@
           <time class="time">{{ date(cheer) }}</time>
           <!-- <el-button type="text" class="button">Operating button</el-button> -->
         </div>
+      </div>
       </el-card>
 
   </section>
