@@ -16,6 +16,7 @@ export default new Vuex.Store({
       lng: 34
     },
     loggedinUser: null,
+    isLoading: false,
   },
   getters: {
     getCheers(state) {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     getUser(state) {
       return state.loggedinUser;
     },
+    getIsLoading(state) {
+      return state.isLoading;
+    }
   },
 
   mutations: {
@@ -45,10 +49,19 @@ export default new Vuex.Store({
       userService.login(user, rememberPref);
       console.log('logged in user', state.loggedinUser);
     },
+    setLoading(state, {isLoading}) {
+      state.isLoading = isLoading;
+      console.log('DEBUG:store-setLoading:isLoading', isLoading);
+    }
   },
   actions: {
+    setLoading(context , {isLoading}) {
+      context.commit('setLoading', {isLoading});
+    },
+    
     loadCheers(context) {
       console.log('loading cheers...');
+      context.dispatch({ type: 'setLoading', isLoading: true});
 
       return cheersService.query(context.state.filter)
         .then(cheers => {
@@ -62,10 +75,14 @@ export default new Vuex.Store({
     // THIS IS SUPPOSED TO GET PAYLOAD, BUT GETTNG JUST THE ID.
     // DONT CHANGE THIS IF YOU WANT THE CODE TO WORK
     getUserById(context,  userId ) {
-      return userService.getById(userId);
+      context.dispatch({ type: 'setLoading', isLoading: true});
+
+      return userService.getById(userId)
+        .then(user => user);
     },
 
     findCurrPosition(context) {
+      context.dispatch({ type: 'setLoading', isLoading: true});      
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(({ coords }) => {
           context.commit({ type: 'setPosition', coords })
@@ -83,6 +100,7 @@ export default new Vuex.Store({
         })
     },
     login(context, { user, rememberPref }) {
+      context.dispatch({ type: 'setLoading', isLoading: true});
       authService.getLoggedInUser()
         .then(sessionUser => {
           if (sessionUser) {
@@ -101,7 +119,11 @@ export default new Vuex.Store({
     },
     logout(context) {
       context.commit({ type: 'setUser', user: null })
+      context.dispatch({ type: 'setLoading', isLoading: true});
       authService.logout()
+        .then(()=> {
+          context.dispatch({ type: 'setLoading', isLoading: false});
+        });
     }
   },
 

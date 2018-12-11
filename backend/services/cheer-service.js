@@ -108,6 +108,10 @@ function update(_id, newData) {
         })
 }
 
+function test() {
+    console.log('DEBUG::foo');
+}
+
 module.exports = {
     query,
     queryRadius,
@@ -115,5 +119,6 @@ module.exports = {
     remove,
     getById,
     add,
-    update
+    update,
+    test
 }

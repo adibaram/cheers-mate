@@ -42,8 +42,24 @@ export default {
             let user = this.user;
             let rememberPref = this.rememberPref;
             this.$store.dispatch({type: 'login', user , rememberPref})
-                .then(()=> this.$router.go(-1))
+                .then(()=> {
+                    // USER MSG
+                    this.$notify({
+                        title: 'Logged In Successfully!',
+                        // message: 'Going to last page...',
+                        type: 'success',
+                        offset: 50,
+                    });
+
+                    this.$router.go(-1)
+                })
                 .catch(err => {
+                    // USER MSG
+                    this.$notify.error({
+                        title: 'Login Failed!',
+                        // message: 'Going to last page...',
+                        offset: 50,
+                    });
                     console.log('err', err);
                 })
 
