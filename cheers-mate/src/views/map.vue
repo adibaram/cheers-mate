@@ -1,5 +1,6 @@
 <template>
   <section>
+    <loading-modal></loading-modal>
     <GmapMap
       ref="gmapRef"
       :center="currPosition"
@@ -34,6 +35,7 @@
 
 <script>
 import { Vue2GoogleMap } from "vue2-google-maps";
+import loadingModal from '../components/loading-modal.vue';
 
 export default {
   data() {
@@ -92,8 +94,12 @@ export default {
       this.findCurrLocation();
     });
   },
+  updated() {
+      this.$store.dispatch({ type: 'setLoading', isLoading: false});
+  },
   components: {
     Vue2GoogleMap,
+    loadingModal
   }
 };
 </script>

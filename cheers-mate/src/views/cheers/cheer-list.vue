@@ -1,9 +1,9 @@
 <template>
-  <section class="cheer-list-container grid" id="list">
+  <section id="list" class="cards">
   
-    <div class="cards" v-for="cheer in cheers" :key="cheer._id">
-      <cheer-preview :cheer="cheer"></cheer-preview>
-    </div>
+
+      <cheer-preview v-for="cheer in cheers" :key="cheer._id" :cheer="cheer"></cheer-preview>
+
 
   </section>
 </template>
@@ -28,9 +28,27 @@ export default {
     let filter = {sortBy: 'date'};
     this.$store.dispatch({ type: "loadFilter", filter });
   },
+  updated() {
+    this.$store.dispatch({ type: 'setLoading', isLoading: false});
+  },
   components: {
     cheerPreview
   }
 };
+
 </script>
+
+<style scoped lang="scss">
+
+    .cards {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      // display: -webkit-flex;
+      justify-content: center;
+      // -webkit-justify-content: center;
+      // max-width: 820px;
+  }
+
+</style>
 

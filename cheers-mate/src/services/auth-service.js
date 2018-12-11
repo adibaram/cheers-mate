@@ -18,7 +18,7 @@ function checkUser(user) {
 
 function logout() {
     // remove user from session storage to log user out
-    axios.put(`${BASE_URL}/logout`)
+    return axios.put(`${BASE_URL}/logout`)
         .then(res => {
             if (sessionStorage.getItem('user')) sessionStorage.removeItem('user');
             if (localStorage.getItem('user')) localStorage.removeItem('user');

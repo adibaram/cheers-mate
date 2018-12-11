@@ -173,6 +173,13 @@ export default {
     submitCheer() {
       cheerService.add(this.newCheer)
         .then(cheer =>{
+          // USER MSG
+          this.$notify({
+              title: 'Cheer Created Successfully!',
+              message: 'Going to cheer\'s page...',
+              type: 'success',
+              offset: 50,
+          });
           this.$router.push(`/cheer/${cheer._id}`)
         })
       console.log("DEBUG::this.newCheer", this.newCheer);

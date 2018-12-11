@@ -1,5 +1,6 @@
 <template>
     <section class="cheer-details-container">
+        <loading-modal></loading-modal>
         <section class="title-attendance-container">
             
             <div class="name-date dark" :style="backgroundImg">
@@ -109,6 +110,8 @@
 import cheerService from '../../services/cheer-service.js';
 import userCard from '../../components/user-card.vue';
 import userService from '../../services/user-service.js';
+import loadingModal from '../../components/loading-modal.vue';
+
 const moment = require('moment');
 
 export default {
@@ -124,10 +127,9 @@ export default {
     created() {
         this.loadCheer();
         this.$socket.emit('joinRoom', this.$route.params.cheerId);
+        this.$store.dispatch({ type: 'setLoading', isLoading: true});
 
-    },
-    mounted() {
-       
+
     },
 
     methods: {
@@ -136,6 +138,8 @@ export default {
             cheerService.getById(cheerId)
                 .then(res => {
                     console.log('this cheer:', res)
+                    this.$store.dispatch({ type: 'setLoading', isLoading: false});
+
                     return this.cheer = res;
                 });
         },
@@ -228,6 +232,7 @@ export default {
 
     components: {
         userCard,
+        loadingModal,
     },
 
     sockets: {
