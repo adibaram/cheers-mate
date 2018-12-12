@@ -27,6 +27,12 @@
         :clickable="true"
         @click="toggleInfo(cheer)"
       />
+
+      <GmapMarker         
+        :position="currPosition"
+        :icon="{ url : require('../assets/imgs/self-marker.png')}"
+        :clickable="false" />
+
     </GmapMap>
   </section>
 </template>
