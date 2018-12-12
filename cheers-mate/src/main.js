@@ -22,10 +22,13 @@ axios.defaults.withCredentials = true;
 // import VueMaterial from 'vue-material'
 // import 'vue-material/dist/vue-material.min.css'
 // import 'vue-material/dist/theme/default.css'
-
 // Vue.use(VueMaterial)
+
 locale.use(lang)
 Vue.use(ElementUI);
+
+const SocialSharing = require('vue-social-sharing');
+Vue.use(SocialSharing);
 
 // import component and stylesheet
 import AirbnbStyleDatepicker from 'vue-airbnb-style-datepicker'
@@ -45,9 +48,6 @@ Vue.use(AirbnbStyleDatepicker, datepickerOptions)
 Vue.config.productionTip = false
 
 //Google Maps With Vue
-
-
-
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAPXhBZJxk_lQ7GMLmTm_szq6eJ7R7X_Z8',
