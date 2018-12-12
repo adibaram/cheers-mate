@@ -88,6 +88,9 @@ export default {
       this.$store.dispatch({ type: "findCurrPosition" });
     }
   },
+  created(){
+      this.$store.dispatch({ type: 'setLoading', isLoading: true});
+  },
   mounted() {
     this.$refs.gmapRef.$mapPromise.then(() => {
       this.loadCheers();
