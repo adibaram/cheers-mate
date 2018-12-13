@@ -89,20 +89,7 @@
                     </div>
                 </div> -->
 
-                <section class="chat">
-                    <section class="chat-msg-list">
-                    <h1>Let's start talking</h1>
-                        <ul class="clean-list">
-                            <li v-if="cheer.msgs" v-for="msg in msgs" :key="msg.at">
-                                {{msg.from}}: {{msg.txt}}
-                            </li>
-                        </ul>
-                    </section>
-                        <form @submit.prevent="sendMsg" ref="chat" >
-                            <input ref="newMsgInput" type="text">
-                            <button>send</button>
-                        </form>
-                </section>
+        <chat-room :msgs="msgs"></chat-room>
 
         </section>
             <div class="address">
@@ -124,6 +111,7 @@ import cheerService from '../../services/cheer-service.js';
 import userCard from '../../components/user-card.vue';
 import userService from '../../services/user-service.js';
 import loadingModal from '../../components/loading-modal.vue';
+import chatRoom from '../../components/chat-room.vue';
 
 const moment = require('moment');
 
@@ -176,29 +164,7 @@ export default {
                 this.$router.push('/login');
             }
         },
-        sendMsg() {
-            // GET MSG
-            const msgInput = this.$refs.newMsgInput;
-            const txt = msgInput.value;
-            if (!txt.trim()) return;
 
-            // DECLARATION
-            const cheerId = this.$route.params.cheerId;
-            const currUser = this.$store.getters.getUser;
-            const from = (currUser)? currUser.nickname : 'Guest';
-            const userId = (currUser)? currUser._id : '';
-            const msg = {
-                userId, 
-                txt, 
-                at: Date.now(), 
-                from
-            };
-
-            // LET THE WORLD KNOW
-            this.$socket.emit('newChatMsg' , {msg,cheerId});
-            msgInput.value = '';
-
-        },
 
     },
     computed: {
@@ -238,14 +204,12 @@ export default {
             if (!this.cheer.img) return `background-image: url(https://moneycrashers-sparkchargemedia.netdna-ssl.com/wp-content/uploads/2017/08/bachelor-party-bar-drinks-1024x576.jpg)`;
             else return `background-image: url(${this.cheer.img})`;
         },
-        enableChat() {
-            return (!this.$store.getters.getUser)? true : false;   
-        }
     },
 
     components: {
         userCard,
         loadingModal,
+        chatRoom,
     },
 
     sockets: {
@@ -262,23 +226,6 @@ export default {
 
 <style scoped lang="scss">
 
-    .chat {
-        border: 1px solid rgba(128, 128, 128, 0.157);
-        border-radius: 10px;
-        width: 400px;
-        margin-left: 100px;
-        padding: 30px;
-        margin: 20px;
-
-        display:flex;
-        flex-direction: column;
-        justify-content: space-between;
-        background-color: #fff;
-
-        input , button{
-            padding: 10px;
-        }
-    }
 
     .attendees {
         display: flex;
@@ -289,11 +236,6 @@ export default {
         display: flex;
         justify-content: space-between;
         max-width: 90vw;
-    }
-
-    .chat-msg-list {
-        max-height: 400px;
-        overflow-y: scroll;
     }
 
 </style>
