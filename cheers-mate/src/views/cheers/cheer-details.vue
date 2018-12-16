@@ -90,6 +90,8 @@
                 </div> -->
 
         <chat-room :msgs="msgs"></chat-room>
+        <button class="chat-toggle" @click="toggleChat"></button>
+
 
         </section>
             <div class="address">
@@ -164,7 +166,9 @@ export default {
                 this.$router.push('/login');
             }
         },
-
+        toggleChat() {
+            this.$el.querySelector('.chat').classList.toggle('open');
+        },
 
     },
     computed: {
@@ -238,4 +242,42 @@ export default {
         max-width: 90vw;
     }
 
+    .chat-toggle {
+        position: fixed;
+        bottom: 5%;
+        right: 5%;
+        border-radius: 50%;
+        color: white;
+        border: 1px solid azure;
+        background-color: var(--secondary);
+        z-index: 2;
+        height: 48px;
+        width: 48px;
+        font-size: 1.7em;
+        text-align: center;
+        font-family: "Font Awesome 5 Free";
+
+        &:after {
+            content: '\f075';
+        }
+
+        &:focus {
+            outline: 0;
+        }
+        &:active {
+            border: 2px solid darkorange;
+            background-color: #fff;
+            color: var(--secondary);
+            &:after {
+                font-weight: 900;
+            }
+        }
+        .chat.open+& {
+            &:after {
+                content: '\f00d';
+            }
+            top:10%;
+            bottom: unset;
+        }
+    }
 </style>

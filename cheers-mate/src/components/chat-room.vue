@@ -1,9 +1,9 @@
 <template>
   <section class="chat">
-    <section class="chat-msg-list">
+    <section class="chat-msg-list" ref="chatList">
       <h1>Let's start talking</h1>
       <ul class="clean-list">
-        <li v-if="msgs" v-for="msg in msgs" :key="msg.at" class="msg">{{msg.from}}: {{msg.txt}}</li>
+        <li v-for="msg in msgs" :key="msg.at" class="msg">{{msg.from}}: {{msg.txt}}</li>
         <span ref="endOfChat" id="end-of-chat"> </span>
       </ul>
     </section>
@@ -23,7 +23,8 @@ export default {
         }
     },
     mounted() {
-        this.scrollToEnd();
+        // this.scrollToEnd();
+        window.refs = this.$refs
     },
     methods: {
         sendMsg() {
@@ -49,10 +50,16 @@ export default {
             msgInput.value = '';
 
         },
-        scrollToEnd() {    	
-            const endOfChat = this.$refs.endOfChat;
-            endOfChat.scrollTop = endOfChat.scrollHeight;
+        scrollToEnd() {   	
+            const elChatList = this.$refs.chatList;
+            elChatList.scrollTop = elChatList.scrollHeight - elChatList.clientHeight;
         },
+    },
+    watch: {
+        'msgs.length'(length, prevLength) {
+            console.log({length, prevLength})
+            if (prevLength === 0) this.$nextTick().then(() => this.scrollToEnd())
+        }
     }
 };
 </script>
@@ -88,4 +95,22 @@ export default {
         }
     }
 
+    @media (max-width: 600px) {
+        .chat {
+            opacity: 0;
+            position: fixed;
+            right: -100%;
+            transition: .3s;
+            height: calc(100vh - 50px);
+            width: 90vw;
+
+            &.open {
+                opacity: 1;
+                top: 50px;
+                margin: 0 auto;
+                right:unset;
+                z-index: 1;
+            }
+        }
+    }
 </style>

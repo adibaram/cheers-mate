@@ -27,10 +27,16 @@ export default {
     top: 90px;
     height: calc(100vh - 90px);
     width: 100vw;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(85, 78, 78, 0.6);
 
     display: flex;
     justify-content: center;
     align-items: center;
-}
+    @media (max-width: 700px) {
+        .loading-modal-container {
+            top: 50px;
+            height: calc(100vh - 50px);
+        }
+    }
+}  
 </style>
