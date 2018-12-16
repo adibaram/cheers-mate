@@ -1,8 +1,8 @@
 <template>
-<section class="user-card-container">
-    <el-row>
+<div class="user-card-container" :class="{prevImgCont: $route.name === 'home'}">
+
             <!-- <el-card :body-style="{ padding: '0px' }"> -->
-            <img :src="(user.img)? user.img : 'https://via.placeholder.com/100x100'" class="image">
+            <img :src="(user.img)? user.img : 'https://via.placeholder.com/100x100'" :class="{prevImg: $route.name === 'home'}" class="image">
             <!-- <div style="padding: 14px;">
                 <span>{{user.nickname}}</span>
                 <div class="bottom clearfix">
@@ -11,8 +11,8 @@
                 </div>
             </div> -->
             <!-- </el-card> -->
-    </el-row>
-</section>
+
+</div>
         
 </template>
 
@@ -37,6 +37,19 @@
     height: 100px;
     display: block;
     border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .prevImg {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+
+  .prevImgCont {
+      display: flex;
+      flex-direction: row;
+      
   }
 
   .clearfix:before,

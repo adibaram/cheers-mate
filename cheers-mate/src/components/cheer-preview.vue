@@ -41,10 +41,11 @@
     <h3 class="card__title">Let's talk about <span v-for="category in cheer.category" :key="category">{{category}} </span></h3>
     <span class="card__by">created by <a href="#" class="card__author" title="author">{{cheer.cheerCreator.fullName}}</a></span>
   </div>
-  <!-- <div v-for="user in cheer.attendees" :key="user._id">
-      <user-card class="user-card" :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
-                            <td v-for="prop in user" :key="">{{prop}}</td>
-    </div> -->
+  <div class="flex">
+      <user-card v-for="user in cheer.attendees" :key="user._id"
+        class="user-card-img" :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
+         <!-- <td v-for="prop in user" :key="">{{prop}}</td> -->
+    </div>
 </article>
   
   </section>
@@ -52,7 +53,7 @@
 
 <script>
 const moment = require("moment");
-// import userCard from './components/user-card.vue';
+import userCard from '../components/user-card.vue';
 
 export default {
   props: {  
@@ -91,9 +92,9 @@ export default {
       return `url(${this.cheer.img})`;
     },
   },
-  // components: {
-  //   userCard
-  // }
+  components: {
+    userCard
+  }
 };
 </script>
 
@@ -174,7 +175,10 @@ body {
     background-image: url('https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
 }
 
-
+.user-card-img {
+  height: 50px;
+  width: 50px;
+}
 .card__like {
     width: 18px;
 }
@@ -235,7 +239,7 @@ top: 0;
 }
 .card {
   margin: 25px;
-  height: 440px ;
+  height: 465px ;
   transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
   background-color: #fff;
     // width: 33.3%;
@@ -271,6 +275,9 @@ border-bottom-right-radius: 12px;
     margin-top: 5px;
     margin-bottom: 10px;
     font-family: 'Roboto Slab', serif;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
 }
 
 .card__by {
@@ -287,7 +294,7 @@ border-bottom-right-radius: 12px;
 
 .card:hover .card__img--hover {
     // height: 100%;
-    height: 55%;
+    height: 52%;
     opacity: 0.5;
 }
 
