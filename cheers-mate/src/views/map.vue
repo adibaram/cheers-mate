@@ -42,6 +42,7 @@
 <script>
 import { Vue2GoogleMap } from "vue2-google-maps";
 import loadingModal from '../components/loading-modal.vue';
+const moment = require('moment');
 
 export default {
   data() {
@@ -81,9 +82,13 @@ export default {
     },
     getInfoWindowContent(cheer) {
           return (`<section class="info-window">
-                      <div class="info-header">${cheer.locationName}</div>
+                      <div class="info-header">Let's talk about <span v-for="category in cheer.category" :key="category">{{category}} </span></div>
                       <div class="info-content">
-                          <p>${cheer.date}</p>
+                          <div class="seats-location">
+                            <div><i class="fas fa-map-marker-alt"></i> ${cheer.locationName}</div>
+                            <div><i class="fas fa-users"></i> ${cheer.attendees.length} of ${cheer.spots}</div>
+                          </div>
+                          <p>${moment(cheer.date).format('dddd, ll')}</p>
                       </div>
                    </section>`);
     },
@@ -113,5 +118,6 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+
 </style>

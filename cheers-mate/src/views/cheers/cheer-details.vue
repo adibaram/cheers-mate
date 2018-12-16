@@ -243,6 +243,7 @@ export default {
     }
 
     .chat-toggle {
+        display: none;
         position: fixed;
         bottom: 5%;
         right: 5%;
@@ -278,6 +279,12 @@ export default {
             }
             top:10%;
             bottom: unset;
+        }
+
+        @media (max-width: 600px){
+            & {
+                display: unset;
+            }
         }
     }
 </style>
