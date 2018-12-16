@@ -1,6 +1,6 @@
 <template>
     <section class="nav-bar flex container">
-      <div class="nav flex container">
+      <!-- <div class="nav flex container"> -->
         <router-link to="/" tag="div">
           <h1 class="main-logo"> Cheers🍻</h1>
         </router-link>
@@ -27,7 +27,7 @@
             </el-dropdown>
             </div>
         </section>
-      </div>
+      <!-- </div> -->
     </section>
 
 

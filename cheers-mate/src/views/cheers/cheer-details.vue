@@ -50,12 +50,12 @@
                         </social-sharing>
                     </div>
 
+                </div>
                     <div class="categories">
                         <h1>We are going to talk about </h1>
                         <h2 v-if="cheer.category" v-for="category in cheer.category" :key="category">{{category}}<br></h2>
                         <h1 v-else>Everything</h1>
                     </div>
-                </div>
             </div>
         </section>
         

@@ -17,8 +17,8 @@
     }
     & .filter-buttons {
       display: flex;
-      justify-content: space-between;
-      padding: 20px 30px;
+      justify-content: flex-end;
+      // padding: 20px 30px;
     }
 
     @media (max-width: 700px) {
