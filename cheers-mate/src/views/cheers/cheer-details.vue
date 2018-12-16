@@ -94,6 +94,7 @@
 
 
         </section>
+        <section class="cheer-location flex column">
             <div class="address">
                  <div class="icon"><i class="fas fa-map-marker-alt"></i>{{cheer.address}}</div>
                  <!-- <div class="info">
@@ -103,7 +104,8 @@
                 </div>
             <div class="map">
                 <img :src="mapPic" alt="map"/>
-            </div>        
+            </div> 
+        </section>       
     </section>
 </template>
 
@@ -230,6 +232,19 @@ export default {
 
 <style scoped lang="scss">
 
+    .cheer-location{ 
+        align-items: center;
+    }
+    // .user-card {
+    //     height: 200px;
+    //     width: 200px;
+    //     border-radius: 50%;
+
+    // }
+    .cheer-details-container {
+        background-color: var(--main);
+    }
+
 
     .attendees {
         display: flex;
@@ -278,6 +293,10 @@ export default {
             }
             top:10%;
             bottom: unset;
+        }
+
+        .map .cheer-dit {
+            align-content: center;
         }
     }
 </style>

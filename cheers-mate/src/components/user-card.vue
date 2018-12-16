@@ -33,9 +33,10 @@
   }
 
   .image {
-    width: 150px;
+    width: 100px;
+    height: 100px;
     display: block;
-    border-radius: 10%;
+    border-radius: 50%;
   }
 
   .clearfix:before,

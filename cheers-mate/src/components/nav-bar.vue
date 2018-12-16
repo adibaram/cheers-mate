@@ -6,7 +6,9 @@
         </router-link>
 
         <section class="links">
-          <router-link class="auth-link" to="/cheer/create">Create a cheer</router-link>
+            <!-- <el-button type="info"  icon="el-icon-location-outline">Around Me</el-button> -->
+            <router-link icon="el-icon-location-outline" class="auth-link" to="/map"><i class="fas fa-map-marked-alt"></i></router-link>
+          <router-link class="auth-link" to="/cheer/create">Create cheer</router-link>
           
           <div class="links sign" v-if="!currUser">
             <router-link class="auth-link" to="/signup">Sign up</router-link>
@@ -76,8 +78,9 @@ export default {
 };
 </script>
 
-
-<style>
-
-
+<style lang="scss" scoped>
+ .fa-map-marked-alt {
+     font-size: 25px;
+     margin: 0 5px;
+ }
 </style>

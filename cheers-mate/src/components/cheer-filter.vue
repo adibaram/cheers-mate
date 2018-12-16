@@ -16,9 +16,9 @@
     <div class="filter-buttons">
       <el-button type="warning" v-scroll-to="'#list'" @click.native="updateFilter" icon="el-icon-search" >Search</el-button>
 
-      <router-link to="/map">
+      <!-- <router-link to="/map">
       <el-button type="info" icon="el-icon-location-outline">Look Around</el-button>
-      </router-link>
+      </router-link> -->
     </div> 
 
 </section>

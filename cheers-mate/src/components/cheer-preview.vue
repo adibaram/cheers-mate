@@ -41,6 +41,10 @@
     <h3 class="card__title">Let's talk about <span v-for="category in cheer.category" :key="category">{{category}} </span></h3>
     <span class="card__by">created by <a href="#" class="card__author" title="author">{{cheer.cheerCreator.fullName}}</a></span>
   </div>
+  <!-- <div v-for="user in cheer.attendees" :key="user._id">
+      <user-card class="user-card" :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
+                            <td v-for="prop in user" :key="">{{prop}}</td>
+    </div> -->
 </article>
   
   </section>
@@ -48,6 +52,7 @@
 
 <script>
 const moment = require("moment");
+// import userCard from './components/user-card.vue';
 
 export default {
   props: {  
@@ -85,7 +90,10 @@ export default {
     setImg() {
       return `url(${this.cheer.img})`;
     },
-  }
+  },
+  // components: {
+  //   userCard
+  // }
 };
 </script>
 
