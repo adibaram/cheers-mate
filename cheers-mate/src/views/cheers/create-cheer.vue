@@ -193,6 +193,7 @@ export default {
       });
     },
     setPlace(place) {
+      console.log({place})
       this.place = place;
       this.showErr = false;
       console.log("DEBUG::this.place", this.place);

@@ -7,7 +7,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
-    height: calc(100vh - 150px);
+    // height: calc(100vh - 150px);
+    height: calc(100vh - 50px);
 }
 
 .add-cheer, .find-cheer {
@@ -15,7 +16,7 @@
     width: 250px;
     font-size: 30px;
     margin: 15px;
-    color: white;
+    color: white;   
     cursor: pointer;
 }
 

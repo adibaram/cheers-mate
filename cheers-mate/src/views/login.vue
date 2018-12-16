@@ -50,7 +50,6 @@ export default {
                         type: 'success',
                         offset: 50,
                     });
-
                     this.$router.go(-1)
                 })
                 .catch(err => {
