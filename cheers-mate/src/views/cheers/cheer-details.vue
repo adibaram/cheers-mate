@@ -72,10 +72,10 @@
                     <h3 v-if="cheer.attendees && cheer.attendees.length"> Attendees:</h3>
                     <h3 v-else>Be the first one to join!</h3>
                     <div class="attendees">
-                        <div v-for="user in cheer.attendees" :key="user._id">
+                        <!-- <div v-for="user in cheer.attendees" :key="user._id">
                             <user-card class="user-card" :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
-                            <!-- <td v-for="prop in user" :key="">{{prop}}</td> -->
-                        </div>
+                            <td v-for="prop in user" :key="">{{prop}}</td>
+                        </div> -->
                     </div>
                 </section>
             </div>
@@ -258,6 +258,7 @@ export default {
     }
 
     .chat-toggle {
+        display: none;
         position: fixed;
         bottom: 5%;
         right: 5%;
@@ -295,8 +296,10 @@ export default {
             bottom: unset;
         }
 
-        .map .cheer-dit {
-            align-content: center;
+        @media (max-width: 600px){
+            & {
+                display: unset;
+            }
         }
     }
 </style>
