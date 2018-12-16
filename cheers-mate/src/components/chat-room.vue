@@ -3,11 +3,12 @@
     <section class="chat-msg-list">
       <h1>Let's start talking</h1>
       <ul class="clean-list">
-        <li v-if="msgs" v-for="msg in msgs" :key="msg.at">{{msg.from}}: {{msg.txt}}</li>
+        <li v-if="msgs" v-for="msg in msgs" :key="msg.at" class="msg">{{msg.from}}: {{msg.txt}}</li>
+        <span ref="endOfChat" id="end-of-chat"> </span>
       </ul>
     </section>
     <form @submit.prevent="sendMsg" ref="chat">
-      <input ref="newMsgInput" type="text">
+      <input v-scroll-to="'#end-of-chat'" ref="newMsgInput" type="text">
       <button>send</button>
     </form>
   </section>
@@ -20,6 +21,9 @@ export default {
             type: Array,
             default: ()=>[],
         }
+    },
+    mounted() {
+        this.scrollToEnd();
     },
     methods: {
         sendMsg() {
@@ -45,6 +49,10 @@ export default {
             msgInput.value = '';
 
         },
+        scrollToEnd() {    	
+            const endOfChat = this.$refs.endOfChat;
+            endOfChat.scrollTop = endOfChat.scrollHeight;
+        },
     }
 };
 </script>
@@ -68,8 +76,15 @@ export default {
             padding: 10px;
         }
         .chat-msg-list {
-            max-height: 200px;
-            overflow-y: scroll;
+            height: inherit;
+            overflow-y: auto;
+            word-break: break-all;
+            &:hover {
+                overflow-y: scroll;
+            }
+            .msg {
+                margin: 0px 5px 10px 0px;
+            }
         }
     }
 

@@ -1,12 +1,15 @@
 <template>
 <section class="filter-container">
-  <h2>Look for new people to drink with</h2>
+  <!-- <h2>Look for new people to drink with</h2> -->
+  <h2>Find new people to drink with</h2>
     <!-- <h2>Look for events to join</h2> -->
     <div>
-        <input class="filter-input" placeholder="Look by location" v-model="locationName" @input="updateFilter">
+      <h4>Look by location</h4>
+      <input class="filter-input" placeholder="Tel Aviv" v-model="locationName" @input="updateFilter">
     </div>
     <div>
-        <input class="filter-input" placeholder="Date" onfocus="(this.type='date')" type="text" v-model="date" @change="updateFilter">
+      <h4>Date</h4>
+      <input class="filter-input" onfocus="this.type='date'" type="text" v-model="date" @change="updateFilter">
     </div>
 
 
@@ -27,16 +30,8 @@ const moment = require('moment');
 export default {
   data() {
     return {
-      // filter: {
-      //     fromDate: '',
-      //     toDate: '',
-      // },
       locationName: '',
-      date: '',
-      // dateFormat: 'D MMM',
-      // dateOne: '',
-      // dateTwo: '',
-      
+      date: moment().format('DD / MM / YYYY'), 
     };
   },
 
@@ -47,17 +42,6 @@ export default {
       this.$store.dispatch({ type: "loadFilter", filter });
     },
 
-    // formatDates(dateOne, dateTwo) {
-    //   let formattedDates = '';
-    //   if (dateOne) {
-    //     formattedDates = format(dateOne, this.dateFormat);
-    //   }
-    //   if (dateTwo) {
-    //     formattedDates += ' - ' + format(dateTwo, this.dateFormat);
-    //   }
-    //   // this.updateFilter();
-    //   return formattedDates;
-    // }
   },
 
   computed: {
@@ -67,12 +51,6 @@ export default {
         toDate: moment(this.date).add(24,'hours').format('X'),
       }
     },
-    // fromDate() {
-    //   return moment(this.date).format('X');
-    // },
-    // toDate() {
-    //   return moment(this.date).add(24,'hours').format('X');
-    // }
   },
 };
 </script>
@@ -80,7 +58,6 @@ export default {
 <style scoped lang="scss">
 
 input {
-  height: 30px;
   width: 300px;
   border-radius: 5px;
 }

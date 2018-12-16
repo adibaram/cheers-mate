@@ -85,6 +85,7 @@
         <el-button class="next-step-btn" type="warning" @click="submitCheer">Cheers!</el-button>
       </section>
     </section>
+    <input type="file" ref="gURLtoCloudinary" hidden>
   </section>
 </template>
 
@@ -113,7 +114,7 @@ export default {
         desc: '',
         category: [],
         spots: 20,
-        img: "",
+        img: '',
         msgs: []
       },
       categoryTxt: '',
@@ -161,11 +162,12 @@ export default {
       this.newCheer.address = this.place.formatted_address;
       this.newCheer.position.coordinates.lat = this.place.geometry.location.lat();
       this.newCheer.position.coordinates.lng = this.place.geometry.location.lng();
-      this.newCheer.img = this.place.photos[0].getUrl();
       this.newCheer.cheerCreator = this.$store.getters.getUser;
       this.newCheer.spots = +this.newCheer.spots;
       this.newCheer.attendees = [];
       this.stepNum++;
+      this.newCheer.img = this.place.photos[0].getUrl();
+      
     },
     submitSecondStep() {
       this.stepNum++;
