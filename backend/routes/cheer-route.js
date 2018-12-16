@@ -58,12 +58,13 @@ function addCheerRoutes(app) {
                 .then(userCheers => {
                     return userService.getUsersFromCheer(userCheers);
                 })
-        ])
+            ])
             .then(([cheer, users]) => {
                 cheer.attendees = users
                 res.json( cheer )
             })
-    })
+            
+        })
 
     // DELETE
     app.delete('/cheer/:cheerId', (req, res) => {

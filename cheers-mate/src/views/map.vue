@@ -27,6 +27,12 @@
         :clickable="true"
         @click="toggleInfo(cheer)"
       />
+
+      <GmapMarker         
+        :position="currPosition"
+        :icon="{ url : require('../assets/imgs/self-marker.png')}"
+        :clickable="false" />
+
     </GmapMap>
   </section>
 </template>
@@ -87,6 +93,9 @@ export default {
     findCurrLocation() {
       this.$store.dispatch({ type: "findCurrPosition" });
     }
+  },
+  created(){
+      this.$store.dispatch({ type: 'setLoading', isLoading: true});
   },
   mounted() {
     this.$refs.gmapRef.$mapPromise.then(() => {
