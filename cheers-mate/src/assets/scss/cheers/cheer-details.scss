@@ -45,10 +45,10 @@
     }
     .attending-share {
         flex-grow: 1;
+        padding: 10px;
         
         .spot-attendance {       
             .is-going {
-                padding: 10px;
                 
                 .txt {
                     display: flex;
@@ -91,9 +91,30 @@
                 }
                 
             }
+
         }
     }
+    @media (max-width: 600px) {
+        .attending-share {
+            text-align: center;
+            .share {
+                justify-content: center;
+            }
+        }
+    }
+    
 }
+        @media (max-width: 600px) {
+            .title-attendance-container {
+                flex-direction: column;
+                width: 100%;
+                margin: 0;
+
+                .name-date {
+                    width: 100%;
+                }
+            }
+        }
 
 .main-info-container {
     display: flex;
