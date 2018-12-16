@@ -1,62 +1,11 @@
 <template>
-  <section class="create-cheer-page">
-    <header>
-      <div class="container">
-        <router-link to="/" tag="div">
-          <h1 class="main-logo">Cheers🍻</h1>
-        </router-link>
-        <!-- <el-menu :default-active="activeIndex" background-color="#faf9f7" text-color="#e6a23c" class="el-menu-demo links" mode="horizontal" menu-trigger="click">
-        <el-submenu index="1" class="links">
-            <template slot="title">Menu</template>
-            <el-menu-item index="1-1" router="/cheer/create"><router-link class="auth-link" to="/cheer/create">Create a cheer</router-link></el-menu-item>
-            <el-submenu index="1-2">
-              <template slot="title"><div class="links sign" v-if="!currUser">
-            <router-link class="auth-link" to="/signup">Sign up</router-link>
-            <router-link class="auth-link" to="/login">Log in</router-link>
-          </div>
-          <div class="links logout" v-else>
-              <span style="cursor:pointer;" class="el-dropdown-link">Hello {{currUser.nickname}}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-            </div></template>
-              <el-menu-item index="1-2-1"><span @click="goProfile">Profile</span></el-menu-item>
-              <el-menu-item index="1-2-2">Other</el-menu-item>
-              <el-menu-item index="1-2-3"><span @click="logout">Logout</span></el-menu-item>
-            </el-submenu>
-        </el-submenu>
-        </el-menu>
-        <section class="links">   
-        </section> -->
-
-        <section class="links">
-          <router-link class="auth-link" to="/cheer/create">Create a cheer</router-link>
-          
-          <div class="links sign" v-if="!currUser">
-            <router-link class="auth-link" to="/signup">Sign up</router-link>
-            <router-link class="auth-link" to="/login">Log in</router-link>
-          </div>
-          <div class="links logout" v-else>
-            <el-dropdown>
-              <span style="cursor:pointer;" class="el-dropdown-link logged-in-greet">Hello {{currUser.nickname}}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item><span @click="goProfile">Profile</span></el-dropdown-item>
-                <el-dropdown-item>Other</el-dropdown-item>
-                <el-dropdown-item><span @click="logout">Logout</span></el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-            </div>
-        </section>
-          <!-- <div class="auth-link" @click="logout">logout</div>
-          <span>Hello,
-            <br>
-            {{currUser.nickname}}
-          </span> -->
-
-      </div>
+  <section>
+    <header :class="{homeNav: $route.name === 'home'}">
+      <nav-bar></nav-bar>
     </header>
-    <router-view/>
+    <main>
+      <router-view/>
+    </main>
     <footer>
 
     </footer>
@@ -65,6 +14,7 @@
 
 <script>
 import userService from './services/user-service.js';
+import navBar from './components/nav-bar.vue'
 
 export default {
   sockets: {
@@ -132,6 +82,9 @@ export default {
         user: JSON.parse(localStorage.getItem("user"))
       });
 
+  }, 
+  components: {
+    navBar
   }
 };
 </script>
@@ -145,5 +98,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+header.homeNav {
+    position: absolute;
+    background-color: #fbfaf82a;
 }
 </style>

@@ -223,7 +223,7 @@ top: 0;
 
 
 .cheer-prev-container {
-  width: 33%;
+  width: 25%;
 }
 .card {
   margin: 25px;
@@ -292,5 +292,22 @@ border-bottom-right-radius: 12px;
     opacity: 1;
 }
 
+@media (max-width: 1050px) {
+  .cheer-prev-container {
+    width: 33%;
+  }
+}
 
+@media (max-width: 860px) {
+  .cheer-prev-container {
+    width: 50%;
+    height: 400px;
+  }
+}
+
+@media (max-width: 550px) {
+  .cheer-prev-container {
+    width: 90%;
+  }
+}
 </style>
