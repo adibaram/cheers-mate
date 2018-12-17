@@ -9,7 +9,7 @@
     </section>
     <form @submit.prevent="sendMsg" ref="chat">
       <input v-scroll-to="'#end-of-chat'" ref="newMsgInput" type="text">
-      <button>send</button>
+      <button><i class="chat-send fas fa-location-arrow"></i></button>
     </form>
   </section>
 </template>
@@ -70,7 +70,7 @@ export default {
         border-radius: 10px;
         width: 400px;
         margin-left: 100px;
-        padding: 30px;
+        padding: 15px;
         margin: 20px;
         height: 50vh;
 
@@ -78,9 +78,39 @@ export default {
         flex-direction: column;
         justify-content: space-between;
         background-color: #fff;
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            input {
+                border-radius: 5px;
+                padding: 10px;
+                height: 44px;
+                
+                &:focus {
+                    outline: 0;
+                }
+            }
+            button {
+                border-radius: 50%;
+                height: 44px;
+                width: 44px;
+                text-align: center;
+                border: 0;
+                background-color: #e6a23c;
+                &:active {
+                    background-color: darken(#e6a23c,10%);
+                }
+                &:focus {
+                    outline: 0;
+                }
+            }
 
-        input , button{
-            padding: 10px;
+            .chat-send {
+                transform: rotate(45.5deg);
+                font-size: 17px;
+                color: var(--main);
+            }
         }
         .chat-msg-list {
             height: inherit;
@@ -102,7 +132,7 @@ export default {
             right: -100%;
             transition: .3s;
             height: calc(100vh - 50px);
-            width: 90vw;
+            width: 90%;
 
             &.open {
                 opacity: 1;

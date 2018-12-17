@@ -242,7 +242,14 @@ export default {
 
     // }
     .cheer-details-container {
-        background-color: var(--main);
+        margin: 2%;
+        padding: 10px;
+
+        @media (max-width: 700px) {
+            & {
+                padding: 0;
+            }
+        }
     }
 
 
@@ -254,7 +261,7 @@ export default {
     .main-info-container {
         display: flex;
         justify-content: space-between;
-        max-width: 90vw;
+        // max-width: 90%;
     }
 
     .chat-toggle {

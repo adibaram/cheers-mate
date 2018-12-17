@@ -1,10 +1,11 @@
 
 .filter-container {
-    padding: 30px 50px 40px;
-    margin-left: 20px;
+    padding: 30px;
+    margin: 100px 0px 0px calc(2% + 10px);
     background-color: rgba(256, 256, 256, 0.7);
     // opacity: 0.7;
     border-radius: 3%;
+    height: fit-content;
     .filter-input {
       padding: 10px 17px;
       background-color: rgba(228, 224, 224, 0.411);
@@ -24,12 +25,12 @@
     @media (max-width: 700px) {
       & {
         margin: 2%;
-        width: 96%;
-        height: 96%;
-        padding: 10%;
-        .filter-input {
-          max-width: 90%;
-        }
+        margin-top: calc(50px + 2%);
+        width: 100%;
+        // padding: 10%;
+        // .filter-input {
+        //   max-width: 90%;
+        // }
 
         .filter-buttons {
           flex-direction: column;

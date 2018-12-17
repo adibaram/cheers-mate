@@ -23,7 +23,7 @@ export default {
     position: fixed;
     top: 0;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     background-color: rgba(85, 78, 78, 0.6);
 
     display: flex;

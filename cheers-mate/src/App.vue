@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="app-container">
     <header :class="{homeNav: $route.name === 'home'}">
       <nav-bar></nav-bar>
     </header>
@@ -100,7 +100,13 @@ export default {
   color: #2c3e50;
 }
 header.homeNav {
-    position: absolute;
+  position: absolute;
     background-color: #fbfaf82a;
 }
+      @media(max-width:700px) {
+        header.homeNav {
+        background-color: var(--main);
+
+        }
+      }
 </style>
