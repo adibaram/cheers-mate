@@ -42,11 +42,15 @@
     <span class="card__by">created by <a href="#" class="card__author" title="author">{{cheer.cheerCreator.fullName}}</a></span>
   </div>
   <div class="users-container flex">
-      <user-card v-if="cheer.attendees.length<=3" v-for="user in cheer.attendees" :key="user._id"
+    <span v-if="cheer.attendees.length<=3" class="flex">
+      <user-card v-for="user in cheer.attendees" :key="user._id"
         class="user-card-img" :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
+    </span>
          <!-- <td v-for="prop in user" :key="">{{prop}}</td> -->
-      <user-card v-else :v-for="returnUsers" class="user-card-img" 
+    <span v-else class="flex">
+      <user-card v-for="user in usersForPreview" :key="user._id" class="user-card-img" 
       :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
+    </span>
         <div class="additional-users" v-if="cheer.attendees.length>3">
           <span>+{{cheer.attendees.length-3}}</span>
         </div>
@@ -88,10 +92,12 @@ export default {
       // console.log(`${this.cheer.img}`);
       return `background-image: url(${this.cheer.img})`;
     },
-    returnUsers() {
+    usersForPreview() {
+      var users = [];
       for (let i = 0; i < 3; i++) {
-        return this.cheer.attendees[i];
+        if(this.cheer.attendees[i]) users.push(this.cheer.attendees[i]);
       }
+      return users;
     }
   },
   methods: {
@@ -342,7 +348,7 @@ body {
 
 @media (max-width: 1050px) {
   .cheer-prev-container {
-    width: 33%;
+    width: calc(100% / 3);
   }
 }
 
