@@ -4,7 +4,7 @@
                 Contact us 24/7<br>
                 <i class="fas fa-phone-volume"></i> 050-3722207<br>
                 <i class="fas fa-location-arrow"></i> Tel Aviv, Israel<br>
-                <i class="fas fa-envelope"></i> cheers@gmail.com <br>
+                <i class="fas fa-envelope"></i> cheers.coding@gmail.com <br>
         </h4>
     </section>
 </template>
