@@ -41,10 +41,15 @@
     <h3 class="card__title">Let's talk about <span v-for="category in cheer.category" :key="category">{{category}} </span></h3>
     <span class="card__by">created by <a href="#" class="card__author" title="author">{{cheer.cheerCreator.fullName}}</a></span>
   </div>
-  <div class="flex">
-      <user-card v-for="user in cheer.attendees" :key="user._id"
+  <div class="users-container flex">
+      <user-card v-if="cheer.attendees.length<=3" v-for="user in cheer.attendees" :key="user._id"
         class="user-card-img" :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
          <!-- <td v-for="prop in user" :key="">{{prop}}</td> -->
+      <user-card v-else :v-for="returnUsers" class="user-card-img" 
+      :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
+        <div class="additional-users" v-if="cheer.attendees.length>3">
+          <span>+{{cheer.attendees.length-3}}</span>
+        </div>
     </div>
 </article>
   
@@ -53,10 +58,10 @@
 
 <script>
 const moment = require("moment");
-import userCard from '../components/user-card.vue';
+import userCard from "../components/user-card.vue";
 
 export default {
-  props: {  
+  props: {
     cheer: {
       type: Object,
       default: {}
@@ -70,7 +75,7 @@ export default {
   },
   computed: {
     spotsLeft() {
-      if(!this.cheer.attendees) return this.cheer.spots;
+      if (!this.cheer.attendees) return this.cheer.spots;
       else return this.cheer.spots - this.cheer.attendees.length;
     },
     relativeDate() {
@@ -82,6 +87,11 @@ export default {
     returnImg() {
       // console.log(`${this.cheer.img}`);
       return `background-image: url(${this.cheer.img})`;
+    },
+    returnUsers() {
+      for (let i = 0; i < 3; i++) {
+        return this.cheer.attendees[i];
+      }
     }
   },
   methods: {
@@ -90,7 +100,7 @@ export default {
     },
     setImg() {
       return `url(${this.cheer.img})`;
-    },
+    }
   },
   components: {
     userCard
@@ -143,26 +153,34 @@ export default {
 //     box-shadow: 0 0 4px 0 var(--secondary) inset;
 //     display: inline-block;
 
-
 // }
 
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700');
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700");
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
 
-*{
+* {
   box-sizing: border-box;
 }
 
-body, html {
-   font-family: 'Roboto Slab', serif;
-    margin: 0;
+/* styles for '...' */
+.card__title {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+body,
+html {
+  font-family: "Roboto Slab", serif;
+  margin: 0;
   width: 100%;
-height: 100%;
-    padding: 0;
+  height: 100%;
+  padding: 0;
 }
 
 body {
-  background-color: #D2DBDD;
+  background-color: #d2dbdd;
   display: flex;
   display: -webkit-flex;
   -webkit-justify-content: center;
@@ -171,8 +189,17 @@ body {
   align-items: center;
 }
 
-.card--1 .card__img, .card--1 .card__img--hover {
-    background-image: url('https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260');
+
+.additional-users {
+  height: 48px;
+  width: 48px; 
+  border: 1px solid #ad7d52;;
+  border-radius: 50%;
+}
+
+.card--1 .card__img,
+.card--1 .card__img--hover {
+  background-image: url("https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
 }
 
 .user-card-img {
@@ -180,40 +207,39 @@ body {
   width: 50px;
 }
 .card__like {
-    width: 18px;
+  width: 18px;
 }
 
 .card__clock {
-    width: 15px;
+  width: 15px;
   vertical-align: middle;
-    fill: #AD7D52;
+  fill: #ad7d52;
 }
 .card__time {
-    font-size: 12px;
-    color: #AD7D52;
-    vertical-align: middle;
-    margin-left: 5px;
+  font-size: 12px;
+  color: #ad7d52;
+  vertical-align: middle;
+  margin-left: 5px;
 }
 
 .card__clock-info {
-    float: right;
+  float: right;
 }
 
 .card__img {
   visibility: hidden;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 235px;
-  border-top-left-radius: 12px;
-border-top-right-radius: 12px;
-  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 235px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 .card__info-hover {
-    position: absolute;
-    padding: 16px;
+  position: absolute;
+  padding: 16px;
   width: 100%;
   opacity: 0;
   top: 0;
@@ -221,90 +247,97 @@ border-top-right-radius: 12px;
 
 .card__img--hover {
   transition: 0.2s all ease-out;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
   position: absolute;
-    height: 235px;
-  border-top-left-radius: 12px;
-border-top-right-radius: 12px;
-top: 0;
-  
+  height: 235px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  top: 0;
 }
-
 
 .cheer-prev-container {
   width: 25%;
+  position: relative;
 }
 .card {
   margin: 25px;
-  height: 465px ;
-  transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
+  height: 465px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
   background-color: #fff;
-    // width: 33.3%;
+  // width: 33.3%;
   position: relative;
-  border-radius: 12px;
+  // border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0,0.1);
+  box-shadow: 0px 13px 10px -7px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 .card:hover {
-  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0,0.1);
-    // transform: scale(1.10, 1.10);
+  box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+  // transform: scale(1.10, 1.10);
 }
 
 .card__info {
-z-index: 2;
+  z-index: 2;
   background-color: #fff;
   border-bottom-left-radius: 12px;
-border-bottom-right-radius: 12px;
-   padding: 16px 24px 24px 24px;
+  border-bottom-right-radius: 12px;
+  padding: 16px 0 16px 0;
 }
 
 .card__category {
-    font-family: 'Raleway', sans-serif;
-    text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 2px;
-    font-weight: 500;
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 500;
   color: #868686;
 }
 
 .card__title {
-    margin-top: 5px;
-    margin-bottom: 10px;
-    font-family: 'Roboto Slab', serif;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: pre-wrap;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-family: "Roboto Slab", serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
 }
 
 .card__by {
-    font-size: 12px;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 500;
+  font-size: 12px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
 }
 
 .card__author {
-    font-weight: 600;
-    text-decoration: none;
-    color: #AD7D52;
+  font-weight: 600;
+  text-decoration: none;
+  color: #ad7d52;
 }
 
 .card:hover .card__img--hover {
-    // height: 100%;
-    height: 52%;
-    opacity: 0.5;
+  // height: 100%;
+  height: 52%;
+  opacity: 0.5;
 }
 
 .card:hover .card__info {
-    background-color: transparent;
-    position: relative;
+  background-color: transparent;
+  position: relative;
 }
 
 .card:hover .card__info-hover {
-    opacity: 1;
+  opacity: 1;
+}
+
+.users-container {
+  position: absolute;
+  bottom: 5px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 @media (max-width: 1050px) {

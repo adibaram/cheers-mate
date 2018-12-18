@@ -7,6 +7,17 @@
       <!-- <h1 class="desc">Find new people to cheer with</h1> -->
 
     </div>
+    <!-- <el-button-group class="display-btns">
+        <el-button type="warning" icon="el-icon-menu"></el-button>
+        <el-button type="warning" icon="el-icon-location"></el-button>
+    </el-button-group> -->
+
+      <!-- <div>
+    <el-radio-group text-color="#ffffff" fill="#e6a23c" v-model="radio3">
+      <el-radio-button type="warning" label="list"></el-radio-button>
+      <el-radio-button type="warning" label="map"></el-radio-button>
+    </el-radio-group>
+  </div> -->
     <cheer-list></cheer-list>
 
   </section>
@@ -21,6 +32,12 @@ import loadingModal from '../components/loading-modal.vue';
 
 export default {
   name: 'home',
+  data() {
+    return {
+      radio3: 'list'
+    }
+  },
+
   components: {
     cheerList,
     cheerFilter,
@@ -44,5 +61,14 @@ export default {
   .desc {
     color: white;
     font-size: 60px;
+  }
+
+  .display-btns {
+      margin: auto;
+      padding: 10px;
+      display: flex;
+      align-content: center;
+      flex-wrap: wrap;
+      width: fit-content;
   }
 </style>
