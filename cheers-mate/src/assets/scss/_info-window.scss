@@ -1,20 +1,48 @@
-.info-window {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+// button.gm-ui-hover-effect {
+//     background-color: red !important;
+//     border-radius: 50%;
+//     width: 33px !important;
+//     height: 33px !important;
+//     display: flex !important;
+//     justify-content: center;
+//     align-items: center;
+//     right: -5px !important;
+// }
 
-    & .info-header {
-        background-color: #ebb563;
-        padding: 5px;
-    }
-    & .info-content {
-        flex-grow: 1;
-    }
-
-    & .seats-location {
+.map-modal {
+    // background-color: #;
+    width: fit-content;
+    
+    .info-window {
+        height: 100%;
+        width: 100%;
         display: flex;
-        justify-content: space-evenly;
+        flex-direction: column;
+        background-color: #fff;
+        cursor: pointer;
+        & > * {
+            padding: 2px;
+        }    
+        & .info-header {
+            background-color: #ebb563;
+            padding: 5px;
+            text-align: center;
+        }
+        & .info-content {
+            flex-grow: 1;
+            text-align: center;
+        }
+        
+        & .seats-location {
+            display: flex;
+            justify-content: space-evenly;
+            * {
+                margin: 0 2px;
+            }
+        }
+        
+        
     }
-
 }
+    
+    

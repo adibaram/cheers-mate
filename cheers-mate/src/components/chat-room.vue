@@ -3,8 +3,11 @@
     <section class="chat-msg-list" ref="chatList">
       <h1>Let's start talking</h1>
       <div class="clean-list">
-        <chat-msg v-for="msg in msgs" :key="msg.at" class="msg" :class="myMsg(msg)"><span slot="from" class="msg-from">{{msg.from}}</span><span slot="txt">{{msg.txt}}</span></chat-msg>
-        <span ref="endOfChat" id="end-of-chat"> </span>
+        <chat-msg v-for="msg in msgs" :key="msg.at" class="msg" :class="myMsg(msg)">
+            <span slot="from" class="msg-from">{{msg.from}}</span>
+            <span slot="txt">{{msg.txt}}</span>
+        </chat-msg>
+        <span ref="endOfChat" id="end-of-chat"></span>
       </div>
     </section>
     <form @submit.prevent="sendMsg" ref="chat">
@@ -24,10 +27,7 @@ export default {
             default: ()=>[],
         }
     },
-    mounted() {
-        // this.scrollToEnd();
-        window.refs = this.$refs
-    },
+
     methods: {
         sendMsg() {
             // GET MSG
