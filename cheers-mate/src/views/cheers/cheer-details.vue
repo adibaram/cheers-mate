@@ -31,20 +31,19 @@
 
                     </div>
                     <div class="share">
-                        <span> </span>
                         <social-sharing inline-template>
                             <div>
                                 <network network="facebook">
-                                <i class="fab fa-facebook-square"></i>
+                                    <i class="fab fa-facebook-square"></i>
                                 </network>
                                 <network network="linkedin">
-                                <i class="fab fa-linkedin"></i>
+                                    <i class="fab fa-linkedin"></i>
                                 </network>
                                 <network network="twitter">
-                                <i class="fab fa-twitter-square"></i>
+                                    <i class="fab fa-twitter-square"></i>
                                 </network>
                                 <network network="whatsapp">
-                                <i class="fab fa-whatsapp-square"></i>
+                                    <i class="fab fa-whatsapp-square"></i>
                                 </network>
                             </div>
                         </social-sharing>
@@ -287,6 +286,14 @@ export default {
         &:focus {
             outline: 0;
         }
+        .chat.open+& {
+            &:after {
+                content: '';
+                content: '\f00d';
+            }
+            top:10%;
+            bottom: unset;
+        }
         &:active {
             border: 2px solid darkorange;
             background-color: #fff;
@@ -294,13 +301,6 @@ export default {
             &:after {
                 font-weight: 900;
             }
-        }
-        .chat.open+& {
-            &:after {
-                content: '\f00d';
-            }
-            top:10%;
-            bottom: unset;
         }
 
         @media (max-width: 600px){

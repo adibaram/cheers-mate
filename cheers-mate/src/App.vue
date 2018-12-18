@@ -7,14 +7,15 @@
       <router-view/>
     </main>
     <footer>
-
+      <footer-cmp></footer-cmp>
     </footer>
   </section>
 </template>
 
 <script>
 import userService from './services/user-service.js';
-import navBar from './components/nav-bar.vue'
+import navBar from './components/nav-bar.vue';
+import footerCmp from './components/footer-cmp.vue';
 
 export default {
   sockets: {
@@ -84,7 +85,8 @@ export default {
 
   }, 
   components: {
-    navBar
+    navBar,
+    footerCmp,
   }
 };
 </script>

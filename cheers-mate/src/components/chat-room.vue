@@ -129,15 +129,16 @@ export default {
         .chat {
             opacity: 0;
             position: fixed;
+            top: 0;
             right: -100%;
-            transition: .3s;
-            height: calc(100vh - 50px);
-            width: 90%;
+            transition: .5s;
+            height: 96%;
+            width: 96%;
 
             &.open {
                 opacity: 1;
-                top: 50px;
-                margin: 0 auto;
+                // top: 50px;
+                margin: 2%;
                 right:unset;
                 z-index: 1;
             }
