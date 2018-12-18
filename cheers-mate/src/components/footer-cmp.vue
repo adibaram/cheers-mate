@@ -4,10 +4,6 @@
     </section>
 </template>
 
-<script>
-
-</script>
-
 <style lang="scss" scoped>
     .footer {
         background-color: darken(#faf9f7,30%);
