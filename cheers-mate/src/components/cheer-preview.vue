@@ -51,10 +51,10 @@
     <span v-else class="flex">
       <user-card v-for="user in usersForPreview" :key="user._id" class="user-card-img" 
       :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
-    </span>
-        <div class="additional-users" v-if="cheer.attendees.length>3">
-          <span>+{{cheer.attendees.length-3}}</span>
+        <div class="additional-users">
+          +{{cheer.attendees.length-3}}
         </div>
+    </span>
     </div>
 </article>
   
@@ -202,6 +202,12 @@ body {
   width: 48px; 
   border: 1px solid #ad7d52;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ad7d52;
+  font-weight: bold;
+  opacity: .8;
 }
 
 .card--1 .card__img,
