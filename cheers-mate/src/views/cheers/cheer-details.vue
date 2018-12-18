@@ -288,8 +288,8 @@ export default {
         }
         .chat.open+& {
             &:after {
-                content: '';
-                content: '\f00d';
+                content: '×';
+                // content: '\f00d';
             }
             top:10%;
             bottom: unset;

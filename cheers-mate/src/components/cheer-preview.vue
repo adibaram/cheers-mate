@@ -37,7 +37,8 @@
      <div :style="returnImg" class="card__img--hover"></div>
    <!-- </a> -->
   <div class="card__info">
-    <span class="card__category"> <i class="fas fa-users"></i> {{spotsLeft}} seats left</span>
+    <span class="card__category"> <i class="fas fa-users"></i> {{spotsLeft}} seats left</span><br>
+    <span class="card__category"> <i class="fas fa-map-marker-alt"></i> {{cheer.locationName}}</span>
     <h3 class="card__title">Let's talk about <span v-for="category in cheer.category" :key="category">{{category}} </span></h3>
     <span class="card__by">created by <a href="#" class="card__author" title="author">{{cheer.cheerCreator.fullName}}</a></span>
   </div>
@@ -199,7 +200,7 @@ body {
 .additional-users {
   height: 48px;
   width: 48px; 
-  border: 1px solid #ad7d52;;
+  border: 1px solid #ad7d52;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -275,7 +276,7 @@ body {
   position: relative;
 }
 .card {
-  margin: 25px;
+  margin: 15px;
   height: 465px;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
   background-color: #fff;
@@ -305,7 +306,8 @@ body {
   font-size: 13px;
   letter-spacing: 2px;
   font-weight: 500;
-  color: #868686;
+  // color: #868686;
+  color: #ad7d52;
 }
 
 .card__title {
@@ -367,7 +369,7 @@ body {
 
 @media (max-width: 550px) {
   .cheer-prev-container {
-    width: 90%;
+    width: 96%;
   }
 }
 </style>
