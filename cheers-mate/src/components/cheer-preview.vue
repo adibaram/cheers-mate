@@ -300,7 +300,7 @@ body {
   background-color: #fff;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
-  padding: 16px 0 16px 0;
+  padding: 16px 4px 16px 4px;
 }
 
 .card__category {

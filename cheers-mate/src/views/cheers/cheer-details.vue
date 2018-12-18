@@ -82,30 +82,27 @@
       </div>
     </section>
 
-    <section class="main-info-container">
-      <div class="description-attendees">
-        <!-- <div class="cover-image">
-                    <img :src="(cheer.img)? cheer.img : 'https://via.placeholder.com/250x100'" alt="">
-        </div>-->
-        <!-- <div class="cheer-description">
-                    <h3>Details:</h3>
-                    {{cheer.desc}}
-        </div>-->
-        <section class="cheer-attendees">
-          <h3 v-if="cheer.attendees && cheer.attendees.length">Attendees:</h3>
-          <h3 v-else>Be the first one to join!</h3>
-          <div class="attendees">
-            <div v-for="user in cheer.attendees" :key="user._id">
-              <user-card
-                class="user-card"
-                :user="user"
-                @click.native="$router.push(`/user/${user._id}`)"
-              ></user-card>
-              <!-- <td v-for="prop in user" :key="">{{prop}}</td> -->
-            </div>
-          </div>
+        <section class="main-info-container">
+        <div class="description-attendees">
+            <!-- <div class="cover-image">
+                        <img :src="(cheer.img)? cheer.img : 'https://via.placeholder.com/250x100'" alt="">
+            </div>-->
+            <!-- <div class="cheer-description">
+                        <h3>Details:</h3>
+                        {{cheer.desc}}
+                    </div> -->
+                    <section class="cheer-attendees">
+                        <h3 v-if="cheer.attendees && cheer.attendees.length"> Attendees ({{cheer.attendees.length}})</h3>
+                        <h3 v-else>Be the first one to join!</h3>
+                        <div class="attendees">
+                            <div v-for="user in cheer.attendees" :key="user._id">
+                                <user-card class="user-card" :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
+                                <!-- <td v-for="prop in user" :key="">{{prop}}</td> -->
+                            </div>
+                        </div>
+                    </section>
+                </div>
         </section>
-      </div>
 
       <!-- <div class="date-time-map" v-if="cheer.position">
                 <div class="date-time">
@@ -117,7 +114,6 @@
       </div>-->
       <chat-room :msgs="msgs"></chat-room>
       <button class="chat-toggle" @click="toggleChat"></button>
-    </section>
     <section class="cheer-location flex column">
       <div class="address">
         <div class="icon">
@@ -133,7 +129,7 @@
         <img :src="mapPic" alt="map">
       </div>
     </section>
-  </section>
+    </section>
 </template>
 
 <script>
@@ -292,21 +288,25 @@ export default {
   // max-width: 90%;
 }
 
-.chat-toggle {
-  display: none;
-  position: fixed;
-  bottom: 5%;
-  right: 5%;
-  border-radius: 50%;
-  color: white;
-  border: 1px solid azure;
-  background-color: var(--secondary);
-  z-index: 2;
-  height: 48px;
-  width: 48px;
-  font-size: 1.7em;
-  text-align: center;
-  font-family: 'Font Awesome 5 Free';
+    .chat-room {
+        flex-grow: 1;
+    }
+
+    .chat-toggle {
+        display: none;
+        position: fixed;
+        bottom: 5%;
+        right: 5%;
+        border-radius: 50%;
+        color: white;
+        border: 1px solid azure;
+        background-color: var(--secondary);
+        z-index: 2;
+        height: 48px;
+        width: 48px;
+        font-size: 1.7em;
+        text-align: center;
+        font-family: "Font Awesome 5 Free";
 
   &:after {
     content: '\f075';
@@ -332,10 +332,15 @@ export default {
     }
   }
 
-  @media (max-width: 600px) {
-    & {
-      display: unset;
+    @media (max-width: 600px) {
+        & {
+        display: unset;
+        }
     }
-  }
+    @media (max-width: 750px){
+    & {
+        display: unset;
+    }
+    }
 }
 </style>

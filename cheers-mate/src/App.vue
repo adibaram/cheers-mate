@@ -16,6 +16,7 @@
 import userService from './services/user-service.js';
 import navBar from './components/nav-bar.vue';
 import footerCmp from './components/footer-cmp.vue';
+import axios from 'axios';
 
 export default {
   sockets: {
