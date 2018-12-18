@@ -84,13 +84,7 @@
 
         <section class="main-info-container">
         <div class="description-attendees">
-            <!-- <div class="cover-image">
-                        <img :src="(cheer.img)? cheer.img : 'https://via.placeholder.com/250x100'" alt="">
-            </div>-->
-            <!-- <div class="cheer-description">
-                        <h3>Details:</h3>
-                        {{cheer.desc}}
-                    </div> -->
+
                     <section class="cheer-attendees">
                         <h3 v-if="cheer.attendees && cheer.attendees.length"> Attendees ({{cheer.attendees.length}})</h3>
                         <h3 v-else>Be the first one to join!</h3>
@@ -102,6 +96,8 @@
                         </div>
                     </section>
                 </div>
+                 <chat-room :msgs="msgs"></chat-room>
+                <button class="chat-toggle" @click="toggleChat"></button>
         </section>
 
       <!-- <div class="date-time-map" v-if="cheer.position">
@@ -112,18 +108,14 @@
                         <div>{{time}}</div>
                     </div>
       </div>-->
-      <chat-room :msgs="msgs"></chat-room>
-      <button class="chat-toggle" @click="toggleChat"></button>
+
     <section class="cheer-location flex column">
       <div class="address">
         <div class="icon">
           <i class="fas fa-map-marker-alt"></i>
           {{cheer.address}}
         </div>
-        <!-- <div class="info">
-                    <div class="street">{{cheer.address}}</div>
-                    <div class="city">{{cheer.position}}</div>
-        </div>-->
+
       </div>
       <div class="map">
         <img :src="mapPic" alt="map">
@@ -134,13 +126,13 @@
 
 <script>
 // IMPORTS
-import cheerService from '../../services/cheer-service.js';
-import userCard from '../../components/user-card.vue';
-import userService from '../../services/user-service.js';
-import loadingModal from '../../components/loading-modal.vue';
-import chatRoom from '../../components/chat-room.vue';
+import cheerService from "../../services/cheer-service.js";
+import userCard from "../../components/user-card.vue";
+import userService from "../../services/user-service.js";
+import loadingModal from "../../components/loading-modal.vue";
+import chatRoom from "../../components/chat-room.vue";
 
-const moment = require('moment');
+const moment = require("moment");
 
 export default {
   data() {
@@ -154,8 +146,8 @@ export default {
   },
   created() {
     this.loadCheer();
-    this.$socket.emit('joinRoom', this.$route.params.cheerId);
-    this.$store.dispatch({ type: 'setLoading', isLoading: true });
+    this.$socket.emit("joinRoom", this.$route.params.cheerId);
+    this.$store.dispatch({ type: "setLoading", isLoading: true });
     window.scrollTo(0, 0);
   },
 
@@ -163,8 +155,8 @@ export default {
     loadCheer() {
       var cheerId = this.$route.params.cheerId;
       cheerService.getById(cheerId).then(res => {
-        console.log('this cheer:', res);
-        this.$store.dispatch({ type: 'setLoading', isLoading: false });
+        console.log("this cheer:", res);
+        this.$store.dispatch({ type: "setLoading", isLoading: false });
 
         return (this.cheer = res);
       });
@@ -176,7 +168,7 @@ export default {
       if (currUser) {
         userId = currUser._id;
         if (isAttending) {
-          this.$socket.emit('userAttending', { userId, cheerId });
+          this.$socket.emit("userAttending", { userId, cheerId });
         } else {
           const idx = this.cheer.attendees.findIndex(
             user => user._id === userId
@@ -186,16 +178,16 @@ export default {
           }
         }
       } else {
-        this.$router.push('/login');
+        this.$router.push("/login");
       }
     },
     toggleChat() {
-      this.$el.querySelector('.chat').classList.toggle('open');
+      this.$el.querySelector(".chat").classList.toggle("open");
     }
   },
   computed: {
     date() {
-      return moment(this.cheer.date).format('dddd, LL');
+      return moment(this.cheer.date).format("dddd, LL");
     },
     relativeDate() {
       return moment(this.cheer.date).fromNow();
@@ -204,7 +196,7 @@ export default {
       return this.cheer.spots - this.cheer.attendees.length;
     },
     time() {
-      return moment(this.cheer.date).format('hh:mm A');
+      return moment(this.cheer.date).format("hh:mm A");
     },
     mapPic() {
       return `https://maps.googleapis.com/maps/api/staticmap?center=${
@@ -288,28 +280,28 @@ export default {
   // max-width: 90%;
 }
 
-    .chat-room {
-        flex-grow: 1;
-    }
+.chat-room {
+  flex-grow: 1;
+}
 
-    .chat-toggle {
-        display: none;
-        position: fixed;
-        bottom: 5%;
-        right: 5%;
-        border-radius: 50%;
-        color: white;
-        border: 1px solid azure;
-        background-color: var(--secondary);
-        z-index: 2;
-        height: 48px;
-        width: 48px;
-        font-size: 1.7em;
-        text-align: center;
-        font-family: "Font Awesome 5 Free";
+.chat-toggle {
+  display: none;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  border-radius: 50%;
+  color: white;
+  border: 1px solid azure;
+  background-color: var(--secondary);
+  z-index: 2;
+  height: 48px;
+  width: 48px;
+  font-size: 1.7em;
+  text-align: center;
+  font-family: "Font Awesome 5 Free";
 
   &:after {
-    content: '\f075';
+    content: "\f075";
   }
 
   &:focus {
@@ -317,7 +309,7 @@ export default {
   }
   .chat.open + & {
     &:after {
-      content: '×';
+      content: "×";
       // content: '\f00d';
     }
     top: 5%;
@@ -332,15 +324,15 @@ export default {
     }
   }
 
-    @media (max-width: 600px) {
-        & {
-        display: unset;
-        }
-    }
-    @media (max-width: 750px){
+  @media (max-width: 600px) {
     & {
-        display: unset;
+      display: unset;
     }
+  }
+  @media (max-width: 750px) {
+    & {
+      display: unset;
     }
+  }
 }
 </style>

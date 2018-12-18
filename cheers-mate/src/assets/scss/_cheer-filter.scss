@@ -1,7 +1,7 @@
 
 .filter-container {
     padding: 30px;
-    margin: 100px 0px 0px calc(2% + 10px);
+    margin: 120px 0px 0px calc(2% + 10px);
     background-color: rgba(256, 256, 256, 0.7);
     // opacity: 0.7;
     border-radius: 3%;
@@ -25,7 +25,7 @@
     @media (max-width: 700px) {
       & {
         margin: 2%;
-        margin-top: calc(50px + 2%);
+        margin-top: calc(70px + 2%);
         width: 100%;
         // padding: 10%;
         // .filter-input {
