@@ -22,16 +22,10 @@ export default {
     connect() {
       console.log("socket connected");
     },
-    customEmit(data) {
-      console.log(
-        'this method was fired by the socket server. eg: io.emit("customEmit", data)'
-      );
-    },
     renderMsg(msg) {
       this.msgToShow = msg;
     },
     userAttended({userId , cheerId}) {
-      console.log('DEBUG::userId', userId);
       userService.getById(userId)
         .then(({user ,cheers}) => {
           const newCheer = cheers.find(cheer => cheer._id === cheerId); 
@@ -39,7 +33,11 @@ export default {
           this.$notify({
             title: 'Attendance',
             dangerouslyUseHTMLString: true,
-            message: `<span class="notification-content" ><a class="user-link" href="/user/${user._id}">${user.nickname}</a> attended to cheer: <a class="cheer-link" href="/cheer/${cheerId}">${newCheer.locationName}</a>!<span>`,
+            message: `<span class="notification-content">
+                        <a class="user-link" href="/user/${user._id}">${user.nickname}</a> 
+                        attended to cheer: 
+                        <a class="cheer-link" href="/cheer/${cheerId}">${newCheer.locationName}</a>!
+                      <span>`,
             offset: 50,
           });
         })
