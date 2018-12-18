@@ -10,7 +10,7 @@
                 <input v-model="newUser.nickname" placeholder="User Name" type="text" required>
             </label>
             <label> 
-                <input v-model="newUser.email" placeholder="Email" type="text">
+                <input v-model="newUser.email" placeholder="Email" type="email">
             </label>
             <label> 
                 <input v-model="newUser.password" placeholder="Password" type="password" required>
