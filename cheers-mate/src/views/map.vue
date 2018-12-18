@@ -14,8 +14,9 @@
       :position="currCheer.position.coordinates"
       :opened="infoOpened" 
       @closeclick="infoOpened=false; infoCurrentKey=null"
+      
       >
-      <div v-html="infoContent"></div>
+      <div v-html="infoContent" @click="goToCheer(infoCurrentKey)" class="map-modal"></div>
     </gmap-info-window>
  
 
@@ -81,14 +82,16 @@ export default {
       }
     },
     getInfoWindowContent(cheer) {
+          var categoriesStr = cheer.category[0];
+          if (cheer.category.length > 1) categoriesStr += ' & more...';
           return (`<section class="info-window">
-                      <div class="info-header">Let's talk about <span v-for="category in cheer.category" :key="category">{{category}} </span></div>
+                      <div class="info-header">Let's talk about ${categoriesStr}</span></div>
                       <div class="info-content">
                           <div class="seats-location">
                             <div><i class="fas fa-map-marker-alt"></i> ${cheer.locationName}</div>
                             <div><i class="fas fa-users"></i> ${cheer.attendees.length} of ${cheer.spots}</div>
                           </div>
-                          <p>${moment(cheer.date).format('dddd, ll')}</p>
+                          <p><i class="far fa-clock"></i>${moment(cheer.date).format('dddd, ll')}</p>
                       </div>
                    </section>`);
     },
@@ -97,7 +100,11 @@ export default {
     },
     findCurrLocation() {
       this.$store.dispatch({ type: "findCurrPosition" });
-    }
+    },
+    goToCheer(cheerId) {
+      console.log('DEBUG::cheerId', cheerId);
+      this.$router.push(`/cheer/${cheerId}`);
+    },
   },
   created(){
       this.$store.dispatch({ type: 'setLoading', isLoading: true});

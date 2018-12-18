@@ -31,16 +31,16 @@ export default {
     renderMsg(msg) {
       this.msgToShow = msg;
     },
-    userAttended({userId}) {
+    userAttended({userId , cheerId}) {
       console.log('DEBUG::userId', userId);
       userService.getById(userId)
         .then(({user ,cheers}) => {
-          const newCheer = cheers[cheers.length-1]; 
+          const newCheer = cheers.find(cheer => cheer._id === cheerId); 
           const h = this.$createElement;
           this.$notify({
             title: 'Attendance',
             dangerouslyUseHTMLString: true,
-            message: `<span class="notification-content" ><a class="user-link" href="/user/${user._id}">${user.nickname}</a> attended to cheer: <a class="cheer-link" href="/cheer/${newCheer._id}">${newCheer.locationName}</a>!<span>`,
+            message: `<span class="notification-content" ><a class="user-link" href="/user/${user._id}">${user.nickname}</a> attended to cheer: <a class="cheer-link" href="/cheer/${cheerId}">${newCheer.locationName}</a>!<span>`,
             offset: 50,
           });
         })

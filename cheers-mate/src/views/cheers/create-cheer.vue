@@ -163,6 +163,7 @@ export default {
       this.newCheer.position.coordinates.lat = this.place.geometry.location.lat();
       this.newCheer.position.coordinates.lng = this.place.geometry.location.lng();
       this.newCheer.cheerCreator = this.$store.getters.getUser;
+      delete this.newCheer.cheerCreator.password;
       this.newCheer.spots = +this.newCheer.spots;
       this.newCheer.attendees = [];
       this.stepNum++;

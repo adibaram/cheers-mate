@@ -2,10 +2,13 @@
   <section class="chat">
     <section class="chat-msg-list" ref="chatList">
       <h1>Let's start talking</h1>
-      <ul class="clean-list">
-        <li v-for="msg in msgs" :key="msg.at" class="msg">{{msg.from}}: {{msg.txt}}</li>
-        <span ref="endOfChat" id="end-of-chat"> </span>
-      </ul>
+      <div class="clean-list">
+        <chat-msg v-for="msg in msgs" :key="msg.at" class="msg" :class="myMsg(msg)">
+            <span slot="from" class="msg-from">{{msg.from}}</span>
+            <span slot="txt">{{msg.txt}}</span>
+        </chat-msg>
+        <span ref="endOfChat" id="end-of-chat"></span>
+      </div>
     </section>
     <form @submit.prevent="sendMsg" ref="chat">
       <input v-scroll-to="'#end-of-chat'" ref="newMsgInput" type="text">
@@ -15,6 +18,8 @@
 </template>
 
 <script>
+import chatMsg from './chat-msg.vue';
+
 export default {
     props: {
         msgs: {
@@ -22,10 +27,7 @@ export default {
             default: ()=>[],
         }
     },
-    mounted() {
-        // this.scrollToEnd();
-        window.refs = this.$refs
-    },
+
     methods: {
         sendMsg() {
             // GET MSG
@@ -49,18 +51,29 @@ export default {
             this.$socket.emit('newChatMsg' , {msg,cheerId});
             msgInput.value = '';
 
+            this.scrollToEnd();
+
         },
         scrollToEnd() {   	
             const elChatList = this.$refs.chatList;
             elChatList.scrollTop = elChatList.scrollHeight - elChatList.clientHeight;
         },
+        myMsg(msg) {
+            if (this.$store.getters.getUser && msg.from === this.$store.getters.getUser.nickname) {
+                return 'my-msg';
+            }
+        }
     },
     watch: {
         'msgs.length'(length, prevLength) {
             console.log({length, prevLength})
             if (prevLength === 0) this.$nextTick().then(() => this.scrollToEnd())
         }
+    },
+    components: {
+        chatMsg
     }
+
 };
 </script>
 
@@ -117,12 +130,11 @@ export default {
             height: inherit;
             overflow-y: auto;
             word-break: break-all;
-            &:hover {
-                overflow-y: scroll;
-            }
-            .msg {
-                margin: 0px 5px 10px 0px;
-            }
+            padding: 0 5px;
+            // &:hover {
+            //     overflow-y: scroll;
+            // }
+
         }
     }
 
@@ -135,12 +147,16 @@ export default {
             transition: .5s;
             height: 96%;
             width: 96%;
+            margin: 2%;
+
+            // height: 100%;
+            // width: 100%;
+            // margin: 0;
 
             &.open {
                 opacity: 1;
                 // top: 50px;
-                margin: 2%;
-                right:unset;
+                right: 0;
                 z-index: 1;
             }
         }

@@ -132,7 +132,7 @@ export default {
         this.loadCheer();
         this.$socket.emit('joinRoom', this.$route.params.cheerId);
         this.$store.dispatch({ type: 'setLoading', isLoading: true});
-
+        window.scrollTo(0,0);
 
     },
 
@@ -295,7 +295,7 @@ export default {
                 content: 'X';
                 // content: '\f00d';
             }
-            top:10%;
+            top: 5%;
             bottom: unset;
         }
         &:active {

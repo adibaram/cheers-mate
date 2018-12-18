@@ -25,7 +25,7 @@ module.exports = io => {
         });
 
         socket.on('userAttending', ({userId , cheerId})=> {
-            io.emit('userAttended',{userId});
+            io.emit('userAttended',{userId , cheerId});
             rsvpUserCheer.add({userId , cheerId})
                 .then(()=>{
                     socket.emit('updateCheer');
