@@ -8,18 +8,18 @@
         <div class="user-details-cheers">
         <h1 v-if="!userCheers.length">No events to show yet</h1>
 
-        <h1 v-if="upcomingEvents">Upcoming events</h1>
+        <h1 class="events-headline" v-if="upcomingEvents">Upcoming events</h1>
         <section class="cards" v-for="cheer in userCheers" :key="cheer.date" v-if="cheer.date > currDate">
             <div class="cheer-card">
                 <cheer-preview :cheer="cheer"></cheer-preview>
             </div>
         </section>
 
-        <h1 v-if="pastEvents">Past events</h1>
+        <h1 class="events-headline" v-if="pastEvents">Past events</h1>
          <section class="cards" v-for="cheer in userCheers" v-if="cheer.date < currDate" :key="cheer._id">
-            <div class="cheer-card">
+    
                 <cheer-preview :cheer="cheer"></cheer-preview>
-            </div>
+
         </section>
         </div>
         <!-- <pre>{{user}}</pre> -->
@@ -79,6 +79,27 @@ export default {
     .cheer-card {
         width: 250px;
         height: 300px;    
+    }
+
+    .events-headline {
+        margin-left: 18px;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 550px) {
+        .user-header {
+            flex-direction: column;
+            
+        }
+
+        .user-header h1 {
+            font-size: 30px;
+        }
+
+        .user-header img {
+            max-height: 170px;
+        }
     }
 </style>
     
