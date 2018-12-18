@@ -32,6 +32,8 @@ app.use(session({
   }
 }))
 
+app.use(history());
+app.use(express.static('public'));
 
 addAuthRoutes(app)
 addCheerRoutes(app);
@@ -42,8 +44,6 @@ addUserCheerRoutes(app);
 //   res.redirect('/')
 // })
 
-app.use(history());
-app.use(express.static('public'));
 
 const socketService = require('./services/socket-service')
 socketService(io)
