@@ -41,29 +41,17 @@ addUserRoutes(app);
 addUserCheerRoutes(app);
 
 // app.get('/', (req, res) => {
-//   res.redirect('/')
-// })
-
-
-const socketService = require('./services/socket-service')
-socketService(io)
-
-const PORT = process.env.PORT || 3003;
-http.listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
-
-// setTimeout(updateCheerTimes, 2000)
-const q = encodeURIComponent('Rubi, Yermiyahu Street, Tel Aviv-Yafo, Israel')
-console.log({q})
-const nodeFetch = require('node-fetch')
-nodeFetch(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${q}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyDSpb5jrUSIDb124D7Qpjd4XJQ6d8oVPW0`)
-      .then(res => res.json())
-      .then(place => {
-        console.log({place})
-        nodeFetch(`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${place.candidates[0].photos[0].photo_reference}&key=AIzaSyDSpb5jrUSIDb124D7Qpjd4XJQ6d8oVPW0`)
-        .then(res => {
-          console.log('finallllllll', res)
-        })
-      })
+  //   res.redirect('/')
+  // })
+  
+  
+  const socketService = require('./services/socket-service')
+  socketService(io)
+  
+  const PORT = process.env.PORT || 3003;
+  http.listen(PORT, () => console.log(`cheersMate api listening on port ${PORT}`));
+  
+  // setTimeout(updateCheerTimes, 2000)
 
 
 
