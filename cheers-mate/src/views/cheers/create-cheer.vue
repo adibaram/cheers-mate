@@ -11,8 +11,8 @@
       </div>
 
         <h1>Select a cool bar for your meet up</h1>
-        <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
-
+        <gmap-autocomplete @place_changed="setPlace" ref="autoCompleteInput"></gmap-autocomplete>
+        
         <h1>For how many people?</h1>
         <input type="number" v-model="newCheer.spots">
 
@@ -167,7 +167,7 @@ export default {
       this.newCheer.spots = +this.newCheer.spots;
       this.newCheer.attendees = [];
       this.stepNum++;
-      this.newCheer.img = this.place.photos[0].getUrl();
+      this.newCheer.img = refs.autoCompleteInput.$refs.input.value;
       
     },
     submitSecondStep() {
@@ -207,6 +207,9 @@ export default {
   created() {
     this.getCategories();
     if (!this.$store.getters.getUser) this.$router.push('/login');
+  },
+  mounted() {
+    window.refs = this.$refs;
   }
 };
 </script>
