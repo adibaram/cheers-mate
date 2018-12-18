@@ -50,7 +50,10 @@ Vue.config.productionTip = false
 //Google Maps With Vue
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyAPXhBZJxk_lQ7GMLmTm_szq6eJ7R7X_Z8',
+    // key: 'AIzaSyAPXhBZJxk_lQ7GMLmTm_szq6eJ7R7X_Z8',
+    // key: 'AIzaSyBOKU78_QbQjda_J_i1gEwH8RTCX0VWEzo',
+    // key: 'AIzaSyDSLLio1oMPc_TH1OrUFtMxHQnZmDp_JOw',
+    key: 'AIzaSyDSpb5jrUSIDb124D7Qpjd4XJQ6d8oVPW0',
     libraries: 'places'
   }
 })

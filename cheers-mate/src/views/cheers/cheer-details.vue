@@ -25,7 +25,7 @@
                     <div class="is-going" v-else >
                         <h4 class="txt">
                             You are attending to this cheer!
-                            <span class="spots-left" v-if="cheer.attendees">Spots left: {{spotsLeft}}</span>
+                            <span class="spots-left" v-if="cheer.attendees">{{spotsLeft}} Spots left</span>
                         </h4>
                         <el-button class="btn" size="small" type="warning" icon="el-icon-close" @click="userAttending(false)" plain>Cancel</el-button>
 
@@ -68,7 +68,7 @@
                     {{cheer.desc}}
                 </div> -->
                 <section class="cheer-attendees">
-                    <h3 v-if="cheer.attendees && cheer.attendees.length"> Attendees:</h3>
+                    <h3 v-if="cheer.attendees && cheer.attendees.length"> Attendees ({{cheer.attendees.length}})</h3>
                     <h3 v-else>Be the first one to join!</h3>
                     <div class="attendees">
                         <div v-for="user in cheer.attendees" :key="user._id">
@@ -263,6 +263,10 @@ export default {
         // max-width: 90%;
     }
 
+    .chat-room {
+        flex-grow: 1;
+    }
+
     .chat-toggle {
         display: none;
         position: fixed;
@@ -288,7 +292,7 @@ export default {
         }
         .chat.open+& {
             &:after {
-                content: '×';
+                content: 'X';
                 // content: '\f00d';
             }
             top:10%;
@@ -303,7 +307,7 @@ export default {
             }
         }
 
-        @media (max-width: 600px){
+        @media (max-width: 750px){
             & {
                 display: unset;
             }

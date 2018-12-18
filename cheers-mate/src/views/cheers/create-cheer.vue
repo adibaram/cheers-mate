@@ -196,6 +196,8 @@ export default {
     },
     setPlace(place) {
       console.log({place})
+      // debugger
+      console.log({place, 'place.photos[0].getUrl()': place.photos[0].getUrl()});
       this.place = place;
       this.showErr = false;
       console.log("DEBUG::this.place", this.place);

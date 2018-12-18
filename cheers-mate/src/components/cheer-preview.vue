@@ -37,8 +37,10 @@
      <div :style="returnImg" class="card__img--hover"></div>
    <!-- </a> -->
   <div class="card__info">
-    <span class="card__category"> <i class="fas fa-users"></i> {{spotsLeft}} seats left</span><br>
-    <span class="card__category"> <i class="fas fa-map-marker-alt"></i> {{cheer.locationName}}</span>
+    <div class="cheer-inpo-container">
+      <div class="card__category"><i class="fas fa-users"></i><span class="grid-spots">{{spotsLeft}} seats left</span></div><br>
+      <div class="card__category"><i class="fas fa-map-marker-alt"></i><span class="grid-location">{{cheer.locationName}}</span></div>
+    </div>
     <h3 class="card__title">Let's talk about <span v-for="category in cheer.category" :key="category">{{category}} </span></h3>
     <span class="card__by">created by <a href="#" class="card__author" title="author">{{cheer.cheerCreator.fullName}}</a></span>
   </div>
@@ -297,7 +299,7 @@ body {
   background-color: #fff;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
-  padding: 16px 0 16px 0;
+  padding: 16px 4px 16px 4px;
 }
 
 .card__category {

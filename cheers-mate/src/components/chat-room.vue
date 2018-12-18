@@ -68,7 +68,8 @@ export default {
     .chat {
         border: 1px solid rgba(128, 128, 128, 0.157);
         border-radius: 10px;
-        width: 400px;
+        // width: 400px;
+        width: 40%;
         margin-left: 100px;
         padding: 15px;
         margin: 20px;
@@ -125,7 +126,7 @@ export default {
         }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 750px) {
         .chat {
             opacity: 0;
             position: fixed;

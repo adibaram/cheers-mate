@@ -41,7 +41,7 @@
     }
     .attending-share {
         flex-grow: 1;
-        padding: 10px 0px 10px 5px;
+        // padding: 10px 0px 10px 5px;
         
         .spot-attendance {       
             .is-going {
@@ -93,6 +93,7 @@
     @media (max-width: 600px) {
         .attending-share {
             text-align: center;
+            // padding: 10px 0px 10px 5px;
             padding: 10px 0;
             .share {
                 justify-content: center;
@@ -121,7 +122,7 @@
     justify-content: space-between;
 
     .description-attendees {
-        width: 70%;
+        width: 60%;
         padding: 10px;
 
         & > * {
@@ -133,6 +134,7 @@
         }
 
         .cheer-attendees {
+            width: 60%;
             .attendees {
                 display: flex;
 
@@ -213,4 +215,35 @@
 
 .map img {
     width: 400px;
+}
+
+@media (max-width: 1000px) {
+    .attending-share {
+       text-align: center; 
+
+       .share {
+           justify-content: center;
+           align-items: center;
+       }
+    }
+}
+
+@media (max-width: 750px) {
+    .attending-share {
+        text-align: center;
+        // padding: 10px 0px 10px 5px;
+        padding: 10px 0;
+        .share {
+            justify-content: center;
+        }
+    }
+    .title-attendance-container {
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+
+        .name-date {
+            width: 100%;
+        }
+    }
 }
