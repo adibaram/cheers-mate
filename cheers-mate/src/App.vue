@@ -92,7 +92,7 @@ export default {
 
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -104,10 +104,10 @@ header.homeNav {
   position: absolute;
     background-color: #fbfaf82a;
 }
-      @media(max-width:700px) {
-        header.homeNav {
-        background-color: var(--main);
+@media(max-width:700px) {
+  header.homeNav {
+  background-color: var(--main);
 
-        }
-      }
+  }
+}
 </style>

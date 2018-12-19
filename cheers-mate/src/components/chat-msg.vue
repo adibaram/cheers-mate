@@ -1,8 +1,9 @@
 <template>
     <section class="msg-container">
         <div class="msg">
-            <slot name="from"></slot>:
+            <span class="msg-from"><slot name="from"></slot>: </span>
             <slot name="txt"></slot>
+            <div class="msg-at"><slot name="at"></slot></div>
         </div>
     </section>
 </template>
@@ -18,8 +19,15 @@ export default {
                 display: flex;
                 margin: 0px 5px 10px 0px;
                 justify-content: flex-start;
+
+                .msg-at {
+                    opacity: .6;
+                    font-size: 0.6em;
+                    text-align: right;
+                }
                 .msg-from {
                     font-weight: bold;
+                    cursor: pointer;
                 }
                 .msg {
                     width: fit-content;
@@ -49,6 +57,9 @@ export default {
                 .msg {
                     background: lighten(#e6a23c,10%);
                     // direction: rtl;
+                    .msg-from {
+                        display: none;
+                    }
                         
                     &:after {
                         border-top-color: lighten(#e6a23c,10%);

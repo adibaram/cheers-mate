@@ -2,7 +2,7 @@
 <div class="user-card-container" :class="{prevImgCont: $route.name === 'home'}">
 
             <!-- <el-card :body-style="{ padding: '0px' }"> -->
-            <img :src="(user.img)? user.img : 'https://via.placeholder.com/100x100'" :class="{prevImg: $route.name === 'home'}" class="image">
+            <img :src="(user.img)? user.img : 'https://via.placeholder.com/100x100'" :class="{prevImg: $route.name === 'home'}" class="image" />
             <!-- <div style="padding: 14px;">
                 <span>{{user.nickname}}</span>
                 <div class="bottom clearfix">

@@ -4,14 +4,15 @@
       <h1>Let's start talking</h1>
       <div class="clean-list">
         <chat-msg v-for="msg in msgs" :key="msg.at" class="msg" :class="myMsg(msg)">
-            <span slot="from" class="msg-from">{{msg.from}}</span>
+            <span slot="from"><router-link :to="(msg.userId)? `/user/${msg.userId}`: '/'" tag="span">{{msg.from}}</router-link></span>  
             <span slot="txt">{{msg.txt}}</span>
+            <span slot="at">{{msg.at | relativeTime}}</span>
         </chat-msg>
         <span ref="endOfChat" id="end-of-chat"></span>
       </div>
     </section>
     <form @submit.prevent="sendMsg" ref="chat">
-      <input v-scroll-to="'#end-of-chat'" ref="newMsgInput" type="text">
+      <input ref="newMsgInput" type="text">
       <button><i class="chat-send fas fa-location-arrow"></i></button>
     </form>
   </section>
@@ -19,6 +20,7 @@
 
 <script>
 import chatMsg from './chat-msg.vue';
+const moment = require('moment');
 
 export default {
     props: {
@@ -68,6 +70,11 @@ export default {
         'msgs.length'(length, prevLength) {
             console.log({length, prevLength})
             if (prevLength === 0) this.$nextTick().then(() => this.scrollToEnd())
+        }
+    },
+    filters: {
+        relativeTime(msgAt) {
+            return moment(msgAt).fromNow();
         }
     },
     components: {

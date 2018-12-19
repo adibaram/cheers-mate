@@ -45,16 +45,11 @@
     <span class="card__by">created by <a href="#" class="card__author" title="author">{{cheer.cheerCreator.fullName}}</a></span>
   </div>
   <div class="users-container flex">
-    <span v-if="cheer.attendees.length<=3" class="flex">
-      <user-card v-for="user in cheer.attendees" :key="user._id"
-        class="user-card-img" :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
-    </span>
-         <!-- <td v-for="prop in user" :key="">{{prop}}</td> -->
-    <span v-else class="flex">
+    <span class="flex">
       <user-card v-for="user in usersForPreview" :key="user._id" class="user-card-img" 
-      :user="user" @click.native="$router.push(`/user/${user._id}`)"></user-card>
-        <div class="additional-users">
-          +{{cheer.attendees.length-3}}
+      :user="user" @click.native="$router.push(`/user/${user._id}`)" />
+        <div v-if="cheer.attendees.length > 3" class="additional-users">
+          +{{cheer.attendees.length - 3}}
         </div>
     </span>
     </div>
