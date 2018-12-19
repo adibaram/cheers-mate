@@ -1,7 +1,7 @@
 const userService = require('../services/user-service');
 const userCheerService = require('../services/rsvp-user-cheer-service');
 const cheerService = require('../services/cheer-service');
-const BASE_URL = '/user';
+const BASE_URL = '/api/user';
 
 function addRoutes(app) {
     

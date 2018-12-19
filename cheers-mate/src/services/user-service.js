@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = (process.env.NODE_ENV !== 'development')? 
-                '/user' : 'http://localhost:3003/user';
+                '/api/user' : 'http://localhost:3003/api/user';
 
 
 

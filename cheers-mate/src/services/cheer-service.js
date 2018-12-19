@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = (process.env.NODE_ENV !== 'development')? 
-                '/cheer' : 'http://localhost:3003/cheer';
+                '/api/cheer' : 'http://localhost:3003/api/cheer';
 
 
 function query(filter={}) {
@@ -36,7 +36,7 @@ function remove(id) {
 }
 
 const USER_CHEER_URL = (process.env.NODE_ENV !== 'development')? 
-                '/userCheer' : 'http://localhost:3003/userCheer';
+                '/api/userCheer' : 'http://localhost:3003/api/userCheer';
 
 function removeAttendance(cheerId) {
     return axios.delete(`${USER_CHEER_URL}/${cheerId}`)

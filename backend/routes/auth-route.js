@@ -3,7 +3,7 @@ const userService = require('../services/user-service');
 
 function addAuthRoutes(app) {
 
-    app.put('/login', (req, res) => {
+    app.put('/api/login', (req, res) => {
         if (req.session.user) res.status(418).end('user is already logged in, please log out first')
         const userAuth = req.body;
         userService.checkLogin(userAuth)
@@ -18,7 +18,7 @@ function addAuthRoutes(app) {
             })
     })
 
-    app.post('/signup', (req, res) => {
+    app.post('/api/signup', (req, res) => {
         const user = req.body;
         userService.checkNickname(user.nickname)
             .then(isExist => {
@@ -35,7 +35,7 @@ function addAuthRoutes(app) {
             })
     });
 
-    app.put('/logout', (req, res) => {
+    app.put('/api/logout', (req, res) => {
         console.log('inside logout')
         if (req.session.user) {
             res.end(`user ${req.session.user.nickname} logged out successfully`)
@@ -44,7 +44,7 @@ function addAuthRoutes(app) {
     })
 
     // DEBUGG LOGGED IN USER
-    app.get('/loggedin', (req, res) => {
+    app.get('/api/loggedin', (req, res) => {
         let user = req.session.user;
         res.json(user);
     })

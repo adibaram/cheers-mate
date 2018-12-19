@@ -3,7 +3,7 @@ const BASE_URL = '/rsvp/user-cheer';
 
 function addRoutes(app) {
     // GET ALL
-    app.get('/userCheer', (req,res)=>{
+    app.get('/api/userCheer', (req,res)=>{
         rsvpService.query()
             .then(userCheers=>{
                 res.json(userCheers);
@@ -11,7 +11,7 @@ function addRoutes(app) {
     })
 
     // ADD USER CHEER
-    app.post('/userCheer', (req, res)=>{
+    app.post('/api/userCheer', (req, res)=>{
 
         if (!req.session.user) res.status('401').end('user is not logged in')
 
@@ -28,7 +28,7 @@ function addRoutes(app) {
             })
     })
 
-    app.delete('/userCheer/:cheerId', (req, res) => {
+    app.delete('/api/userCheer/:cheerId', (req, res) => {
         if (!req.session.user) res.status('401').end('user not logged in')
         let cheerId = req.params.cheerId;
         let userId = req.session.user._id;

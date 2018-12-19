@@ -6,7 +6,7 @@ function addCheerRoutes(app) {
     // CHEERS REST API:
 
     // LIST
-    app.get('/cheer', (req, res) => {
+    app.get('/api/cheer', (req, res) => {
         var filter = req.query;
         cheerService.query(filter)
         .then(cheers => {
@@ -26,7 +26,7 @@ function addCheerRoutes(app) {
         })
     })
     // GET FROM RADIUS
-    app.get('/cheer/radius', (req, res) => {
+    app.get('/api/cheer/radius', (req, res) => {
         var params = req.query;
         // if (params.lat && params.lng && params.radius) {
             cheerService.queryRadius(params)
@@ -50,7 +50,7 @@ function addCheerRoutes(app) {
 
 
     // SINGLE - GET Full details
-    app.get('/cheer/:cheerId', (req, res) => {
+    app.get('/api/cheer/:cheerId', (req, res) => {
         const cheerId = req.params.cheerId;
         Promise.all([
             cheerService.getById(cheerId),
@@ -67,7 +67,7 @@ function addCheerRoutes(app) {
         })
 
     // DELETE
-    app.delete('/cheer/:cheerId', (req, res) => {
+    app.delete('/api/cheer/:cheerId', (req, res) => {
         const cheerId = req.params.cheerId;
         Promise.all([
             cheerService.remove(cheerId),
@@ -81,14 +81,14 @@ function addCheerRoutes(app) {
     })
 
     // CREATE
-    app.post('/cheer', (req, res) => {
+    app.post('/api/cheer', (req, res) => {
         const cheer = req.body;
         cheerService.add(cheer)
             .then(cheer => res.json(cheer));
     })
 
     // UPDATE
-    app.put('/cheer/:id', (req, res) => {
+    app.put('/api/cheer/:id', (req, res) => {
         const id = req.params.id;
         const newData = req.body;
             cheerService.update(id,{$set : newData})
