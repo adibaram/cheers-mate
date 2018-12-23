@@ -5,7 +5,7 @@ import VueSocketIO from 'vue-socket.io';
 
 import router from './router';
 import store from './store';
-import './registerServiceWorker';
+// import './registerServiceWorker';
 import './assets/scss/main.scss';
 // import {Alert} from 'element-ui';
 import ElementUI from 'element-ui';

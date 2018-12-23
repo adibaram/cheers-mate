@@ -101,19 +101,29 @@ export default new Vuex.Store({
     },
     login(context, { user, rememberPref }) {
       context.dispatch({ type: 'setLoading', isLoading: true});
-      authService.getLoggedInUser()
+      var failedToLogin = false;
+      return authService.getLoggedInUser()
         .then(sessionUser => {
           if (sessionUser) {
             context.commit({ type: 'setUser', user:sessionUser, rememberPref })
           } else {
-            authService.checkUser(user)
+            return authService.checkUser(user)
               .then(loggedInUser => {
                 context.commit({ type: 'setUser', user:loggedInUser, rememberPref })
-              });
+              })
+              .catch(err => {
+                console.log('DEBUG:store login:err', err);
+                failedToLogin = true;
+                // throw new Error(err.message);
+              })
           }
         })
         .catch(err=>{
           console.log('DEBUG::err', err);
+          // return err.message;
+        })
+        .finally(()=>{
+          if (failedToLogin) throw new Error('Failed to login');
         })
 
     },

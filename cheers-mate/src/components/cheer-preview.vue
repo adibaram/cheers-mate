@@ -72,7 +72,7 @@ export default {
   mounted() {
     if (this.cheer.img && this.cheer.img.length) {
       this.$refs.previewImg.src = this.cheer.img;
-      console.log(this.cheer);
+      // console.log(this.cheer);
     }
   },
   computed: {
