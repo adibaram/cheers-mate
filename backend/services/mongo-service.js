@@ -1,5 +1,7 @@
 var dbConn = null;
-const url = 'mongodb://cheers:Cheers123@ds119024.mlab.com:19024/cheer_db';
+// const url = 'mongodb://cheers:Cheers123@ds119024.mlab.com:19024/cheer_db';
+
+const url = 'mongodb+srv://cheers:Cheers123@cheerdb.bedvn.mongodb.net/cheer_db?retryWrites=true&w=majority';
 
 function connectToMongo() {
     // Reuse existing connection if exist
